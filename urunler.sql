@@ -1,12 +1,11 @@
-USE testdb;
-
 CREATE TABLE IF NOT EXISTS urunler (
-    urun_no INT AUTO_INCREMENT PRIMARY KEY,
-    urun_adi VARCHAR(255) NOT NULL,
-    urun_stok INT DEFAULT 100
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    urunIsim VARCHAR(255) NOT NULL,
+    stok INT,
+    urunUrl VARCHAR(255)
 ) ENGINE=INNODB;
 
-INSERT INTO urunler (urun_adi, urun_stok) VALUES
+INSERT INTO urunler (urunIsim, stok) VALUES
 ('Ayakkabı',100),
 ('Bilgisayar',100),
 ('Cila',100),
