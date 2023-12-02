@@ -15,7 +15,7 @@ import java.sql.SQLException;
  * @author iscie
  */
 public class DBOperations {
-     public static ResultSet executeQuery(String sql) {
+    public static ResultSet executeQuery(String sql) {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -28,5 +28,17 @@ public class DBOperations {
             e.printStackTrace();
             return null;
         } 
+    }
+    public static int getTotalProduct() throws SQLException {
+        int totalProduct = 0;
+        String sql = "SELECT COUNT(*) as total FROM urunler";
+
+        try (ResultSet resultSet = executeQuery(sql)) {
+            if (resultSet.next()) {
+                totalProduct = resultSet.getInt("total");
+            }
+        }
+
+        return totalProduct;
     }
 }
