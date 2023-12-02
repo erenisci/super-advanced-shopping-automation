@@ -10,7 +10,7 @@
 <%@page import="java.sql.SQLException"%>
 <%@page import="com.mycompany.web.programming.project.DBConnection"%>
 <%@page import="com.mycompany.web.programming.project.DBOperations"%>
-<%@page import="com.mycompany.web.programming.project.Urun"%>
+<%@page import="com.mycompany.web.programming.project.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -73,10 +73,10 @@
 
                 String sql = "SELECT * FROM urunler LIMIT " + startIndex + "," + urunlerPerPage;
                 try (ResultSet sonucKumesi = DBOperations.executeQuery(sql)) {
-                    List<Urun> productList = new ArrayList<>();
+                    List<Product> productList = new ArrayList<>();
 
                     while (sonucKumesi.next()) {
-                        Urun urun = new Urun();
+                        Product urun = new Product();
                         urun.setUrunIsim(sonucKumesi.getString("urunIsim"));
                         urun.setUrunUrl(sonucKumesi.getString("urunUrl"));
                         urun.setUrunFiyat(sonucKumesi.getString("urunFiyat"));
@@ -84,7 +84,7 @@
                         productList.add(urun);
                     }
 
-                    for (Urun product : productList) {
+                    for (Product product : productList) {
         %>
             <div class="box">
                 <div class="imgBox">
