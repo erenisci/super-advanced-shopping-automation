@@ -69,9 +69,9 @@ main {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   justify-content: space-between;
-  align-items: center;
   padding: 2rem;
   gap: 2rem;
+  height: 988px;
 }
 
 .name-value {
@@ -88,6 +88,7 @@ main {
 
 .box {
   background-color: #f7f7f7;
+  height: 464px
 }
 
 .resim {
