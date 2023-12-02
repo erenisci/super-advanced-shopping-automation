@@ -4,7 +4,12 @@
     Author     : iscie
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="com.mycompany.web.programming.project.DBConnection"%>
+<%@page import="com.mycompany.web.programming.project.DBOperations"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -49,90 +54,54 @@
       <div class="search-productDiv">
         <!-- Search Bar -->
         <div class="searchBar">SEARCH</div>
-
         <!-- Product page -->
         <div class="productDiv">
-          <!--  -->
-          <div class="box">
-            <img
-              class="resim"
-              src="https://smile.com.tr/smile-sneaker-casual-erkek-ayakkabi-siyah-8064-18-B.jpg"
-            />
-            <div class="name-value">
-              <span>ISIM</span>
-              <span>FIYAT</span>
-            </div>
-            <div class="center">
-              <button class="buyBut">SATIN AL</button>
-            </div>
-          </div>
-          <div class="box">
-            <img
-              class="resim"
-              src="https://static.ekolonline.com/upload/images/ON-Kisa-Sapli-Baget-Canta_1570323_52_1_xml2.jpg"
-            />
-            <div class="name-value">
-              <span>ISIM</span>
-              <span>FIYAT</span>
-            </div>
-            <div class="center">
-              <button class="buyBut">SATIN AL</button>
-            </div>
-          </div>
-          <div class="box">
-            <img
-              class="resim"
-              src="https://img.freepik.com/free-photo/painting-mountain-lake-with-mountain-background_188544-9126.jpg"
-            />
-            <div class="name-value">
-              <span>ISIM</span>
-              <span>FIYAT</span>
-            </div>
-            <div class="center">
-              <button class="buyBut">SATIN AL</button>
-            </div>
-          </div>
-          <div class="box">
-            <img
-              class="resim"
-              src="https://cdn.akakce.com/z/baby-toys/baby-toys-aventura.jpg"
-            />
-            <div class="name-value">
-              <span>ISIM</span>
-              <span>FIYAT</span>
-            </div>
-            <div class="center">
-              <button class="buyBut">SATIN AL</button>
-            </div>
-          </div>
-          <div class="box">
-            <img
-              class="resim"
-              src="https://cdn.akakce.com/z/renault/renault-clio-1-0-tce-touch-benzin-manuel.jpg"
-            />
-            <div class="name-value">
-              <span>ISIM</span>
-              <span>FIYAT</span>
-            </div>
-            <div class="center">
-              <button class="buyBut">SATIN AL</button>
-            </div>
-          </div>
-          <div class="box">
-            <img
-              class="resim"
-              src="https://cilek.com/cdn/shop/products/20.56.1304.00_1_3bd5cbb0-1a77-484f-acb2-45a0e8d5ea6b.png?v=1603798963"
-            />
-            <div class="name-value">
-              <span>ISIM</span>
-              <span>FIYAT</span>
-            </div>
-            <div class="center">
-              <button class="buyBut">SATIN AL</button>
-            </div>
-          </div>
-          <!--  -->
+            <%
+                try {
+                    String sql = "SELECT * FROM urunler";
+                    try (ResultSet resultSet = DBOperations.executeQuery(sql)) {
+                        while (resultSet.next()) {
+                            String urunIsim = resultSet.getString("urunIsim");
+                            String urunUrl = resultSet.getString("urunUrl");
+                            String urunFiyat = resultSet.getString("urunFiyat");
+                            int urunStok = resultSet.getInt("urunStok");
+                            %>
+                                <div class="box">
+                                    <div class="imgBox">
+                                      <img
+                                        class="resim"
+                                        src="<%out.println(urunUrl);%>"
+                                      />
+                                      <div class="stokDiv"><p class="stok">STOK: <%out.println(urunStok);%></p></div>
+                                    </div>
+                                    <div class="name-value">
+                                      <span><%out.println(urunIsim);%></span>
+                                      <span>
+                                            <%
+                                                if(urunFiyat.length() > 3) {
+                                                    urunFiyat = urunFiyat.substring(0, urunFiyat.length() - 3) + "." + urunFiyat.substring(urunFiyat.length() - 3);
+                                                }
+                                                out.println(urunFiyat);
+                                            %> 
+                                          TL</span>
+                                    </div>
+                                    <div class="center">
+                                      <button class="buyBut">SATIN AL</button>
+                                    </div>
+                                </div>
+                            <%
+                        }
+                    }
+                } catch (SQLException c) {
+                    String errorMessage = c.getMessage();
+                    out.println("SQLException Hatası: " + errorMessage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    out.println(e);
+                }
+            %>
         </div>
+
         <div class="pagination">
           <div>1</div>
           <div>2</div>
