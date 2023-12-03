@@ -11,13 +11,13 @@ package com.mycompany.web.programming.project;
 public class Product {
     private String urunIsim;
     private String urunUrl;
-    private String urunFiyat;
+    private float urunFiyat;
     private int urunStok;
 
     public Product() {
     }
 
-    public Product(String urunIsim, String urunUrl, String urunFiyat, int urunStok) {
+    public Product(String urunIsim, String urunUrl, float urunFiyat, int urunStok) {
         this.urunIsim = urunIsim;
         this.urunUrl = urunUrl;
         this.urunFiyat = urunFiyat;
@@ -40,11 +40,11 @@ public class Product {
         this.urunUrl = urunUrl;
     }
 
-    public String getUrunFiyat() {
+    public float getUrunFiyat() {
         return urunFiyat;
     }
 
-    public void setUrunFiyat(String urunFiyat) {
+    public void setUrunFiyat(float urunFiyat) {
         this.urunFiyat = urunFiyat;
     }
 
