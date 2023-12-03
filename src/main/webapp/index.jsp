@@ -56,31 +56,48 @@
       <nav>NAV</nav>
       <div class="search-productDiv">
         <!-- Search Bar -->
-        <div class="searchBar">SEARCH</div>
+        <div class="searchBar">SEARCH
+            <div class="sorting-options">
+                <a href="index.jsp?page=1&sort=AZ">A-Z</a>
+                <a href="index.jsp?page=1&sort=ZA">Z-A</a>
+                <a href="index.jsp?page=1&sort=priceAsc">Price Ascending</a>
+                <a href="index.jsp?page=1&sort=priceDesc">Price Descending</a>
+            </div>
+        </div>
         <!-- Product page -->
         <div class="productDiv">
         <%
             int urunlerPerPage = 8;
             int currentPage = 1;
-
+            
+            String sortOption = request.getParameter("sort");
             String pageParam = request.getParameter("page");
+            
             if (pageParam != null && !pageParam.isEmpty()) {
                 currentPage = Integer.parseInt(pageParam);
             }
 
             try {
                 int startIndex = (currentPage - 1) * urunlerPerPage;
-
-                String sql = "SELECT * FROM urunler LIMIT " + startIndex + "," + urunlerPerPage;
-                try (ResultSet sonucKumesi = DBOperations.executeQuery(sql)) {
+                String colmnSort = "urunIsim";
+                if ("ZA".equals(sortOption)) {
+                    colmnSort = "urunIsim DESC";
+                } else if ("priceAsc".equals(sortOption)) {
+                    colmnSort = "urunFiyat ASC";
+                } else if ("priceDesc".equals(sortOption)) {
+                    colmnSort = "urunFiyat DESC";
+                }
+                
+                String sql = "SELECT * FROM urunler ORDER BY " + colmnSort + " LIMIT " + startIndex + "," + urunlerPerPage;
+                try (ResultSet result = DBOperations.executeQuery(sql)) {
                     List<Product> productList = new ArrayList<>();
-
-                    while (sonucKumesi.next()) {
+                    
+                    while (result.next()) {
                         Product urun = new Product();
-                        urun.setUrunIsim(sonucKumesi.getString("urunIsim"));
-                        urun.setUrunUrl(sonucKumesi.getString("urunUrl"));
-                        urun.setUrunFiyat(sonucKumesi.getString("urunFiyat"));
-                        urun.setUrunStok(sonucKumesi.getInt("urunStok"));
+                        urun.setUrunIsim(result.getString("urunIsim"));
+                        urun.setUrunUrl(result.getString("urunUrl"));
+                        urun.setUrunFiyat(result.getString("urunFiyat"));
+                        urun.setUrunStok(result.getInt("urunStok"));
                         productList.add(urun);
                     }
 
@@ -122,13 +139,25 @@
         %>
         <div class='pagination'>
         <%
-            for (int i = 1; i <= totalPage; i++) {
-                if (i == currentPage) {
-                    out.println("<div class='aktif'>" + i + "</div>");
-                } else {
-                    out.println("<a href='index.jsp?page=" + i + "'>" + i + "</a>");
+            if (sortOption != null && !sortOption.isEmpty()){
+                for (int i = 1; i <= totalPage; i++) {
+                    if (i == currentPage) {
+                        out.println("<div class='aktif'>" + i + "</div>");
+                    } else {
+                        out.println("<a href='index.jsp?page=" + i + "&sort=" + colmnSort + "'>" + i + "</a>");
+                    }
                 }
             }
+            else {
+                for (int i = 1; i <= totalPage; i++) {
+                    if (i == currentPage) {
+                        out.println("<div class='aktif'>" + i + "</div>");
+                    } else {
+                        out.println("<a href='index.jsp?page=" + i + "'>" + i + "</a>");
+                    }
+                }
+            }
+            
         %>
         </div>
         <%
