@@ -9,7 +9,7 @@ package com.mycompany.web.programming.project;
  * @author iscie
  */
 public class Categories {
-    private int categoryId;
+    private Integer categoryId;
     private String categoryName;
     
     public Categories() {
@@ -20,11 +20,11 @@ public class Categories {
         this.categoryName = categoryName;
     }
     
-    public void setCategoryId(int categoryId) {
+    public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
 
-    public int getCategoryId() {
+    public Integer getCategoryId() {
         return categoryId;
     }
 
