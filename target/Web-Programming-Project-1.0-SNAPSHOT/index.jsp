@@ -39,12 +39,11 @@
       rel="stylesheet"
       href="css/style.css"
     />
-
     <title>Index</title>
   </head>
   <body>
       
-    <!-- Header -->
+    <!-- HEADER -->
     <header>
       <p class="logo">LOGO</p>
       <div class="log-reg">
@@ -59,15 +58,22 @@
         <!-- CATEGORIES NAV -->
         <nav>
             <div>
-              <a href="?search=&sort=">
+              <a href="?page=&search=&category=&sort=">
                 Tüm Ürünler
               </a>
             </div>
-        <%
-            String val = "";
-            if(request.getParameter("search") != null) val = request.getParameter("search");
+        <%  
+            String pageParam = "";
+            if (request.getParameter("page") != null) pageParam = request.getParameter("page");
             
-            String sortOption = request.getParameter("sort");
+            String searchKeyword = "";
+            if(request.getParameter("search") != null) searchKeyword = request.getParameter("search");
+            
+            String categoryKeyword = "";
+            if (request.getParameter("category") != null) categoryKeyword = request.getParameter("category");
+            
+            String sortOption = "";
+            if (request.getParameter("sort") != null) sortOption = request.getParameter("sort");
             
             String sqlKategori = "SELECT * FROM kategoriler ORDER BY urunKategori_ad";
             try (ResultSet resultCat = DBOperations.executeQuery(sqlKategori)) {
@@ -82,7 +88,7 @@
                 for (Categories category : categoryResults) {
         %>
           <div>
-              <a href="?category=<%out.print(category.getCategoryId());%>&search=<%out.print(val);%>&sort=<%out.print(sortOption);%>">
+              <a href="?page=&search=<%out.print(searchKeyword);%>&category=<%out.print(category.getCategoryId());%>&sort=<%out.print(sortOption);%>">
               <%out.print(category.getCategoryName());%>
             </a>
           </div>
@@ -98,18 +104,23 @@
         <div class="search-productDiv">
             <div class="searchBar">
                 <form class="form-select" method="get">
+                    <!-- PAGE -->
+                    <input type="hidden" name="page" value="<%out.print(pageParam);%>"/>
                     
-                    <!-- Search OPTION -->
+                    <!-- SEARCH OPTION -->
                     <div class="search">
                         <div class="search-bar">
-                            <input class="searchText" type="text" name="search" value="<%out.print(val);%>"/>
+                            <input class="searchText" type="text" name="search" value="<%out.print(searchKeyword);%>"/>
                             <input class="searchBut" type="submit" value="ARA"/>
                         </div>
                         
-                        <!-- Sorting OPTION -->
+                        <!-- FOR CATEGORY -->
+                        <input type="hidden" name="category" value="<%out.print(categoryKeyword);%>"/>
+                        
+                        <!-- SORTING OPRION -->
                         <div class="sorting-options">
                             <select class="searchText" name="sort">
-                                <option value="" disabled selected>Sırala</option>
+                                <option value="">Sırala</option>
                                 <option value="AZ" <%= "AZ".equals(sortOption) ? "selected" : "" %>>A-Z</option>
                                 <option value="ZA" <%= "ZA".equals(sortOption) ? "selected" : "" %>>Z-A</option>
                                 <option value="priceAsc" <%= "priceAsc".equals(sortOption) ? "selected" : "" %>>Fiyat Artan</option>
@@ -120,22 +131,17 @@
                 </form>
             </div>
                             
-        <!-- Product page -->
+        <!-- PRODUCT PAGE -->
         <div class="productDiv">
         <%
-            List<Product> searchResults = new ArrayList<>();
-            
+            // PAGE
             int urunlerPerPage = 8;
             int currentPage = 1;
-                        
-            String pageParam = request.getParameter("page");
-            String searchKeyword = request.getParameter("search");
-            String categoryKeyword = request.getParameter("category");
             
-            if (pageParam != null && !pageParam.isEmpty()) {
-                currentPage = Integer.parseInt(pageParam);
-            }
-                        
+            if (pageParam != null && !pageParam.isEmpty()) currentPage = Integer.parseInt(pageParam);
+            int startIndex = (currentPage - 1) * urunlerPerPage;
+            
+            // ORDER
             String colmnSort = "urunIsim";
             if ("ZA".equals(sortOption)) {
                 colmnSort = "urunIsim DESC";
@@ -146,21 +152,23 @@
             }
             
             String sql = "";
-            int startIndex = (currentPage - 1) * urunlerPerPage;
-            if (searchKeyword != null && !searchKeyword.isEmpty())
-                sql = "SELECT * FROM urunler WHERE urunIsim LIKE '" + searchKeyword + "%' ORDER BY " + colmnSort + " LIMIT " + startIndex + "," + urunlerPerPage;
-            else if (categoryKeyword != null && !categoryKeyword.isEmpty())
-                sql = "SELECT u.*" +
-                            "FROM urunler u " +
-                            "LEFT JOIN kategoriler k ON u.urunKategori_id = k.urunKategori_id " +
-                            "WHERE k.urunKategori_id = '" + categoryKeyword + "'" + " LIMIT " + startIndex + "," + urunlerPerPage;
-            else
-                sql = "SELECT * FROM urunler ORDER BY " + colmnSort + " LIMIT " + startIndex + "," + urunlerPerPage;
+            String limit = "ORDER BY " + colmnSort + " LIMIT " + startIndex + "," + urunlerPerPage + ";";
+            if (!(categoryKeyword != null && !categoryKeyword.isEmpty())) {
+                sql = "SELECT * FROM urunler ";
+                if (searchKeyword != null && !searchKeyword.isEmpty()) sql += "WHERE urunIsim LIKE '" + searchKeyword + "%' ";
+            } else {
+                sql = "SELECT u.*" + "FROM urunler u " +
+                        "LEFT JOIN kategoriler k ON u.urunKategori_id = k.urunKategori_id " +
+                        "WHERE k.urunKategori_id = '" + categoryKeyword + "' ";
+                if (searchKeyword != null && !searchKeyword.isEmpty()) sql += "AND urunIsim LIKE '" + searchKeyword + "%' ";
+            }
+            sql += limit;
             
             try (ResultSet result = DBOperations.executeQuery(sql)) {
+                List<Product> searchResults = new ArrayList<>();
                 while (result.next()) {
                     Product urun = new Product();
-                    urun.setUrunIsim(result.getString("urunIsim"));
+                    urun.setUrunIsim(result.getString("urunIsim").substring(0, 1).toUpperCase() + result.getString("urunIsim").substring(1));
                     urun.setUrunUrl(result.getString("urunUrl"));
                     urun.setUrunFiyat(result.getFloat("urunFiyat"));
                     urun.setUrunStok(result.getInt("urunStok"));
@@ -183,48 +191,28 @@
         <div class="pagination">
         <%
             int totalProduct = 0;
+            
             if (categoryKeyword != null && !categoryKeyword.isEmpty()) totalProduct = DBOperations.getTotalCategoryProduct(sql);
             else totalProduct = DBOperations.getTotalQueryProduct(sql);
-             
+            
             int totalPage = (int) Math.ceil((double) totalProduct / urunlerPerPage);
-
-            if (currentPage > 1) {
-                if (sortOption != null && !sortOption.isEmpty()) {
-                    out.println("<a href='index.jsp?page=" + (currentPage - 1) + "&sort=" + sortOption + "'>&lt;</a>");
-                } else {
-                    out.println("<a href='index.jsp?page=" + (currentPage - 1) + "'>&lt;</a>");
-                }
-            }
-
+            
+            if (currentPage > 1) out.println("<a href='index.jsp?page=" + (currentPage - 1) + "&search=" + searchKeyword + "&category=" + categoryKeyword + "&sort=" + sortOption + "'>&lt;</a>");
             for (int i = 1; i <= totalPage; i++) {
-                if (sortOption != null && !sortOption.isEmpty()) {
-                    if (i == currentPage) {
-                        out.println("<div class='aktif'>" + i + "</div>");
-                    } else {
-                        out.println("<a href='index.jsp?page=" + i + "&sort=" + sortOption + "'>" + i + "</a>");
-                    }
+                if (i == currentPage) {
+                    out.println("<div class='aktif'>" + i + "</div>");
                 } else {
-                    if (i == currentPage) {
-                        out.println("<div class='aktif'>" + i + "</div>");
-                    } else {
-                        out.println("<a href='index.jsp?page=" + i + "'>" + i + "</a>");
-                    }
+                    out.println("<a href='index.jsp?page=" + i + "&search=" + searchKeyword + "&category=" + categoryKeyword + "&sort=" + sortOption + "'>" + i + "</a>");
                 }
             }
-
-            if (currentPage < totalPage) {
-                if (sortOption != null && !sortOption.isEmpty()) {
-                    out.println("<a href='index.jsp?page=" + (currentPage + 1) + "&sort=" + sortOption + "'>&gt;</a>");
-                } else {
-                    out.println("<a href='index.jsp?page=" + (currentPage + 1) + "'>&gt;</a>");
-                }
-            }
+            if (currentPage < totalPage) out.println("<a href='index.jsp?page=" + (currentPage + 1) + "&search=" + searchKeyword + "&category=" + categoryKeyword + "&sort=" + sortOption + "'>&gt;</a>");
+            System.out.println("a");
         %>
         </div>
       </div>
     </main>
   
-    <!-- Footer -->
+    <!-- FOOTER -->
     <footer>FOOTER</footer>
     
     <script>
