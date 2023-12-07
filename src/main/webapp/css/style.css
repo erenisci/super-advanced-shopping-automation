@@ -10,7 +10,7 @@ html {
 
 body {
   font-family: 'Roboto', sans-serif;
-  font-size: 3rem;
+  font-size: 2.5rem;
   line-height: 1;
   font-weight: 400;
   color: #555;
@@ -43,9 +43,12 @@ header {
   padding: 3rem;
 }
 
-nav {
+.nav-cat {
   width: 20%;
+  height: 110rem;
   border-right: 1px solid black;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .searchBar {
@@ -154,7 +157,97 @@ footer {
   padding: 0.4rem;
 }
 
+.search-select {
+  border: 1px solid black;
+  padding: 0.4rem;
+}
+
 .searchBut {
   border: 1px solid black;
   padding: 0.4rem 0.4rem;
+}
+
+.footer {
+  padding: 12.8rem 0;
+  border-top: 1px solid #eee;
+}
+
+.footer-container {
+  display: grid;
+  gap: 8.4rem;
+}
+
+.grid--footer {
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+}
+
+.container {
+  max-width: 160rem;
+  padding: 0 3.2rem;
+  margin: 0 auto;
+}
+
+.boxLogo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logoFoot{
+    margin-bottom: 0.6rem;
+}
+
+.footer-logo {
+  display: block;
+  margin-bottom: 3.2rem;
+}
+
+.social-links {
+  list-style: none;
+  display: flex;
+  gap: 2.4rem;
+}
+
+.copyright {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color: #767676;
+  margin-top: auto;
+}
+
+.footer-heading {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 4rem;
+}
+
+.contacts {
+  font-style: normal;
+  font-size: 1.6rem;
+  line-height: 1.6;
+}
+
+.address {
+  margin-bottom: 2.4rem;
+}
+
+.footer-nav {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.footer-link:link,
+.footer-link:visited {
+  text-decoration: none;
+  font-size: 1.6rem;
+  color: #767676;
+  transition: all 0.3s;
+  display: flex;
+}
+
+.footer-link:hover,
+.footer-link:active {
+  color: #555;
 }

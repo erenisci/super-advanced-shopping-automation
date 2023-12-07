@@ -13,6 +13,7 @@ public class Product {
     private String urunUrl;
     private float urunFiyat;
     private int urunStok;
+    private String urunNewPageUrl;
 
     public Product() {
     }
@@ -23,7 +24,7 @@ public class Product {
         this.urunFiyat = urunFiyat;
         this.urunStok = urunStok;
     }
-    // Getter ve setter metotları
+    
     public String getUrunIsim() {
         return urunIsim;
     }
@@ -54,5 +55,13 @@ public class Product {
 
     public void setUrunStok(int urunStok) {
         this.urunStok = urunStok;
+    }
+    
+    public String getUrunNewPageUrl() {
+        return urunNewPageUrl;
+    }
+
+    public void setUrunNewPageUrl() {
+        this.urunNewPageUrl = "urunIsim=" + this.urunIsim + "&urunUrl=" + this.urunUrl + "&urunFiyat=" + this.urunFiyat + "&urunStok=" + this.urunStok;
     }
 }

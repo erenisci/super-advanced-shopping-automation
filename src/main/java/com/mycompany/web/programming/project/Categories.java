@@ -11,6 +11,7 @@ package com.mycompany.web.programming.project;
 public class Categories {
     private Integer categoryId;
     private String categoryName;
+    private int categoryCount;
     
     public Categories() {
     }
@@ -34,6 +35,14 @@ public class Categories {
 
     public String getCategoryName() {
         return categoryName;
+    }
+    
+    public void setCategoryCount(int categoryCount) {
+        this.categoryCount = categoryCount;
+    }
+    
+    public int getCategoryCount() {
+        return categoryCount;
     }
 }
 

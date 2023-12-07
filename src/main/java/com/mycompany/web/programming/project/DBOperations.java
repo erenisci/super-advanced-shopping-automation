@@ -32,6 +32,18 @@ public class DBOperations {
         } 
     }
     
+    public static int getAllProduct(String sql) throws SQLException {
+        int totalProduct = 0;
+
+        try (ResultSet resultSet = executeQuery(sql)) {
+            if (resultSet.next()) {
+                totalProduct = resultSet.getInt("total");
+            }
+        }
+        
+        return totalProduct;
+    }
+    
     public static int getTotalProduct() throws SQLException {
         int totalProduct = 0;
         String sql = "SELECT COUNT(*) as total FROM urunler";
@@ -41,7 +53,7 @@ public class DBOperations {
                 totalProduct = resultSet.getInt("total");
             }
         }
-
+        
         return totalProduct;
     }
     
