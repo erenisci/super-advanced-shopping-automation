@@ -8,6 +8,9 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.SQLException"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.mycompany.web.programming.project.Categories"%>
 <%@page import="com.mycompany.web.programming.project.DBConnection"%>
 <%@page import="com.mycompany.web.programming.project.DBOperations"%>
@@ -17,7 +20,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0"
@@ -39,16 +42,16 @@
       rel="stylesheet"
       href="css/style.css"
     />
-    <title>Index</title>
+    <title>Index</title>    
   </head>
   <body>
       
     <!-- HEADER -->
     <header>
-      <p class="logo">LOGO</p>
+        <p class="logo"><a href="index.jsp">LOGO</a></p>
       <div class="log-reg">
-        <span class="login">LOGIN</span>
-        <span class="register">REGISTER</span>
+          <span class="login"><a href="#">LOGIN</a></span>
+        <span class="register"><a href="#">REGISTER</a></span>
       </div>
     </header>
 
@@ -56,32 +59,45 @@
     <main>
         
         <!-- CATEGORIES NAV -->
-        <nav>
-            <div>
-              <a href="?page=&search=&category=&sort=">
-                Tüm Ürünler
-              </a>
-            </div>
+        <nav class="nav-cat">
         <%  
             String pageParam = "";
             if (request.getParameter("page") != null) pageParam = request.getParameter("page");
             
             String searchKeyword = "";
-            if(request.getParameter("search") != null) searchKeyword = request.getParameter("search");
+            String searchKey = request.getParameter("search");
+            boolean searchTF = true;
+            if(request.getParameter("search") != null && request.getParameter("search").matches("[a-zA-ZçÇğĞıİöÖşŞüÜ]+")) searchKeyword = request.getParameter("search").trim();
+            else searchTF = false;
             
             String categoryKeyword = "";
             if (request.getParameter("category") != null) categoryKeyword = request.getParameter("category");
             
             String sortOption = "";
             if (request.getParameter("sort") != null) sortOption = request.getParameter("sort");
-            
-            String sqlKategori = "SELECT * FROM kategoriler ORDER BY urunKategori_ad";
-            try (ResultSet resultCat = DBOperations.executeQuery(sqlKategori)) {
+
+            String sqlCategoryCount = "";
+            try (ResultSet resultCat = DBOperations.executeQuery("SELECT * FROM kategoriler ORDER BY urunKategori_ad")) { 
+        %>
+        <div>
+          <%sqlCategoryCount = "SELECT COUNT(*) as total FROM urunler u LEFT JOIN kategoriler k ON u.urunKategori_id = k.urunKategori_id WHERE k.urunKategori_id = u.urunKategori_id;";%>
+          <a href="?page=&search=&category=&sort=">
+              Tüm Ürünler 
+              <span>
+                (<%out.print(DBOperations.getAllProduct(sqlCategoryCount));%>)  
+              </span>
+          </a>
+        </div>
+        <%
                 List<Categories> categoryResults = new ArrayList<>();
                 while (resultCat.next()) {
                     Categories category = new Categories();
                     category.setCategoryId(resultCat.getInt("urunKategori_id"));
                     category.setCategoryName(resultCat.getString("urunKategori_ad"));
+                    
+                    // CATEGORY COUNT
+                    sqlCategoryCount = "SELECT COUNT(*) as total FROM urunler u LEFT JOIN kategoriler k ON u.urunKategori_id = k.urunKategori_id WHERE u.urunKategori_id = " + category.getCategoryId();
+                    category.setCategoryCount(DBOperations.getAllProduct(sqlCategoryCount));
                     categoryResults.add(category);
                 }
                 
@@ -90,6 +106,7 @@
           <div>
               <a href="?page=&search=<%out.print(searchKeyword);%>&category=<%out.print(category.getCategoryId());%>&sort=<%out.print(sortOption);%>">
               <%out.print(category.getCategoryName());%>
+              <span>(<%out.print(category.getCategoryCount());%>)</span>
             </a>
           </div>
         <%
@@ -105,12 +122,20 @@
             <div class="searchBar">
                 <form class="form-select" method="get">
                     <!-- PAGE -->
-                    <input type="hidden" name="page" value="<%out.print(pageParam);%>"/>
-                    
+                    <input type="hidden" name="page" value="<%
+                                                                if (pageParam == session.getAttribute("page"))
+                                                                    out.print(pageParam);
+                                                                else
+                                                                    out.print("1");
+                                                            %>"/>
                     <!-- SEARCH OPTION -->
                     <div class="search">
                         <div class="search-bar">
-                            <input class="searchText" type="text" name="search" value="<%out.print(searchKeyword);%>"/>
+                            <input class="searchText" type="text" name="search" value="<%out.print(searchKeyword);%>" 
+                                    placeholder="<%
+                                        if (searchTF || searchKey == null || searchKey == "") out.print("Arama");
+                                        else out.print("Türkçe karakter girin...");%>
+                            "/>
                             <input class="searchBut" type="submit" value="ARA"/>
                         </div>
                         
@@ -119,7 +144,7 @@
                         
                         <!-- SORTING OPRION -->
                         <div class="sorting-options">
-                            <select class="searchText" name="sort">
+                            <select class="search-select" name="sort">
                                 <option value="">Sırala</option>
                                 <option value="AZ" <%= "AZ".equals(sortOption) ? "selected" : "" %>>A-Z</option>
                                 <option value="ZA" <%= "ZA".equals(sortOption) ? "selected" : "" %>>Z-A</option>
@@ -134,6 +159,8 @@
         <!-- PRODUCT PAGE -->
         <div class="productDiv">
         <%
+            session.setAttribute("page", pageParam);
+            
             // PAGE
             int urunlerPerPage = 8;
             int currentPage = 1;
@@ -152,7 +179,7 @@
             }
             
             String sql = "";
-            String limit = "ORDER BY " + colmnSort + " LIMIT " + startIndex + "," + urunlerPerPage + ";";
+            String limit = "ORDER BY " + colmnSort + " LIMIT " + startIndex + "," + urunlerPerPage;
             if (!(categoryKeyword != null && !categoryKeyword.isEmpty())) {
                 sql = "SELECT * FROM urunler ";
                 if (searchKeyword != null && !searchKeyword.isEmpty()) sql += "WHERE urunIsim LIKE '" + searchKeyword + "%' ";
@@ -172,6 +199,7 @@
                     urun.setUrunUrl(result.getString("urunUrl"));
                     urun.setUrunFiyat(result.getFloat("urunFiyat"));
                     urun.setUrunStok(result.getInt("urunStok"));
+                    urun.setUrunNewPageUrl();
                     searchResults.add(urun);
                 }
 
@@ -206,17 +234,80 @@
                 }
             }
             if (currentPage < totalPage) out.println("<a href='index.jsp?page=" + (currentPage + 1) + "&search=" + searchKeyword + "&category=" + categoryKeyword + "&sort=" + sortOption + "'>&gt;</a>");
-            System.out.println("a");
         %>
         </div>
       </div>
     </main>
   
     <!-- FOOTER -->
-    <footer>FOOTER</footer>
+    <footer class="footer">
+      <div class="container footer-container grid--footer">
+        <div class="boxLogo">
+          <a class="footer-logo" href="#">
+              <p class="logoFoot">LOGO</p>
+          </a>
+          <ul class="social-links">
+            <li>
+              <a class="footer-link" href="#">FACEBOOK</a>
+            </li>
+            <li>
+              <a class="footer-link" href="#">TWITTER</a>
+            </li>
+            <li>
+              <a class="footer-link" href="#">INSTAGRAM</a>
+            </li>
+          </ul>
+          <%
+            Date currentDate = new Date();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(currentDate);
+            int currentYear = calendar.get(Calendar.YEAR);
+          %>
+          <p class="copyright">
+            Copyright &copy; <span><%out.print(currentYear);%></span> by lorem, Inc. All rights reserved.
+          </p>
+        </div>
+        <div class="boxAddress">
+          <p class="footer-heading">Contact us</p>
+          <address class="contacts">
+            <p class="address">lorem ipsum dolor</p>
+            <p>
+              <a class="footer-link">123-456-7890</a><br />
+              <a class="footer-link">lorem@ipsum.com</a>
+            </p>
+          </address>
+        </div>
+        <nav class="boxNav">
+          <p class="footer-heading">Account</p>
+          <ul class="footer-nav">
+            <li><a class="footer-link" href="#">Create account</a></li>
+            <li><a class="footer-link" href="#">Sign in</a></li>
+            <li><a class="footer-link" href="#">iOS app</a></li>
+            <li><a class="footer-link" href="#">Android app</a></li>
+          </ul>
+        </nav>
+        <nav class="boxNav">
+          <p class="footer-heading">Company</p>
+          <ul class="footer-nav">
+            <li><a class="footer-link" href="#">About Lorem</a></li>
+            <li><a class="footer-link" href="#">For Business</a></li>
+            <li><a class="footer-link" href="#">Cooking partners</a></li>
+            <li><a class="footer-link" href="#">Careers</a></li>
+          </ul>
+        </nav>
+        <nav class="boxNav">
+          <p class="footer-heading">Resources</p>
+          <ul class="footer-nav">
+            <li><a class="footer-link" href="#">Recipe directory </a></li>
+            <li><a class="footer-link" href="#">Help center</a></li>
+            <li><a class="footer-link" href="#">Privacy & terms</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
     
     <script>
-        document.querySelector('form.form-select').addEventListener('change', function () {
+        document.querySelector('.form-select').addEventListener('change', function () {
             this.submit();
         });
     </script>
