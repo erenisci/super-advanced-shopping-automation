@@ -1,0 +1,48 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 8 Ara 2023, 18:00:20
+    Author     : iscie
+*/
+
+.box {
+  background-color: #f7f7f7;
+  height: 464px
+}
+
+.imgBox {
+  position: relative;
+  height: 37.5rem;
+}
+
+.picture {
+  width: 100%;
+  height: 37.5rem;
+}
+
+.stokDiv {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: aquamarine;
+  padding: 0.3rem 0.6rem;
+}
+
+.stok {
+  font-size: 2.2rem;
+}
+
+.name-value {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0.2rem;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

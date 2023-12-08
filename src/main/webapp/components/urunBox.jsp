@@ -9,7 +9,7 @@
 <div class="box" onclick="redirectToPurchase('<%out.print(product.getUrunNewPageUrl());%>')">
     <div class="imgBox">
       <img
-        class="resim"
+        class="picture"
         src="<%out.print(product.getUrunUrl());%>"
         alt="<%out.print(product.getUrunIsim());%>"
       />
@@ -30,6 +30,6 @@
         <input type="hidden" name="category" value="<%out.print(categoryKeyword);%>"/>
         <input type="hidden" name="sort" value="<%out.print(sortOption);%>"/>
         <button type="submit">Satın Al</button>
-    </form>
+      </form>
     </div>
 </div>
