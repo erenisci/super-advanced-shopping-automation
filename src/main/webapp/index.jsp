@@ -40,7 +40,11 @@
     />
     <link
       rel="stylesheet"
-      href="css/style.css"
+      href="css/index.css"
+    />
+        <link
+      rel="stylesheet"
+      href="css/general.css"
     />
     <title>Index</title>    
   </head>
@@ -67,7 +71,7 @@
             String searchKeyword = "";
             String searchKey = request.getParameter("search");
             boolean searchTF = true;
-            if(request.getParameter("search") != null && request.getParameter("search").matches("[a-zA-ZçÇğĞıİöÖşŞüÜ]+")) searchKeyword = request.getParameter("search").trim();
+            if(request.getParameter("search") != null && request.getParameter("search").matches("[a-zA-ZçÇğĞıİöÖşŞüÜ ]+")) searchKeyword = request.getParameter("search").trim();
             else searchTF = false;
             
             String categoryKeyword = "";
@@ -133,8 +137,12 @@
                         <div class="search-bar">
                             <input class="searchText" type="text" name="search" value="<%out.print(searchKeyword);%>" 
                                     placeholder="<%
+                                        boolean flag = false;
                                         if (searchTF || searchKey == null || searchKey == "") out.print("Arama");
-                                        else out.print("Türkçe karakter girin...");%>
+                                        else {
+                                            out.print("Türkçe karakter girin...");
+                                            flag = true;
+                                        }%>
                             "/>
                             <input class="searchBut" type="submit" value="ARA"/>
                         </div>
@@ -162,7 +170,7 @@
             session.setAttribute("page", pageParam);
             
             // PAGE
-            int urunlerPerPage = 8;
+            int urunlerPerPage = 6;
             int currentPage = 1;
             
             if (pageParam != null && !pageParam.isEmpty()) currentPage = Integer.parseInt(pageParam);
@@ -182,12 +190,12 @@
             String limit = "ORDER BY " + colmnSort + " LIMIT " + startIndex + "," + urunlerPerPage;
             if (!(categoryKeyword != null && !categoryKeyword.isEmpty())) {
                 sql = "SELECT * FROM urunler ";
-                if (searchKeyword != null && !searchKeyword.isEmpty()) sql += "WHERE urunIsim LIKE '" + searchKeyword + "%' ";
+                if (searchKeyword != null && !searchKeyword.isEmpty()) sql += "WHERE urunIsim COLLATE utf8mb4_turkish_ci LIKE '" + searchKeyword + "%' ";
             } else {
                 sql = "SELECT u.*" + "FROM urunler u " +
                         "LEFT JOIN kategoriler k ON u.urunKategori_id = k.urunKategori_id " +
                         "WHERE k.urunKategori_id = '" + categoryKeyword + "' ";
-                if (searchKeyword != null && !searchKeyword.isEmpty()) sql += "AND urunIsim LIKE '" + searchKeyword + "%' ";
+                if (searchKeyword != null && !searchKeyword.isEmpty()) sql += "AND urunIsim COLLATE utf8mb4_turkish_ci LIKE '" + searchKeyword + "%' ";
             }
             sql += limit;
             
@@ -224,16 +232,21 @@
             else totalProduct = DBOperations.getTotalQueryProduct(sql);
             
             int totalPage = (int) Math.ceil((double) totalProduct / urunlerPerPage);
-            
+            int rangeStart = Math.max(currentPage - 1, 1);
+            int rangeEnd = Math.min(currentPage + 1, totalPage);
+            if (currentPage > 1) out.println("<a class='pagination-link' href='index.jsp?page=1&search=" + searchKeyword + "&category=" + categoryKeyword + "&sort=" + sortOption + "'>&lt;&lt;</a>");
             if (currentPage > 1) out.println("<a href='index.jsp?page=" + (currentPage - 1) + "&search=" + searchKeyword + "&category=" + categoryKeyword + "&sort=" + sortOption + "'>&lt;</a>");
-            for (int i = 1; i <= totalPage; i++) {
+
+            for (int i = rangeStart; i <= rangeEnd; i++) {
                 if (i == currentPage) {
                     out.println("<div class='aktif'>" + i + "</div>");
                 } else {
                     out.println("<a href='index.jsp?page=" + i + "&search=" + searchKeyword + "&category=" + categoryKeyword + "&sort=" + sortOption + "'>" + i + "</a>");
                 }
             }
+
             if (currentPage < totalPage) out.println("<a href='index.jsp?page=" + (currentPage + 1) + "&search=" + searchKeyword + "&category=" + categoryKeyword + "&sort=" + sortOption + "'>&gt;</a>");
+            if (currentPage < totalPage) out.println("<a class='pagination-link' href='index.jsp?page=" + totalPage + "&search=" + searchKeyword + "&category=" + categoryKeyword + "&sort=" + sortOption + "'>&gt;&gt;</a>");
         %>
         </div>
       </div>
@@ -243,7 +256,7 @@
     <footer class="footer">
       <div class="container footer-container grid--footer">
         <div class="boxLogo">
-          <a class="footer-logo" href="#">
+          <a class="footer-logo" href="index.jsp">
               <p class="logoFoot">LOGO</p>
           </a>
           <ul class="social-links">
@@ -310,6 +323,9 @@
         document.querySelector('.form-select').addEventListener('change', function () {
             this.submit();
         });
+        
+        let flag = <%out.print(flag);%>
+        if(flag == true) alert("Türkçe karakter girin...");
     </script>
   </body>
 </html>

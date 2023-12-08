@@ -1,27 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 62.5%;
-}
-
-body {
-  font-family: 'Roboto', sans-serif;
-  font-size: 2.5rem;
-  line-height: 1;
-  font-weight: 400;
-  color: #555;
-}
-
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 header {
   display: flex;
   justify-content: space-between;
@@ -45,7 +21,7 @@ header {
 
 .nav-cat {
   width: 20%;
-  height: 110rem;
+  height: 117.4rem;
   border-right: 1px solid black;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -64,15 +40,18 @@ main {
 .search-productDiv {
   display: flex;
   flex-direction: column;
+  gap: 2rem;
   width: 80%;
 }
 
 .productDiv {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   justify-content: space-between;
-  padding: 2rem;
-  gap: 2rem;
+  padding: 4rem;
+  margin-bottom: 2rem;
+  row-gap: 3rem;
+  column-gap: 4rem;
   height: 988px;
 }
 
@@ -96,7 +75,6 @@ main {
 .resim {
   width: 100%;
   height: 37.5rem;
-  object-fit: cover;
 }
 
 .pagination {
@@ -105,6 +83,7 @@ main {
   align-items: center;
   gap: 5rem;
   padding: 2rem;
+  margin-bottom: 2rem;
 }
 
 footer {
@@ -242,12 +221,12 @@ footer {
 .footer-link:visited {
   text-decoration: none;
   font-size: 1.6rem;
-  color: #767676;
+  color: #999;
   transition: all 0.3s;
   display: flex;
 }
 
 .footer-link:hover,
 .footer-link:active {
-  color: #555;
+  color: #666;
 }

@@ -25,6 +25,10 @@
         <input type="hidden" name="productUrl" value="<%out.print(product.getUrunUrl());%>"/>
         <input type="hidden" name="productPrice" value="<%out.print(product.getUrunFiyat());%>"/>
         <input type="hidden" name="productStock" value="<%out.print(product.getUrunStok());%>"/>
+        <input type="hidden" name="page" value="<%out.print(pageParam);%>"/>
+        <input type="hidden" name="search" value="<%out.print(searchKeyword);%>"/>
+        <input type="hidden" name="category" value="<%out.print(categoryKeyword);%>"/>
+        <input type="hidden" name="sort" value="<%out.print(sortOption);%>"/>
         <button type="submit">Satın Al</button>
     </form>
     </div>
