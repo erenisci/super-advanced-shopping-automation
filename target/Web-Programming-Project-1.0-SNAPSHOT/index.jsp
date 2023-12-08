@@ -42,9 +42,13 @@
       rel="stylesheet"
       href="css/index.css"
     />
-        <link
+    <link
       rel="stylesheet"
       href="css/general.css"
+    />
+    <link
+      rel="stylesheet"
+      href="css/urunBox.css"
     />
     <title>Index</title>    
   </head>
@@ -52,10 +56,10 @@
       
     <!-- HEADER -->
     <header>
-        <p class="logo"><a href="index.jsp">LOGO</a></p>
+        <p><a class="logo" href="index.jsp">LOGO</a></p>
       <div class="log-reg">
-          <span class="login"><a href="#">LOGIN</a></span>
-        <span class="register"><a href="#">REGISTER</a></span>
+          <span><a class="logR" href="#">GİRİŞ YAP</a></span>
+        <span><a class="logR" href="#">KAYIT </a></span>
       </div>
     </header>
 
@@ -83,13 +87,15 @@
             String sqlCategoryCount = "";
             try (ResultSet resultCat = DBOperations.executeQuery("SELECT * FROM kategoriler ORDER BY urunKategori_ad")) { 
         %>
-        <div>
+        <div class="category-div">
           <%sqlCategoryCount = "SELECT COUNT(*) as total FROM urunler u LEFT JOIN kategoriler k ON u.urunKategori_id = k.urunKategori_id WHERE k.urunKategori_id = u.urunKategori_id;";%>
-          <a href="?page=&search=&category=&sort=">
-              Tüm Ürünler 
-              <span>
-                (<%out.print(DBOperations.getAllProduct(sqlCategoryCount));%>)  
-              </span>
+          <a class="category-link" href="?page=&search=&category=&sort=">
+              <div class="div-category-link">
+                  <span>TÜM ÜRÜNLER</span>
+                <span class="category-span">
+                  (<%out.print(DBOperations.getAllProduct(sqlCategoryCount));%>)  
+                </span>
+              </div>
           </a>
         </div>
         <%
@@ -107,10 +113,14 @@
                 
                 for (Categories category : categoryResults) {
         %>
-          <div>
-              <a href="?page=&search=<%out.print(searchKeyword);%>&category=<%out.print(category.getCategoryId());%>&sort=<%out.print(sortOption);%>">
-              <%out.print(category.getCategoryName());%>
-              <span>(<%out.print(category.getCategoryCount());%>)</span>
+          <div class="category-div">
+              <a class="category-link" href="?page=&search=<%out.print(searchKeyword);%>&category=<%out.print(category.getCategoryId());%>&sort=<%out.print(sortOption);%>">
+                  <div class="div-category-link">
+                      <span>
+                          <%out.print(category.getCategoryName().toUpperCase());%>
+                      </span>
+                    <span class="category-span">(<%out.print(category.getCategoryCount());%>)</span>
+                  </div>
             </a>
           </div>
         <%
@@ -170,7 +180,7 @@
             session.setAttribute("page", pageParam);
             
             // PAGE
-            int urunlerPerPage = 6;
+            int urunlerPerPage = 8;
             int currentPage = 1;
             
             if (pageParam != null && !pageParam.isEmpty()) currentPage = Integer.parseInt(pageParam);
@@ -256,7 +266,7 @@
     <footer class="footer">
       <div class="container footer-container grid--footer">
         <div class="boxLogo">
-          <a class="footer-logo" href="index.jsp">
+          <a class="footer-logo footer-link" href="index.jsp">
               <p class="logoFoot">LOGO</p>
           </a>
           <ul class="social-links">
@@ -277,13 +287,13 @@
             int currentYear = calendar.get(Calendar.YEAR);
           %>
           <p class="copyright">
-            Copyright &copy; <span><%out.print(currentYear);%></span> by lorem, Inc. All rights reserved.
+            Copyright &copy; <span><%out.print(currentYear);%></span> by Lorem, Inc. Bütün Hakları Saklıdır.
           </p>
         </div>
         <div class="boxAddress">
-          <p class="footer-heading">Contact us</p>
+          <p class="footer-heading">İletişim</p>
           <address class="contacts">
-            <p class="address">lorem ipsum dolor</p>
+            <p class="address">Lorem Ipsum Dolor</p>
             <p>
               <a class="footer-link">123-456-7890</a><br />
               <a class="footer-link">lorem@ipsum.com</a>
@@ -291,29 +301,28 @@
           </address>
         </div>
         <nav class="boxNav">
-          <p class="footer-heading">Account</p>
+          <p class="footer-heading">Hesap</p>
           <ul class="footer-nav">
-            <li><a class="footer-link" href="#">Create account</a></li>
-            <li><a class="footer-link" href="#">Sign in</a></li>
-            <li><a class="footer-link" href="#">iOS app</a></li>
-            <li><a class="footer-link" href="#">Android app</a></li>
+            <li><a class="footer-link" href="#">Giriş Yap</a></li>
+            <li><a class="footer-link" href="#">Hesap Oluştur</a></li>
+            <li><a class="footer-link" href="#">iOS Uygulaması</a></li>
+            <li><a class="footer-link" href="#">Android Uygulaması</a></li>
           </ul>
         </nav>
         <nav class="boxNav">
-          <p class="footer-heading">Company</p>
+          <p class="footer-heading">Şirket</p>
           <ul class="footer-nav">
-            <li><a class="footer-link" href="#">About Lorem</a></li>
-            <li><a class="footer-link" href="#">For Business</a></li>
-            <li><a class="footer-link" href="#">Cooking partners</a></li>
-            <li><a class="footer-link" href="#">Careers</a></li>
+            <li><a class="footer-link" href="#">Hakkımızda</a></li>
+            <li><a class="footer-link" href="#">İş Ortaklarımız</a></li>
+            <li><a class="footer-link" href="#">Kariyer</a></li>
           </ul>
         </nav>
         <nav class="boxNav">
-          <p class="footer-heading">Resources</p>
+          <p class="footer-heading">Yardım</p>
           <ul class="footer-nav">
-            <li><a class="footer-link" href="#">Recipe directory </a></li>
-            <li><a class="footer-link" href="#">Help center</a></li>
-            <li><a class="footer-link" href="#">Privacy & terms</a></li>
+            <li><a class="footer-link" href="#">Yardım Merkezi</a></li>
+            <li><a class="footer-link" href="#">Gizlilik & Şartlar</a></li>
+            <li><a class="footer-link" href="#">Sıkça Sorulan Sorular</a></li>
           </ul>
         </nav>
       </div>

@@ -24,9 +24,3 @@ body {
   font-weight: 400;
   color: #666;
 }
-
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
