@@ -6,11 +6,11 @@
 
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.SQLException"%>
-<%@page import="java.util.Calendar"%>
-<%@page import="java.util.Date"%>
-<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.mycompany.web.programming.project.Categories"%>
 <%@page import="com.mycompany.web.programming.project.DBConnection"%>
 <%@page import="com.mycompany.web.programming.project.DBOperations"%>
@@ -86,14 +86,22 @@
 
             String sqlCategoryCount = "";
             try (ResultSet resultCat = DBOperations.executeQuery("SELECT * FROM kategoriler ORDER BY urunKategori_ad")) { 
+                sqlCategoryCount = "SELECT COUNT(*) as total FROM urunler u LEFT JOIN kategoriler k ON u.urunKategori_id = k.urunKategori_id WHERE k.urunKategori_id = u.urunKategori_id;";
+                int TotalcategoryCount = DBOperations.getAllProduct(sqlCategoryCount);
         %>
-        <div class="category-div">
-          <%sqlCategoryCount = "SELECT COUNT(*) as total FROM urunler u LEFT JOIN kategoriler k ON u.urunKategori_id = k.urunKategori_id WHERE k.urunKategori_id = u.urunKategori_id;";%>
-          <a class="category-link" href="?page=&search=&category=&sort=">
-              <div class="div-category-link">
+        <div class="category-div <%if(TotalcategoryCount < 1) out.print("disabled-link");%>">
+          <a class="<%
+                 if(request.getParameter("category") == "") out.print("category-link-active");
+                 else out.print("category-link");%>"
+             href="?page=&search=&category=&sort=">
+              <div class=
+                   "<%
+                       if (request.getParameter("category") == "") out.print("div-category-link-active");
+                       else out.print("div-category-link");
+                   %>" 
                   <span>TÜM ÜRÜNLER</span>
                 <span class="category-span">
-                  (<%out.print(DBOperations.getAllProduct(sqlCategoryCount));%>)  
+                  (<%out.print(TotalcategoryCount);%>)  
                 </span>
               </div>
           </a>
@@ -112,10 +120,22 @@
                 }
                 
                 for (Categories category : categoryResults) {
+                    
+                    Integer categoryId = category.getCategoryId();
+                    String categoryParam = request.getParameter("category");
+                    boolean myCss = categoryId.toString().equals(categoryParam);
         %>
-          <div class="category-div">
-              <a class="category-link" href="?page=&search=<%out.print(searchKeyword);%>&category=<%out.print(category.getCategoryId());%>&sort=<%out.print(sortOption);%>">
-                  <div class="div-category-link">
+          <div class="category-div <%if(category.getCategoryCount() < 1) out.print("disabled-link");%>">
+              <a class=
+                "<%
+                if(myCss) out.print("category-link-active");
+                else out.print("category-link");
+                %>" href="?page=&search=<%out.print(searchKeyword);%>&category=<%out.print(category.getCategoryId());%>&sort=<%out.print(sortOption);%>">
+                  <div class=
+                    "<%
+                        if(myCss) out.print("div-category-link-active");
+                        else out.print("div-category-link");
+                    %>">
                       <span>
                           <%out.print(category.getCategoryName().toUpperCase());%>
                       </span>
@@ -226,9 +246,8 @@
         <%@include file="components/urunBox.jsp"%>
         <%
                 }
-            } catch (SQLException c) {
-                String hataMesaji = c.getMessage();
-                out.println("SQLException Hatası: " + hataMesaji);
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         %>
         </div>

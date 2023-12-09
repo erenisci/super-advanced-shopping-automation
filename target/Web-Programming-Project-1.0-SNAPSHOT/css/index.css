@@ -8,6 +8,11 @@ header {
   border-bottom: 1px solid #00212d;
 }
 
+.disabled-link {
+  pointer-events: none;
+  background: #33333315;
+}
+
 .logo {
   margin-left: 2rem;
 }
@@ -86,6 +91,21 @@ header {
 
 .div-category-link:hover,
 .div-category-link:active {
+  background: #b3e5f6;
+}
+
+.category-link-active:link,
+.category-link-active:visited {
+  text-decoration: none;
+  color: #ea580c;
+}
+
+.div-category-link-active {
+  padding: 2rem 1rem;
+  border-bottom: 1px solid #33333350;
+  display: flex;
+  justify-content: space-between;
+  transition: all 0.2s;
   background: #b3e5f6;
 }
 

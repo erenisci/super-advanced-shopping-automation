@@ -38,14 +38,19 @@
         <title>Login</title>
     </head>
     <body>
+        <p class="logo-p"><a class="logo" href="index.jsp">LOGO</a></p>
         <div class="login-div">
             <p class="title">GİRİŞ YAP</p>
             <form class="loginForm" action="index.jsp" method="post">
-                <div class="inputs"><p>E-Posta</p><input class="inp loginName" type="email" name="userName"/></div>
-                <div class="inputs"><p>Şifre</p><input class="inp loginPassword" type="password" name="userPassword"/></div>
+                <div class="inputs"><p>E-Posta</p><input class="inp loginName" type="email" name="userName"  placeholder="E-Posta"/></div>
+                <div class="inputs"><p>Şifre</p><input class="inp loginPassword" type="password" name="userPassword"  placeholder="Şifre"/></div>
                 <div class="inputs marg-top"><p class="hid">EŞ</p><button class="inp sub" type="submit">Giriş Yap</button></div>
+                <p class="passwordf"><a class="passwordforgot" href="#">Şifrenizi mi unuttunuz?</a></p>
             </form>
             <p class="newregister">Henüz üye olmadınız mı? <a class="linktoregister" href="register.jsp">Üye Ol</a></p>
         </div>
+        <%
+            
+        %>
     </body>
 </html>

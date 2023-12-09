@@ -12,6 +12,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
   border-radius: 16px;
   height: 464px;
   position: relative;
+  transition: all 0.3s;
+}
+
+.box:hover {
+  transform: translateY(-1.2rem);
+  box-shadow: 0 3.2rem 6.4rem rgba(0, 0, 0, 0.06);
 }
 
 .imgBox {
