@@ -16,8 +16,8 @@
       <div class="stokDiv"><p class="stok">STOK: <%out.print(product.getUrunStok());%></p></div>
     </div>
     <div class="name-value">
-      <span><%out.print(product.getUrunIsim());%></span>
-      <span><%out.print(product.getUrunFiyat());%>TL</span>
+      <p class="prod-name value-urunIsim"><%out.print(product.getUrunIsim());%></p>
+      <p class="value-urunIsim"><span class="value-urunFiyat"><%out.print(product.getUrunFiyat());%></span><span class="value-tl"> TL</span></p>
     </div>
     <div class="center">
       <form action="purchase.jsp" method="get">
@@ -29,7 +29,7 @@
         <input type="hidden" name="search" value="<%out.print(searchKeyword);%>"/>
         <input type="hidden" name="category" value="<%out.print(categoryKeyword);%>"/>
         <input type="hidden" name="sort" value="<%out.print(sortOption);%>"/>
-        <button type="submit">Satın Al</button>
+        <button class="buy" type="submit">Satın Al</button>
       </form>
     </div>
 </div>

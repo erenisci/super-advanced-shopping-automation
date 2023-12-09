@@ -35,6 +35,7 @@
           rel="stylesheet"
           href="css/general.css"
         />
+        <title>Purchase</title>
     </head>
     <body>
         <div class="div-product">
