@@ -58,8 +58,8 @@
     <header>
         <p><a class="logo" href="index.jsp">LOGO</a></p>
       <div class="log-reg">
-          <span><a class="logR" href="#">GİRİŞ YAP</a></span>
-        <span><a class="logR" href="#">KAYIT </a></span>
+          <span><a class="logR" href="login.jsp">GİRİŞ YAP</a></span>
+        <span><a class="logR" href="register.jsp">KAYIT </a></span>
       </div>
     </header>
 
@@ -244,19 +244,27 @@
             int totalPage = (int) Math.ceil((double) totalProduct / urunlerPerPage);
             int rangeStart = Math.max(currentPage - 1, 1);
             int rangeEnd = Math.min(currentPage + 1, totalPage);
-            if (currentPage > 1) out.println("<a class='pagination-link' href='index.jsp?page=1&search=" + searchKeyword + "&category=" + categoryKeyword + "&sort=" + sortOption + "'>&lt;&lt;</a>");
-            if (currentPage > 1) out.println("<a href='index.jsp?page=" + (currentPage - 1) + "&search=" + searchKeyword + "&category=" + categoryKeyword + "&sort=" + sortOption + "'>&lt;</a>");
+            if (currentPage > 1) out.println("<a class='non-active' href='index.jsp?page=1&search=" + searchKeyword + "&category=" + categoryKeyword + "&sort=" + sortOption + "'>&lt;&lt;</a>");
+            if (currentPage > 1) out.println("<a class='marg-right non-active' href='index.jsp?page=" + (currentPage - 1) + "&search=" + searchKeyword + "&category=" + categoryKeyword + "&sort=" + sortOption + "'>&lt;</a>");
+            else {
+                out.println("<a class='non-active hid'>&lt;&lt;</a>");
+                out.println("<a class='hid-marg-right non-active hid'>&lt;</a>");
+            }
 
             for (int i = rangeStart; i <= rangeEnd; i++) {
                 if (i == currentPage) {
-                    out.println("<div class='aktif'>" + i + "</div>");
+                    out.println("<div class='active'>" + i + "</div>");
                 } else {
-                    out.println("<a href='index.jsp?page=" + i + "&search=" + searchKeyword + "&category=" + categoryKeyword + "&sort=" + sortOption + "'>" + i + "</a>");
+                    out.println("<a class='non-active' href='index.jsp?page=" + i + "&search=" + searchKeyword + "&category=" + categoryKeyword + "&sort=" + sortOption + "'>" + i + "</a>");
                 }
             }
 
-            if (currentPage < totalPage) out.println("<a href='index.jsp?page=" + (currentPage + 1) + "&search=" + searchKeyword + "&category=" + categoryKeyword + "&sort=" + sortOption + "'>&gt;</a>");
-            if (currentPage < totalPage) out.println("<a class='pagination-link' href='index.jsp?page=" + totalPage + "&search=" + searchKeyword + "&category=" + categoryKeyword + "&sort=" + sortOption + "'>&gt;&gt;</a>");
+            if (currentPage < totalPage) out.println("<a class='marg-left non-active' href='index.jsp?page=" + (currentPage + 1) + "&search=" + searchKeyword + "&category=" + categoryKeyword + "&sort=" + sortOption + "'>&gt;</a>");
+            if (currentPage < totalPage) out.println("<a class='non-active' href='index.jsp?page=" + totalPage + "&search=" + searchKeyword + "&category=" + categoryKeyword + "&sort=" + sortOption + "'>&gt;&gt;</a>");
+            else {
+                out.println("<a class='hid-marg-left non-active hid'>&lt;&lt;</a>");
+                out.println("<a class='non-active hid'>&lt;</a>");
+            }
         %>
         </div>
       </div>
@@ -335,6 +343,13 @@
         
         let flag = <%out.print(flag);%>
         if(flag == true) alert("Türkçe karakter girin...");
+        
+        let productNameInput = document.querySelector('.prod-name');
+        let productName = productNameInput.innerHTML;
+        if (productName.length > 20) {
+            productName = productName.substring(0, 17) + "...";
+            productNameInput.innerHTML = productName;
+        }
     </script>
   </body>
 </html>

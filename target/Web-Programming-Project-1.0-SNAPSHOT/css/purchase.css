@@ -8,7 +8,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 */
 
 body {
-  background: #e6f6fc;
+  background: #f8f8f8;
 }
 
 .child {
@@ -52,7 +52,6 @@ body {
   background: #ccedf9;
   padding: 3rem;
   border-radius: 16px;
-  position: relative;
 }
 
 .img-product {
@@ -67,6 +66,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  position: relative;
 }
 
 .product-name {
@@ -83,6 +83,10 @@ body {
 .stock-price {
   display: flex;
   justify-content: space-between;
+  position: absolute;
+  bottom: 14rem;
+  right: 3.3rem;
+  gap: 15.8rem;
 }
 
 .stock-price-color-first {
@@ -95,8 +99,8 @@ body {
 
 .product-buy {
   position: absolute;
-  bottom: 3rem;
-  right: 11rem;
+  bottom: 0;
+  right: 9rem;
   padding: 1.2rem 2rem;
   font-size: 2.2rem;
   width: 30rem; 
