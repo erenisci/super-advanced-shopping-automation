@@ -11,6 +11,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.SQLException"%>
+<%@page import="com.mycompany.web.programming.project.UserBean"%>
 <%@page import="com.mycompany.web.programming.project.Categories"%>
 <%@page import="com.mycompany.web.programming.project.DBConnection"%>
 <%@page import="com.mycompany.web.programming.project.DBOperations"%>
@@ -48,19 +49,45 @@
     />
     <link
       rel="stylesheet"
-      href="css/urunBox.css"
+      href="css/component-css/urunBox.css"
     />
     <title>Index</title>    
   </head>
   <body>
-      
+    <%
+        UserBean userBean = (UserBean) session.getAttribute("userBean");
+        boolean isLoggedIn = (userBean != null && userBean.getUserName() != null && !userBean.getUserName().isEmpty());
+    %>
+    
     <!-- HEADER -->
     <header>
         <p><a class="logo" href="index.jsp">LOGO</a></p>
-      <div class="log-reg">
-          <span><a class="logR" href="login.jsp">GİRİŞ YAP</a></span>
-        <span><a class="logR" href="register.jsp">KAYIT </a></span>
-      </div>
+        <div class="log-reg">
+            <% 
+                if (isLoggedIn) { 
+            %>
+                <span><a class="logR" href="#">Sepet</a></span>
+                <span class="profile-container">
+                    <a class="logR" href="profile.jsp?link=profil">Profil</a>
+                    <div class="profile-hover">
+                        <ul>
+                            <li><a href="profile.jsp?link=urunEkle"><p><span>Ürün</span> <span>Ekle</span></p></a></li>
+                            <li><a href="profile.jsp?link=urunlerim">Ürünlerim</a></li>
+                            <li><a href="profile.jsp?link=siparislerim"><p><span>Siparişlerim</span></p></a></li>
+                            <li><a href="profile.jsp?link=ayarlar">Ayarlar</a></li>
+                            <li><a href="logout.jsp">Çıkış</a></li>
+                        </ul>
+                    </div>
+                </span>
+            <%
+                } else { 
+            %>
+                <span><a class="logR" href="login.jsp">GİRİŞ YAP</a></span>
+                <span><a class="logR" href="register.jsp">KAYIT</a></span>
+            <%
+                }
+            %>
+        </div>
     </header>
 
     <!-- CONTENT -->

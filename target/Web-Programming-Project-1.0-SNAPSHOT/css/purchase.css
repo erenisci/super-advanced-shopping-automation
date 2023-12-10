@@ -78,15 +78,14 @@ body {
 .product-info {
   font-size: 2rem;
   margin-bottom: 7rem;
+  height: 16rem;
 }
 
 .stock-price {
   display: flex;
   justify-content: space-between;
-  position: absolute;
   bottom: 14rem;
   right: 3.3rem;
-  gap: 15.8rem;
 }
 
 .stock-price-color-first {

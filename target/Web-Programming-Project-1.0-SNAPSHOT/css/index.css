@@ -1,3 +1,84 @@
+.profile-container {
+  position: relative;
+}
+
+.profile-hover {
+  z-index: 999;
+  display: none;
+  position: absolute;
+  top: 3rem;
+  left: -4.2rem;
+  background-color: #e6f6fc;
+  padding: 2rem;
+  border-radius: 16px;
+  border: 1px solid #00212d;
+  box-shadow: 0 3.2rem 6.4rem rgba(0, 0, 0, 0.2);
+}
+
+.past {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-hover ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-hover li {
+  border-bottom: 1px solid #33333350;
+  padding-bottom: 1.1rem;
+  font-size: 1.8rem;
+  line-height: 2rem;
+}
+
+.profile-hover li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.profile-hover li a {
+  transition: all 0.2s;
+}
+
+.profile-hover li a:link,
+.profile-hover li a:visited {
+  text-decoration: none;
+  color: #003243;
+}
+
+.profile-hover li a:hover,
+.profile-hover li a:active {
+  color: #ea580c;
+}
+
+.profile-container:hover .profile-hover {
+  display: block;
+}
+
+.logR:link,
+.logR:visited {
+  padding: 1rem;
+  color: #e6f6fc;
+  transition: all 0.3s;
+  font-size: 1.6rem;
+  text-decoration: none;
+  letter-spacing: 0.05rem;
+}
+
+.logR:hover,
+.logR:active {
+  color: #ea580c;
+}
+
 header {
   display: flex;
   justify-content: space-between;
@@ -27,19 +108,6 @@ header {
 
 .logo:hover,
 .logo:active {
-  color: #ea580c;
-}
-
-.logR:link,
-.logR:visited {
-  color: #e6f6fc;
-  transition: all 0.3s;
-  font-size: 1.6rem;
-  text-decoration: none;
-}
-
-.logR:hover,
-.logR:active {
   color: #ea580c;
 }
 
@@ -78,6 +146,20 @@ header {
   transition: all 0.2s;
 }
 
+.div-category-link:hover,
+.div-category-link:active {
+  background: #b3e5f6;
+}
+
+.div-category-link-active {
+  padding: 2rem 1rem;
+  border-bottom: 1px solid #33333350;
+  display: flex;
+  justify-content: space-between;
+  transition: all 0.2s;
+  background: #b3e5f6;
+}
+
 .category-link:link,
 .category-link:visited {
   text-decoration: none;
@@ -89,24 +171,10 @@ header {
   color: #ea580c;
 }
 
-.div-category-link:hover,
-.div-category-link:active {
-  background: #b3e5f6;
-}
-
 .category-link-active:link,
 .category-link-active:visited {
   text-decoration: none;
   color: #ea580c;
-}
-
-.div-category-link-active {
-  padding: 2rem 1rem;
-  border-bottom: 1px solid #33333350;
-  display: flex;
-  justify-content: space-between;
-  transition: all 0.2s;
-  background: #b3e5f6;
 }
 
 .category-span {
