@@ -6,10 +6,10 @@
 package com.mycompany.web.programming.project;
 
 import com.mycompany.web.programming.project.DBConnection;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.PreparedStatement;
 
 /**
  *
@@ -30,6 +30,34 @@ public class DBOperations {
             e.printStackTrace();
             return null;
         } 
+    }
+    
+    public static boolean validateUser(String userEmail, String userPassword) throws SQLException {
+        String sql = "SELECT * FROM kullanicilar WHERE kullaniciEposta = ? AND kullaniciSifre = ?";
+        try (Connection connection = DBConnection.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, userEmail);
+            statement.setString(2, userPassword);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                return resultSet.next();
+            }
+        }
+    }
+    
+    public static String getUserName(String userEmail) throws SQLException {
+        String userName = "";
+        String sql = "SELECT kullaniciNick FROM kullanicilar WHERE kullaniciEposta = ?";
+        
+        try (Connection connection = DBConnection.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, userEmail);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                userName = resultSet.getString("kullaniciNick");
+            }
+        }
+
+        return userName;
     }
     
     public static int getAllProduct(String sql) throws SQLException {
