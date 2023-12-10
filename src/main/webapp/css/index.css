@@ -60,6 +60,16 @@
   color: #ea580c;
 }
 
+.profile-hover li:last-child a {
+  transition: all 0.4s;
+  color: #ea580c;
+}
+
+.profile-hover li:last-child a:hover,
+.profile-hover li:last-child a:active {
+  color: #003243;
+}
+
 .profile-container:hover .profile-hover {
   display: block;
 }
