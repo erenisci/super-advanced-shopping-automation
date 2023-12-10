@@ -4,6 +4,9 @@
     Author     : iscie
 --%>
 
+<%@page import="java.sql.SQLException"%>
+<%@page import="com.mycompany.web.programming.project.UserBean"%>
+<%@page import="com.mycompany.web.programming.project.DBOperations"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -41,16 +44,33 @@
         <p class="logo-p"><a class="logo" href="index.jsp">LOGO</a></p>
         <div class="login-div">
             <p class="title">GİRİŞ YAP</p>
-            <form class="loginForm" action="index.jsp" method="post">
-                <div class="inputs"><p>E-Posta</p><input class="inp loginName" type="email" name="userName"  placeholder="E-Posta"/></div>
-                <div class="inputs"><p>Şifre</p><input class="inp loginPassword" type="password" name="userPassword"  placeholder="Şifre"/></div>
+            <form class="loginForm" method="post">
+                <div class="inputs"><p>E-Posta</p><input class="inp loginName" type="email" name="userEmail" placeholder="E-Posta" required/></div>
+                <div class="inputs"><p>Şifre</p><input class="inp loginPassword" type="password" name="userPassword" pattern="^[^\s]+$" title="Boşluk içeremez." placeholder="Şifre" required/></div>
                 <div class="inputs marg-top"><p class="hid">EŞ</p><button class="inp sub" type="submit">Giriş Yap</button></div>
                 <p class="passwordf"><a class="passwordforgot" href="#">Şifrenizi mi unuttunuz?</a></p>
             </form>
             <p class="newregister">Henüz üye olmadınız mı? <a class="linktoregister" href="register.jsp">Üye Ol</a></p>
         </div>
         <%
-            
+            UserBean userBean = new UserBean();
+            String userEmail = request.getParameter("userEmail");
+            String userPassword = request.getParameter("userPassword");
+            String userName = null;
+            try {
+                if (DBOperations.validateUser(userEmail, userPassword)) {
+                    userName = DBOperations.getUserName(userEmail);
+                    userBean.setUserName(userName);
+                    session.setAttribute("userBean", userBean);
+                    response.sendRedirect("index.jsp");
+                } else if (userName == null || userPassword == null) {
+                    
+                } else {
+                    %><script>alert("E-Posta veya Şifre uyuşmuyor!");</script><%
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         %>
     </body>
 </html>
