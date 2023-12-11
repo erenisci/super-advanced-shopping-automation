@@ -5,8 +5,7 @@ USE projectdb;
     kullaniciNick VARCHAR(20) NOT NULL UNIQUE,
     kullaniciEposta VARCHAR(255) NOT NULL UNIQUE,
     kullaniciSifre VARCHAR(255) NOT NULL,
-    kullaniciUrl VARCHAR(255) NOT NULL,
-    kullaniciChange VARCHAR(5) NOT NULL
+    kullaniciUrl VARCHAR(255) NOT NULL
 ) ENGINE=INNODB;
  
 CREATE TABLE IF NOT EXISTS kategoriler (
@@ -27,9 +26,9 @@ CREATE TABLE IF NOT EXISTS kategoriler (
     FOREIGN KEY (urunKullanici_id) REFERENCES kullanicilar(urunKullanici_id)
 ) ENGINE=INNODB;
 
-INSERT INTO kullanicilar (kullaniciNick, kullaniciEposta, kullaniciSifre, kullaniciUrl, kullaniciChange) VALUES 
-('admin', 'admin@admin.com', 'admin', 'kullaniciResim/user.jpg', 'false'),
-('user', 'user@user.com', 'user', 'kullaniciResim/user.jpg', 'false');
+INSERT INTO kullanicilar (kullaniciNick, kullaniciEposta, kullaniciSifre, kullaniciUrl) VALUES 
+('admin', 'admin@admin.com', 'admin', 'kullaniciResim/user.jpg'),
+('user', 'user@user.com', 'user', 'kullaniciResim/user.jpg');
 
 INSERT INTO kategoriler (urunKategori_ad) VALUES
  ('mutfak'), 

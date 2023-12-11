@@ -20,27 +20,25 @@
         if (isChanged.equals("true")) {
             int userId = userBean.getUserId();
 
-            String updateSql = "UPDATE kullanicilar SET kullaniciChange = ?, kullaniciUrl = ? WHERE urunKullanici_id = ?";
+            String updateSql = "UPDATE kullanicilar SET kullaniciUrl = ? WHERE urunKullanici_id = ?";
             try (Connection connection = DBConnection.getConnection();
                 PreparedStatement updateStatement = connection.prepareStatement(updateSql)) {
                 
-                updateStatement.setString(1, "true");
-                updateStatement.setString(2, request.getParameter("url"));
-                updateStatement.setInt(3, userId);
+                updateStatement.setString(1, request.getParameter("url"));
+                updateStatement.setInt(2, userId);
                 int rowsAffected = updateStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         } else {
             int userId = userBean.getUserId();
-            String updateSql = "UPDATE kullanicilar SET kullaniciChange = ?, kullaniciUrl = ? WHERE urunKullanici_id = ?";
+            String updateSql = "UPDATE kullanicilar SET kullaniciUrl = ? WHERE urunKullanici_id = ?";
 
             try (Connection connection = DBConnection.getConnection();
                 PreparedStatement updateStatement = connection.prepareStatement(updateSql)) {
                 
-                updateStatement.setString(1, "false");
-                updateStatement.setString(2, "kullaniciResim/user.jpg");
-                updateStatement.setInt(3, userId);
+                updateStatement.setString(1, "kullaniciResim/user.jpg");
+                updateStatement.setInt(2, userId);
                 updateStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
