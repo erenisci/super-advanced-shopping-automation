@@ -56,14 +56,17 @@
             UserBean userBean = new UserBean();
             String userEmail = request.getParameter("userEmail");
             String userPassword = request.getParameter("userPassword");
-            String userName = null;
+            int userId = 0;
+            String userNick = "";
             try {
                 if (DBOperations.validateUser(userEmail, userPassword)) {
-                    userName = DBOperations.getUserName(userEmail);
-                    userBean.setUserName(userName);
+                    userId = DBOperations.getUserId(userEmail);
+                    userNick = DBOperations.getUserNick(userEmail);
+                    userBean.setUserId(userId);
+                    userBean.setUserNick(userNick);
                     session.setAttribute("userBean", userBean);
                     response.sendRedirect("index.jsp");
-                } else if (userName == null || userPassword == null) {
+                } else if (userEmail == null || userPassword == null) {
                     
                 } else {
                     %><script>alert("E-Posta veya Şifre uyuşmuyor!");</script><%

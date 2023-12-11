@@ -29,7 +29,7 @@
         <input type="hidden" name="search" value="<%out.print(searchKeyword);%>"/>
         <input type="hidden" name="category" value="<%out.print(categoryKeyword);%>"/>
         <input type="hidden" name="sort" value="<%out.print(sortOption);%>"/>
-        <button class="buy" type="submit">Satın Al</button>
+        <button class="buy <%if(isLoggedIn && (product.getUrunKullaniciId() == userBean.getUserId())) out.print("buy-disabled");%>" type="submit">Satın Al</button>
       </form>
     </div>
 </div>

@@ -44,8 +44,24 @@ public class DBOperations {
         }
     }
     
-    public static String getUserName(String userEmail) throws SQLException {
-        String userName = "";
+    public static int getUserId(String userEmail) throws SQLException {
+        int userId = 0;
+        String sql = "SELECT urunKullanici_id FROM kullanicilar WHERE kullaniciEposta = ?";
+        
+        try (Connection connection = DBConnection.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, userEmail);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                userId = resultSet.getInt("urunKullanici_id");
+            }
+        }
+
+        return userId;
+    }
+    
+    public static String getUserNick(String userEmail) throws SQLException {
+        String userNick = "";
         String sql = "SELECT kullaniciNick FROM kullanicilar WHERE kullaniciEposta = ?";
         
         try (Connection connection = DBConnection.getConnection();
@@ -53,11 +69,11 @@ public class DBOperations {
             statement.setString(1, userEmail);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                userName = resultSet.getString("kullaniciNick");
+                userNick = resultSet.getString("kullaniciNick");
             }
         }
 
-        return userName;
+        return userNick;
     }
     
     public static int getAllProduct(String sql) throws SQLException {

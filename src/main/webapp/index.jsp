@@ -56,7 +56,7 @@
   <body>
     <%
         UserBean userBean = (UserBean) session.getAttribute("userBean");
-        boolean isLoggedIn = (userBean != null && userBean.getUserName() != null && !userBean.getUserName().isEmpty());
+        boolean isLoggedIn = (userBean != null && userBean.getUserId() != 0);
     %>
     
     <!-- HEADER -->
@@ -68,13 +68,13 @@
             %>
                 <span><a class="logR" href="#">Sepet</a></span>
                 <span class="profile-container">
-                    <a class="logR" href="profile.jsp?link=profil">Profil</a>
+                    <a class="logR" href="profile.jsp?link=profile">Profil</a>
                     <div class="profile-hover">
                         <ul>
-                            <li><a href="profile.jsp?link=urunEkle"><p><span>Ürün</span> <span>Ekle</span></p></a></li>
-                            <li><a href="profile.jsp?link=urunlerim">Ürünlerim</a></li>
-                            <li><a href="profile.jsp?link=siparislerim"><p><span>Siparişlerim</span></p></a></li>
-                            <li><a href="profile.jsp?link=ayarlar">Ayarlar</a></li>
+                            <li><a href="profile.jsp?link=addProduct"><p><span>Ürün</span> <span>Ekle</span></p></a></li>
+                            <li><a href="profile.jsp?link=myProducts">Ürünlerim</a></li>
+                            <li><a href="profile.jsp?link=myOrders"><p><span>Siparişlerim</span></p></a></li>
+                            <li><a href="profile.jsp?link=settings">Ayarlar</a></li>
                             <li><a href="logout.jsp">Çıkış</a></li>
                         </ul>
                     </div>
@@ -82,8 +82,8 @@
             <%
                 } else { 
             %>
-                <span><a class="logR" href="login.jsp">GİRİŞ YAP</a></span>
-                <span><a class="logR" href="register.jsp">KAYIT</a></span>
+                <span><a class="logR-else" href="login.jsp">Giriş Yap</a></span>
+                <span><a class="logR-else" href="register.jsp">Üye Ol</a></span>
             <%
                 }
             %>
@@ -192,7 +192,7 @@
                     <!-- SEARCH OPTION -->
                     <div class="search">
                         <div class="search-bar">
-                            <input class="searchText" type="text" name="search" value="<%out.print(searchKeyword);%>" 
+                            <input class="searchText" type="text" name="search" value="<%out.print(searchKeyword);%>"
                                     placeholder="<%
                                         boolean flag = false;
                                         if (searchTF || searchKey == null || searchKey == "") out.print("Arama");
@@ -264,6 +264,7 @@
                     urun.setUrunUrl(result.getString("urunUrl"));
                     urun.setUrunFiyat(result.getFloat("urunFiyat"));
                     urun.setUrunStok(result.getInt("urunStok"));
+                    urun.setUrunKullaniciId(result.getInt("urunKullanici_id"));
                     urun.setUrunNewPageUrl();
                     searchResults.add(urun);
                 }

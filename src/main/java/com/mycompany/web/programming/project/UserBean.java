@@ -11,16 +11,25 @@ package com.mycompany.web.programming.project;
  */
 
 public class UserBean {
-    private String userName;
+    private int userId;
+    private String userNick;
 
     public UserBean() {
     }
     
-    public String getUserName() {
-        return userName;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+    
+    public String getUserNick() {
+        return userNick;
+    }
+
+    public void setUserNick(String userNick) {
+        this.userNick = userNick;
     }
 }

@@ -5,4 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<h1>Add Product</h1>
+<div class="right-col">
+    h1
+</div>
