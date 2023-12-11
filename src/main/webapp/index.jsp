@@ -265,6 +265,7 @@
                     urun.setUrunFiyat(result.getFloat("urunFiyat"));
                     urun.setUrunStok(result.getInt("urunStok"));
                     urun.setUrunKullaniciId(result.getInt("urunKullanici_id"));
+                    urun.setUrunAciklama(result.getString("urunAciklama"));
                     urun.setUrunNewPageUrl();
                     searchResults.add(urun);
                 }

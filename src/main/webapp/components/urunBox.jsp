@@ -25,6 +25,7 @@
         <input type="hidden" name="productUrl" value="<%out.print(product.getUrunUrl());%>"/>
         <input type="hidden" name="productPrice" value="<%out.print(product.getUrunFiyat());%>"/>
         <input type="hidden" name="productStock" value="<%out.print(product.getUrunStok());%>"/>
+        <input type="hidden" name="productInfo" value="<%out.print(product.getUrunAciklama());%>"/>
         <input type="hidden" name="page" value="<%out.print(pageParam);%>"/>
         <input type="hidden" name="search" value="<%out.print(searchKeyword);%>"/>
         <input type="hidden" name="category" value="<%out.print(categoryKeyword);%>"/>

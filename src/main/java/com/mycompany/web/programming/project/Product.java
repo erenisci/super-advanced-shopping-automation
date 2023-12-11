@@ -15,6 +15,7 @@ public class Product {
     private int urunStok;
     private String urunNewPageUrl;
     private int urunKullaniciId;
+    private String urunAciklama;
 
     public Product() {
     }
@@ -64,6 +65,14 @@ public class Product {
 
     public void setUrunKullaniciId(int urunKullaniciId) {
         this.urunKullaniciId = urunKullaniciId;
+    }
+    
+    public String getUrunAciklama() {
+        return urunAciklama;
+    }
+
+    public void setUrunAciklama(String urunAciklama) {
+        this.urunAciklama = urunAciklama;
     }
     
     public String getUrunNewPageUrl() {

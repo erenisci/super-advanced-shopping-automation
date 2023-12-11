@@ -17,7 +17,6 @@
 <%
     UserBean userBean = (UserBean) session.getAttribute("userBean");
     boolean isLoggedIn = (userBean != null && userBean.getUserId() != 0);
-    String targetURL = "";
     
     if(isLoggedIn) {
         String uploadSubDir = "../../src/main/webapp/kullaniciResim/";
@@ -41,9 +40,9 @@
         }
     } else {
 %>
-    <body>
-        404 NOT FOUND EN SON İŞİM
-    </body>
+<body>
+    404 NOT FOUND EN SON İŞİM
+</body>
 <%
     }
 %>

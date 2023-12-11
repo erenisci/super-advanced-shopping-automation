@@ -49,7 +49,7 @@
                     <img class="img-product" src="<%out.print(request.getParameter("productUrl"));%>" alt="<%out.print(request.getParameter("productName"));%>"/>
                     <div class="text-product">
                         <p class="product-name color"><%out.print(request.getParameter("productName"));%></p>
-                        <p class="product-info color">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisi scelerisque eu ultrices vitae auctor. Cursus mattis molestie a iaculis at erat. Purus sit amet volutpat consequat mauris nunc congue nisi. Magna sit amet purus gravida quis blandit turpis. Vitae ultricies leo integer malesuada nunc vel risus</p>
+                        <p class="product-info color"><%out.print(request.getParameter("productInfo"));%></p>
                         <div class="stock-price">
                             <p class="stock-price-color-first">FİYAT: <span class="stock-price-color"><%out.print(request.getParameter("productPrice"));%></span> TL</p>
                             <p class="stock-price-color-first">STOK: <span class="stock-price-color"><%out.print(request.getParameter("productStock"));%></span></p>

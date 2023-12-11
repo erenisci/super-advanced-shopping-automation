@@ -7,6 +7,28 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Author     : iscie
 */
 
+#firs-bottom-div{
+  padding-bottom: 7rem; 
+  border-bottom: 1px solid #33333350;
+}
+
+#fileCss {
+  width: 21rem;
+  padding: 1rem;
+  background: #e6f6fc;
+  border-radius: 16px;
+  border: 1px solid #003243;
+}
+
+.resimChange {
+  font-size: 1.4rem;
+  color: #003243;
+  margin-left: 4.2rem;
+  margin-top: -2.5rem;
+  font-weight: 500;
+  margin-bottom: 7rem;
+}
+
 .right-col-profile {
   display: flex;
 }
@@ -42,7 +64,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 
 .profile-info-div:last-child {
-  margin-top: 11rem;
+  margin-top: 4.6rem;
 }
 
 .profile-info-p {
@@ -53,10 +75,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 
 .profile-info-border {
-  width: 30rem;
+  width: 25rem;
   border: 1px solid #003243;
   border-radius: 12px;
-  padding: 1.2rem;
+  padding: 1.1rem;
   overflow: scroll;
   background: #e6f6fc;
 }
@@ -98,6 +120,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
   border-radius: 12px;
   width: 7rem;
   border: 1px solid #003243;
+  align-self: center;
 }
 
 .deleteImg {

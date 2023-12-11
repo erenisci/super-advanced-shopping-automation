@@ -61,6 +61,7 @@
             
             try {
                 if (registerNickname != null && registerPassword != null && registerEmail != null) {
+                    System.out.println("a");
                     
                     String sqlCheckNickname = "SELECT COUNT(*) FROM kullanicilar WHERE kullaniciNick = ?";
                     try (PreparedStatement checkNicknameStatement = DBConnection.getConnection().prepareStatement(sqlCheckNickname)) {
@@ -91,11 +92,12 @@
                                 </script>
         <%
                             } else {
-                                String sqlInsert = "INSERT INTO kullanicilar (kullaniciNick, kullaniciEposta, kullaniciSifre) VALUES (?, ?, ?)";
+                                String sqlInsert = "INSERT INTO kullanicilar (kullaniciNick, kullaniciEposta, kullaniciSifre, kullaniciUrl) VALUES (?, ?, ?, ?)";
                                 try (PreparedStatement preparedStatement = DBConnection.getConnection().prepareStatement(sqlInsert)) {
                                     preparedStatement.setString(1, registerNickname);
                                     preparedStatement.setString(2, registerEmail);
                                     preparedStatement.setString(3, registerPassword);
+                                    preparedStatement.setString(4, "kullaniciResim/user.jpg");
                                     preparedStatement.executeUpdate();
                                 }
                                 %>

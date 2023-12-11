@@ -15,7 +15,7 @@
 
 <%
     String isChanged = request.getParameter("change");
-    
+
     if(isChanged != null && !isChanged.isEmpty()) {
         if (isChanged.equals("true")) {
             int userId = userBean.getUserId();
@@ -26,7 +26,8 @@
                 
                 updateStatement.setString(1, request.getParameter("url"));
                 updateStatement.setInt(2, userId);
-                int rowsAffected = updateStatement.executeUpdate();
+                updateStatement.executeUpdate();
+                response.sendRedirect("profile.jsp?link=profile");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -36,10 +37,11 @@
 
             try (Connection connection = DBConnection.getConnection();
                 PreparedStatement updateStatement = connection.prepareStatement(updateSql)) {
-                
                 updateStatement.setString(1, "kullaniciResim/user.jpg");
                 updateStatement.setInt(2, userId);
                 updateStatement.executeUpdate();
+
+                response.sendRedirect("profile.jsp?link=profile");
             } catch (SQLException e) {
                 e.printStackTrace();
             } 
@@ -52,12 +54,14 @@
         <div class="div-userBean-img">
             <img class="userBean-img" src="<%out.print(kullaniciUrl);%>" alt="<%out.print(kullaniciAdi);%> resim"/>
         </div>
+        <p class="resimChange">Resminizin değişmesi biraz zaman alabilir...</p>
         <div class="divFormImg">
             <p class="divFormImgP">Resmi Değiştir</p>
             <form class="sendImg" method="post" action="upload.jsp" enctype="multipart/form-data">
-                <input type="file" name="image" accept="image/jpeg, image/png" required/>
+                <input id="fileCss" type="file" name="image" accept="image/jpeg, image/png" required/>
                 <input class="save" type="submit" value="Kaydet"/>
             </form>
+
 
             <form class="deleteImg" action="profile.jsp?link=profile&change=false&url=kullaniciResim/user.jpg" method="post">
                 <p class="divFormDeleP">Resmi Sil</p>
@@ -66,7 +70,7 @@
         </div>
     </div>
     <div class="profile-info">
-        <div class="profile-info-div">
+        <div class="profile-info-div" id="firs-bottom-div">
             <p class="profile-info-p">Kullanıcı Adı</p>
             <div class="profile-info-border">
                 <p class="profile-info-border-p"><%out.print(kullaniciAdi);%></p>

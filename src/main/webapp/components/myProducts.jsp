@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <div class="div-myProduct">
     <div class="inside-product-div">
         <img src="<%out.print(product.getUrunUrl());%>" alt="<%%>"/>

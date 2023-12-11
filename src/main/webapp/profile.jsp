@@ -145,7 +145,6 @@
                 %><%@include file="components/addProduct.jsp"%>
             <%
                 }
-                
                 if(myForm.equals("myProducts")) {
                     String sql = "SELECT * FROM urunler WHERE urunKullanici_id = " + userBean.getUserId();
                     try (ResultSet result = DBOperations.executeQuery(sql)) {
