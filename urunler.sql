@@ -29,16 +29,13 @@ CREATE TABLE IF NOT EXISTS urunler (
 
 CREATE TABLE IF NOT EXISTS siparisler (
     siparis_id INT AUTO_INCREMENT PRIMARY KEY,
-    urunIsim VARCHAR(255) NOT NULL,
-    urunFiyat DECIMAL(10, 2) NOT NULL,
+    kullanici_id INT,
     urun_id INT,
-    FOREIGN KEY (urun_id) REFERENCES urunler(id),
-    FOREIGN KEY (urunIsim, urunFiyat) REFERENCES urunler(urunIsim, urunFiyat)
+    siparis_tarih TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (kullanici_id) REFERENCES kullanicilar(urunKullanici_id),
+    FOREIGN KEY (urun_id) REFERENCES urunler(id)
 ) ENGINE=INNODB;
 
-
-ALTER TABLE siparisler
-ADD COLUMN siparisTarihi TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
 
 
 INSERT INTO kullanicilar (kullaniciNick, kullaniciEposta, kullaniciSifre) VALUES 
@@ -112,3 +109,4 @@ INSERT INTO urunler (urunIsim, urunUrl, urunAciklama, urunFiyat, urunStok, urunK
 ('krem','https://cdn03.ciceksepeti.com/cicek/kcm18747248-1/XL/neutrogena-yogun-nemlendirici-krem-kuru-cilt-200ml-kcm18747248-1-bebc3e05eace4e0a94bdbc9bbd81ca4e.jpg','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisi scelerisque eu ultrices vitae auctor. Cursus mattis molestie a iaculis at erat.', 200.00, 78, 19, 1),
 ('rimel','https://cdn03.ciceksepeti.com/cicek/kc7810336-1/XL/maybelline-cils-sensational-sky-high-mascara-siyah-kc7810336-1-7dbbbc82c2c54936b78b9c4933313bfe.jpg','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisi scelerisque eu ultrices vitae auctor. Cursus mattis molestie a iaculis at erat.', 290.00, 34, 19, 1),
 ('ruj','https://cdn.dsmcdn.com/ty729/product/media/images/20230213/12/280163206/7203098/1/1_org_zoom.jpg','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisi scelerisque eu ultrices vitae auctor. Cursus mattis molestie a iaculis at erat.', 280.00, 22, 19, 1);
+
