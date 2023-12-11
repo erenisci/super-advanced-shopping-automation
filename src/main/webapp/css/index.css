@@ -89,6 +89,21 @@
   color: #ea580c;
 }
 
+.logR-else:link,
+.logR-else:visited {
+  padding: 1rem;
+  color: #e6f6fc;
+  transition: all 0.3s;
+  font-size: 1.6rem;
+  text-decoration: none;
+  letter-spacing: 0;
+}
+
+.logR-else:hover,
+.logR-else:active {
+  color: #ea580c;
+}
+
 header {
   display: flex;
   justify-content: space-between;

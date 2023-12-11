@@ -3,7 +3,141 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
 */
 /* 
-    Created on : 10 Ara 2023, 06:06:06
+    Created on : 10 Ara 2023, 18:44:19
     Author     : iscie
 */
 
+.right-col-profile {
+  display: flex;
+}
+
+.profile-pic {
+  width: 45%;
+}
+
+.profile-info {
+  width: 55%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.div-userBean-img {
+  overflow: hidden;
+  margin: 3rem;
+  border-radius: 16px;
+  border: 1px solid #003243;
+  width: 29.7rem;
+  height: 25.7rem;
+}
+
+.userBean-img {
+  width: 29.7rem;
+  height: 25.7rem;
+}
+
+.profile-info-div {
+  padding: 1rem;
+  margin-top: 2.2rem;
+}
+
+.profile-info-div:last-child {
+  margin-top: 11rem;
+}
+
+.profile-info-p {
+  font-size: 1.6rem;
+  color: #003243;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.profile-info-border {
+  width: 30rem;
+  border: 1px solid #003243;
+  border-radius: 12px;
+  padding: 1.2rem;
+  overflow: scroll;
+  background: #e6f6fc;
+}
+
+.profile-info-border-p {
+  font-size: 2rem;
+  color: #ea580c;
+}
+
+.profile-info-border::-webkit-scrollbar {
+  display: none;
+}
+
+.divFormImg {
+  margin: 4rem 3rem;
+}
+
+.divFormImgP {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #003243;
+  margin-bottom: 0.5rem;
+}
+
+.sendImg {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #33333350;
+  padding-bottom: 3rem;
+}
+
+.sendImg input {
+  width: 19rem;
+}
+
+.sendImg input:last-child {
+  padding: 0;
+  border-radius: 12px;
+  width: 7rem;
+  border: 1px solid #003243;
+}
+
+.deleteImg {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.deleteImg input {
+  width: 19rem;
+}
+
+.deleteImg input:last-child {
+  padding: 2px;
+  border-radius: 12px;
+  width: 7rem;
+  border: 1px solid #003243;
+}
+
+.divFormDeleP {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #003243;
+}
+
+.save {
+  border: 1px solid #003243;
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+  padding: 0.4rem 0.8rem;
+  right: 0;
+  height: 3rem;
+  background: #003243;
+  color: #ea580c;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.save:hover,
+.save:active {
+  background-color: #ea580c;
+  color: #003243;
+}

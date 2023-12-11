@@ -83,6 +83,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
   cursor: pointer;
 }
 
+.buy-disabled {
+  pointer-events: none;
+  background-color: #33333315;
+  color: #003243;
+}
+
 .value-urunIsim {
   align-self: center;
   font-size: 1.6rem;

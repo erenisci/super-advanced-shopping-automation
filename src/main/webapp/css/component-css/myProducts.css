@@ -1,0 +1,119 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 10 Ara 2023, 20:57:21
+    Author     : iscie
+*/
+
+.right-col-add {
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  gap: 2rem;
+}
+
+.right-col-add::-webkit-scrollbar { 
+  display: none;
+}
+
+.div-myProduct {
+  margin: 2rem;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  display: flex;
+  justify-content: space-between;
+  background: #ccedf9;
+  color: #003243;
+  transition: 0.3s all;
+}
+
+.div-myProduct:hover {
+  transform: translateY(-0.3rem);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.inside-product-div {  
+  height: 10.5rem;
+}
+
+.inside-product-div img {
+  width: 12.5rem;
+  height: 10.5rem;
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+
+.delete-button {
+  font-size: 3rem;
+  color: #ea580c;
+  background: #003243;
+  transition: all 0.3s;
+  width: 8.5rem;
+  height: 10.5rem;
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+.delete-button:hover,
+.delete-button:active {
+  background-color: #ea580c;
+  color: #003243;
+  cursor: pointer;
+}
+
+.inputNumber {
+  height: 10.5rem;
+  width: 9rem;
+  display: block;
+  font-size: 3rem;
+  align-self: center;
+  padding: 7rem 1rem 1rem 1rem;
+  background: #b3e5f6;
+  border: 0;
+}
+
+.inputNumber:focus {
+  outline: none;
+}
+
+.form {
+  display: flex;
+  position: relative;
+}
+
+.productPrice {
+  align-self: center;
+  width: 20rem;
+}
+
+.productName {
+  align-self: center;
+  width: 20rem;
+  font-weight: bold;
+}
+
+.fiyatText {
+  font-weight: bold;
+}
+
+.fiyat {
+  color: #ea580c;
+}
+
+.money {
+  font-weight: bold;
+  font-size: 1.6rem;
+}
+
+.productStok {
+  position: absolute;
+  font-size: 1.6rem;
+  padding: 0.8rem 0.7rem;
+  font-weight: bold;
+}
+
+.stokS {
+  color: #ea580c;
+}
