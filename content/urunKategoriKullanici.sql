@@ -26,6 +26,16 @@ CREATE TABLE IF NOT EXISTS kategoriler (
     FOREIGN KEY (urunKullanici_id) REFERENCES kullanicilar(urunKullanici_id)
 ) ENGINE=INNODB;
 
+CREATE TABLE IF NOT EXISTS siparisler (
+    siparis_id INT AUTO_INCREMENT PRIMARY KEY,
+    kullanici_id INT NOT NULL,
+    siparisIsim VARCHAR(255) NOT NULL,
+    siparisUrl VARCHAR(255) NOT NULL,
+	siparisFiyat DECIMAL(10, 2) NOT NULL,
+    siparisAdet INT NOT NULL,
+    siparis_tarih TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=INNODB;
+
 INSERT INTO kullanicilar (kullaniciNick, kullaniciEposta, kullaniciSifre, kullaniciUrl) VALUES 
 ('admin', 'admin@admin.com', 'admin', 'kullaniciResim/user.jpg'),
 ('user', 'user@user.com', 'user', 'kullaniciResim/user.jpg');
@@ -98,3 +108,6 @@ INSERT INTO urunler (urunIsim, urunUrl, urunAciklama, urunFiyat, urunStok, urunK
 ('krem', 'urunResim/1krem.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisi scelerisque eu ultrices vitae auctor. Cursus mattis molestie a iaculis at erat.', 200.00, 78, 19, 1),
 ('rimel', 'urunResim/1rimel.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisi scelerisque eu ultrices vitae auctor. Cursus mattis molestie a iaculis at erat.', 290.00, 34, 19, 1),
 ('ruj', 'urunResim/1ruj.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisi scelerisque eu ultrices vitae auctor. Cursus mattis molestie a iaculis at erat.', 280.00, 22, 19, 1);
+
+INSERT INTO siparisler (kullanici_id, siparisIsim, siparisUrl, siparisFiyat, siparisAdet) VALUES
+(2, 'cila', 'urunResim/1cila.jpg', 79.00, 5);
