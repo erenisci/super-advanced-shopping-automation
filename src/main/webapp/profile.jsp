@@ -12,6 +12,7 @@
 <%@page import="com.mycompany.web.programming.project.DBConnection"%>
 <%@page import="com.mycompany.web.programming.project.DBOperations"%>
 <%@page import="com.mycompany.web.programming.project.Product"%>
+<%@page import="com.mycompany.web.programming.project.Orders"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -145,12 +146,14 @@
                 %><%@include file="components/addProduct.jsp"%>
             <%
                 }
+
                 if(myForm.equals("myProducts")) {
                     String sql = "SELECT * FROM urunler WHERE urunKullanici_id = " + userBean.getUserId();
                     try (ResultSet result = DBOperations.executeQuery(sql)) {
                         List<Product> searchResults = new ArrayList<>();
                         while (result.next()) {
                             Product urun = new Product();
+                            urun.setUrunId(result.getInt("id"));
                             urun.setUrunIsim(result.getString("urunIsim").substring(0, 1).toUpperCase() + result.getString("urunIsim").substring(1));
                             urun.setUrunUrl(result.getString("urunUrl"));
                             urun.setUrunFiyat(result.getFloat("urunFiyat"));
@@ -162,7 +165,40 @@
             <%
                         for (Product product : searchResults) {
             %>
-                <%@include file="components/myProducts.jsp"%>
+                            <%@include file="components/myProducts.jsp"%>
+            <%
+                        }
+            %>
+                </div>
+            <%
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                if(myForm.equals("myOrders")) {
+                    String sql = "SELECT * FROM siparisler";
+System.out.println(sql);
+                    try (ResultSet result = DBOperations.executeQuery(sql)) {
+                        List<Orders> searchResults = new ArrayList<>();
+                        while (result.next()) {
+System.out.println(sql);
+                            Orders orderDetail = new Orders();
+                            orderDetail.setSiparisId(result.getInt("siparis_id"));
+                            orderDetail.setKullaniciId(result.getInt("kullanici_id"));
+                            orderDetail.setSiparisIsim(result.getString("siparisIsim").substring(0, 1).toUpperCase() + result.getString("siparisIsim").substring(1));
+                            orderDetail.setSiparisUrl(result.getString("siparisUrl"));
+                            orderDetail.setSiparisFiyat(result.getFloat("siparisFiyat"));
+                            orderDetail.setSiparisAdet(result.getInt("siparisAdet"));
+                            orderDetail.setSiparisTarih(result.getTimestamp("siparis_tarih"));
+                            searchResults.add(orderDetail);
+                        }
+            %>
+            <div class="right-col right-col-add">
+            <%
+                        for (Orders order : searchResults) {
+            %>
+                            <%@include file="components/myOrders.jsp"%>
             <%
                         }
             %>
@@ -172,18 +208,21 @@
                         e.printStackTrace();
                     } 
                 }
-                if(myForm.equals("myOrders")) {
-                %><%@include file="components/myOrders.jsp"%>
-            <%
-                }
-            %>
-            <%
+
                 if(myForm.equals("settings")) {
                 %><%@include file="components/settings.jsp"%>
             <%
                 }
             %>
         </div>
+        <script>
+            let productNameInput = document.querySelector('.product-Name');
+            let productName = productNameInput.innerHTML;
+            if (productName.length > 9) {
+                productName = productName.substring(0, 6) + "...";
+                productNameInput.innerHTML = productName;
+            }
+        </script>
     </body>
     <%
         } else {

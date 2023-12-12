@@ -9,6 +9,7 @@ package com.mycompany.web.programming.project;
  * @author iscie
  */
 public class Product {
+    private int urunId;
     private String urunIsim;
     private String urunUrl;
     private float urunFiyat;
@@ -25,6 +26,14 @@ public class Product {
         this.urunUrl = urunUrl;
         this.urunFiyat = urunFiyat;
         this.urunStok = urunStok;
+    }
+    
+    public int getUrunId() {
+        return urunId;
+    }
+    
+    public void setUrunId(int urunId) {
+        this.urunId = urunId;
     }
     
     public String getUrunIsim() {

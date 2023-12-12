@@ -55,7 +55,6 @@
                 }
 
                 for (FileItem item : items) {
-                    System.out.println(item);
                     if (item.isFormField()) {
                         String paramName = item.getFieldName();
                         String paramValue = item.getString("UTF-8");
