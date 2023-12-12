@@ -71,7 +71,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
   font-size: 1.6rem;
   color: #003243;
   font-weight: bold;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.5rem;
+  margin-left: 1rem;
+
 }
 
 .profile-info-border {
@@ -102,6 +104,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
   font-weight: bold;
   color: #003243;
   margin-bottom: 0.5rem;
+  margin-left: 1rem;
 }
 
 .sendImg {
@@ -145,6 +148,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
   font-size: 1.6rem;
   font-weight: bold;
   color: #003243;
+  margin-left: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .save {

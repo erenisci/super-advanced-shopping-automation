@@ -46,7 +46,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 
 .flex p {
   margin-left: 1rem;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.5rem;
   font-size: 1.6rem;
   font-weight: 500;
   color: #003243;
@@ -79,6 +79,7 @@ textarea {
   font-size: 1.6rem;
   padding: 1rem;
   background-color: #e6f6fc;
+  border-radius: 16px;
 }
 
 .flex button {
@@ -96,8 +97,4 @@ textarea {
 .flex button:hover {
   background-color: #ea580c;
   color: #003243;
-}
-
-.border-bot {
-    
 }

@@ -178,11 +178,9 @@
 
                 if(myForm.equals("myOrders")) {
                     String sql = "SELECT * FROM siparisler";
-System.out.println(sql);
                     try (ResultSet result = DBOperations.executeQuery(sql)) {
                         List<Orders> searchResults = new ArrayList<>();
                         while (result.next()) {
-System.out.println(sql);
                             Orders orderDetail = new Orders();
                             orderDetail.setSiparisId(result.getInt("siparis_id"));
                             orderDetail.setKullaniciId(result.getInt("kullanici_id"));
@@ -210,7 +208,13 @@ System.out.println(sql);
                 }
 
                 if(myForm.equals("settings")) {
+            %>
+            <div class="right-col right-col-add">
+            <%
                 %><%@include file="components/settings.jsp"%>
+            <%
+            %>
+            </div>
             <%
                 }
             %>
