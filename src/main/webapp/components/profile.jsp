@@ -14,10 +14,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    String isChanged = request.getParameter("change");
+    String isChange = request.getParameter("change");
+    String isChanged = request.getParameter("changed");
 
-    if(isChanged != null && !isChanged.isEmpty()) {
-        if (isChanged.equals("true")) {
+    if(isChange != null && !isChange.isEmpty()) {
+        if (isChange.equals("true")) {
             int userId = userBean.getUserId();
 
             String updateSql = "UPDATE kullanicilar SET kullaniciUrl = ? WHERE urunKullanici_id = ?";
@@ -27,7 +28,7 @@
                 updateStatement.setString(1, request.getParameter("url"));
                 updateStatement.setInt(2, userId);
                 updateStatement.executeUpdate();
-                response.sendRedirect("profile.jsp?link=profile");
+                response.sendRedirect("profile.jsp?link=profile&changed=true");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -41,7 +42,7 @@
                 updateStatement.setInt(2, userId);
                 updateStatement.executeUpdate();
 
-                response.sendRedirect("profile.jsp?link=profile");
+                response.sendRedirect("profile.jsp?link=profile&changed=false");
             } catch (SQLException e) {
                 e.printStackTrace();
             } 
@@ -52,9 +53,21 @@
 <div class="right-col right-col-profile">
     <div class="profile-pic">
         <div class="div-userBean-img">
-            <img class="userBean-img" src="<%out.print(kullaniciUrl);%>" alt="<%out.print(kullaniciAdi);%> resim"/>
+            <img class="userBean-img" src="<%out.print(kullaniciUrl);%>" alt="<%out.print(kullaniciAdi);%>-resim"/>
         </div>
-        <p class="resimChange">Resminizin değişmesi biraz zaman alabilir...</p>
+            <p class="resimChange <%if(isChanged == null) out.print("opac");%>">
+            <%
+                if(isChanged != null) {
+                    if (isChanged.equals("true")) {
+                        out.print("Resminizin değişmesi biraz zaman alabilir..."); 
+                    } else {
+                        out.print("Resminizin silinmesi biraz zaman alabilir..."); 
+                    }
+                } else {
+                    out.print("Resminizin değişmesi biraz zaman alabilir...");
+                }
+            %>
+            </p>
         <div class="divFormImg">
             <p class="divFormImgP">Resmi Değiştir</p>
             <form class="sendImg" method="post" action="upload.jsp" enctype="multipart/form-data">

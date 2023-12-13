@@ -32,6 +32,54 @@ public class DBOperations {
         } 
     }
     
+    public static boolean userIdMatches(int userId) throws SQLException {
+        try (Connection connection = DBConnection.getConnection()) {
+            String query = "SELECT COUNT(*) FROM kullanicilar WHERE urunKullanici_id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setInt(1, userId);
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        int count = resultSet.getInt(1);
+                        return count > 0;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
+    public static boolean isUserNickExists(String userNick) throws SQLException {
+        try (Connection connection = DBConnection.getConnection()) {
+            String query = "SELECT COUNT(*) FROM kullanicilar WHERE kullaniciNick = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, userNick);
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        int count = resultSet.getInt(1);
+                        return count > 0;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
+    public static boolean isEmailExists(String email) throws SQLException {
+        try (Connection connection = DBConnection.getConnection()) {
+            String query = "SELECT COUNT(*) FROM kullanicilar WHERE kullaniciEposta = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, email);
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        int count = resultSet.getInt(1);
+                        return count > 0;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
     public static boolean validateUser(String userEmail, String userPassword) throws SQLException {
         String sql = "SELECT * FROM kullanicilar WHERE kullaniciEposta = ? AND kullaniciSifre = ?";
         try (Connection connection = DBConnection.getConnection();
