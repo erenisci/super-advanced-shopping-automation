@@ -7,6 +7,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Author     : iscie
 */
 
+.opac{
+  opacity: 0;
+}
+
 #firs-bottom-div{
   padding-bottom: 7rem; 
   border-bottom: 1px solid #33333350;
@@ -22,7 +26,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 
 .resimChange {
   font-size: 1.4rem;
-  color: #003243;
+  color: #ea580c;
   margin-left: 4.2rem;
   margin-top: -2.5rem;
   font-weight: 500;

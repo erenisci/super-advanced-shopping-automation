@@ -12,7 +12,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10rem;
+  gap: 3.5rem;
   margin-top: 5rem;
 }
 
@@ -24,6 +24,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 .form-flex {
   display: flex;
   gap: 3rem;
+  border-bottom: 1px solid #33333350;
+  padding-bottom: 6.5rem;
+}
+
+#last {
+  border-bottom: 0;
 }
 
 .par {
@@ -57,4 +63,8 @@ input {
   border-radius: 16px;
   border: 1px solid #003243;
   background-color: #e6f6fc;
+}
+
+.form-flex input:focus {
+  outline: 1px solid #003243;
 }
