@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<div class="box" onclick="redirectToPurchase('<%out.print(product.getUrunNewPageUrl());%>')">
+<div class="box">
     <div class="imgBox">
       <img
         class="picture"

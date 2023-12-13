@@ -260,7 +260,9 @@
                 List<Product> searchResults = new ArrayList<>();
                 while (result.next()) {
                     Product urun = new Product();
-                    urun.setUrunIsim(result.getString("urunIsim").substring(0, 1).toUpperCase() + result.getString("urunIsim").substring(1));
+                    String newIsim = result.getString("urunIsim").substring(0, 1).toUpperCase() + result.getString("urunIsim").substring(1);
+                    if(newIsim.length() > 12) newIsim = newIsim.substring(0,12) + "...";
+                    urun.setUrunIsim(newIsim);
                     urun.setUrunUrl(result.getString("urunUrl"));
                     urun.setUrunFiyat(result.getFloat("urunFiyat"));
                     urun.setUrunStok(result.getInt("urunStok"));
@@ -383,7 +385,6 @@
         </nav>
       </div>
     </footer>
-    
     <script>
         document.querySelector('.form-select').addEventListener('change', function () {
             this.submit();
@@ -391,13 +392,6 @@
         
         let flag = <%out.print(flag);%>
         if(flag == true) alert("Türkçe karakter girin...");
-        
-        let productNameInput = document.querySelector('.prod-name');
-        let productName = productNameInput.innerHTML;
-        if (productName.length > 20) {
-            productName = productName.substring(0, 17) + "...";
-            productNameInput.innerHTML = productName;
-        }
     </script>
   </body>
 </html>

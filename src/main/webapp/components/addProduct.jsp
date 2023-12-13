@@ -22,7 +22,7 @@
     
     if(isAdded != null && !isAdded.isEmpty()) {
         if (isAdded.equals("true")) {
-            %><script>alert("Ürünü Başarıyla Eklediniz");</script><%
+            %><script>alert("Ürününüzü Başarıyla Eklediniz!");</script><%
         }
     }
 %>

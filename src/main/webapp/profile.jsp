@@ -154,7 +154,9 @@
                         while (result.next()) {
                             Product urun = new Product();
                             urun.setUrunId(result.getInt("id"));
-                            urun.setUrunIsim(result.getString("urunIsim").substring(0, 1).toUpperCase() + result.getString("urunIsim").substring(1));
+                            String newIsim = result.getString("urunIsim").substring(0, 1).toUpperCase() + result.getString("urunIsim").substring(1);
+                            if(newIsim.length() > 12) newIsim = newIsim.substring(0,12) + "...";
+                            urun.setUrunIsim(newIsim);
                             urun.setUrunUrl(result.getString("urunUrl"));
                             urun.setUrunFiyat(result.getFloat("urunFiyat"));
                             urun.setUrunStok(result.getInt("urunStok"));
@@ -219,22 +221,12 @@
                 }
             %>
         </div>
-        <script>
-            let productNameInput = document.querySelector('.product-Name');
-            let productName = productNameInput.innerHTML;
-            if (productName.length > 9) {
-                productName = productName.substring(0, 6) + "...";
-                productNameInput.innerHTML = productName;
-            }
-        </script>
     </body>
-    <%
-        } else {
-    %>
-    <body>
-        404 NOT FOUND EN SON İŞİM
-    </body>
-    <%
-        }
-    %>
 </html>
+<%
+    } else {
+%>
+<%@include file="goToLogin.jsp"%>
+<%
+    }
+%>
