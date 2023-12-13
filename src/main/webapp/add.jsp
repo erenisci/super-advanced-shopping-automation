@@ -110,9 +110,7 @@
         response.sendRedirect("profile.jsp?link=addProduct&added=true");
     } else {
 %>
-<body>
-    404 NOT FOUND EN SON İŞİM
-</body>
+<%@include file="goToLogin.jsp"%>
 <%
     }
 %>
