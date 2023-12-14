@@ -13,7 +13,7 @@ body {
   background: #f8f8f8;
 }
 
-#countdown-message {
+.countdown-message {
   font-size: 2.4rem;
   font-weight: 500;
   color: #ea580c;
@@ -30,8 +30,10 @@ body {
   width: 50rem;
   height: 10rem;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 2rem;
 }
 
 .logo-p {
