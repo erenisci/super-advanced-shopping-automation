@@ -8,13 +8,36 @@
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.PreparedStatement" %>
 <%@page import="com.mycompany.web.programming.project.UserBean"%>
+<%@page import="com.mycompany.web.programming.project.DBOperations"%>
 <%@page import="com.mycompany.web.programming.project.DBConnection"%>
+<%@page import="com.mycompany.web.programming.project.SessionUtils"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
 <%
     UserBean userBean = (UserBean) session.getAttribute("userBean");
-    boolean isLoggedIn = (userBean != null && userBean.getUserId() != 0);
+    String sessionIdFromCookie = "";
+
+    if(userBean == null) {
+        UserBean userBeanTemp = new UserBean();
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("userSessId".equals(cookie.getName())) {
+                    sessionIdFromCookie = cookie.getValue();
+
+                    userBeanTemp.setUserId(DBOperations.getUserIdFromSess(sessionIdFromCookie));
+                    userBeanTemp.setUserNick(DBOperations.getUserNickFromSess(sessionIdFromCookie));
+
+                    session.setAttribute("userBean", userBeanTemp);
+                    break;
+                }
+            }
+        }
+    }
+
+    userBean = (UserBean) session.getAttribute("userBean");
+    boolean isLoggedIn = (userBean != null && userBean.getUserId() != 0) || !sessionIdFromCookie.equals("");
     
     if (!isLoggedIn) {
         %>
@@ -100,14 +123,17 @@
                                         </script>
                 <%
                                     } else {
-                                        String sqlInsert = "INSERT INTO kullanicilar (kullaniciNick, kullaniciEposta, kullaniciSifre, kullaniciUrl) VALUES (?, ?, ?, ?)";
+                                        String sessId = SessionUtils.generateUniqueSessionID();
+                                        String sqlInsert = "INSERT INTO kullanicilar (kullaniciNick, kullaniciEposta, kullaniciSifre, kullaniciUrl, kullaniciSessId) VALUES (?, ?, ?, ?, ?)";
                                         try (PreparedStatement preparedStatement = DBConnection.getConnection().prepareStatement(sqlInsert)) {
                                             preparedStatement.setString(1, registerNickname);
                                             preparedStatement.setString(2, registerEmail);
                                             preparedStatement.setString(3, registerPassword);
                                             preparedStatement.setString(4, "kullaniciResim/user.jpg");
+                                            preparedStatement.setString(5, sessId);
                                             preparedStatement.executeUpdate();
                                         }
+                                        
                                         %>
                                             <script>
                                                 alert("Başarıyla Kayıt Oldunuz!");

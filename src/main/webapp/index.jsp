@@ -56,7 +56,28 @@
   <body>
     <%
         UserBean userBean = (UserBean) session.getAttribute("userBean");
-        boolean isLoggedIn = (userBean != null && userBean.getUserId() != 0);
+        String sessionIdFromCookie = "";
+        
+        if(userBean == null) {
+            UserBean userBeanTemp = new UserBean();
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if ("userSessId".equals(cookie.getName())) {
+                        sessionIdFromCookie = cookie.getValue();
+                        
+                        userBeanTemp.setUserId(DBOperations.getUserIdFromSess(sessionIdFromCookie));
+                        userBeanTemp.setUserNick(DBOperations.getUserNickFromSess(sessionIdFromCookie));
+                        
+                        session.setAttribute("userBean", userBeanTemp);
+                        break;
+                    }
+                }
+            }
+        }
+        
+        userBean = (UserBean) session.getAttribute("userBean");
+        boolean isLoggedIn = (userBean != null && userBean.getUserId() != 0) || !sessionIdFromCookie.equals("");
     %>
     
     <!-- HEADER -->
@@ -66,7 +87,7 @@
             <% 
                 if (isLoggedIn) { 
             %>
-                <span><a class="logR" href="#">Sepet</a></span>
+                <span><a class="logR" href="cart.jsp">Sepet</a></span>
                 <span class="profile-container">
                     <a class="logR" href="profile.jsp?link=profile">Profil</a>
                     <div class="profile-hover">

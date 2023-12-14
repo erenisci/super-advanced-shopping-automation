@@ -20,8 +20,30 @@
     <head>
         <%
             String myForm = request.getParameter("link");
+            
             UserBean userBean = (UserBean) session.getAttribute("userBean");
-            boolean isLoggedIn = (userBean != null && userBean.getUserId() != 0);
+            String sessionIdFromCookie = "";
+
+            if(userBean == null) {
+                UserBean userBeanTemp = new UserBean();
+                Cookie[] cookies = request.getCookies();
+                if (cookies != null) {
+                    for (Cookie cookie : cookies) {
+                        if ("userSessId".equals(cookie.getName())) {
+                            sessionIdFromCookie = cookie.getValue();
+
+                            userBeanTemp.setUserId(DBOperations.getUserIdFromSess(sessionIdFromCookie));
+                            userBeanTemp.setUserNick(DBOperations.getUserNickFromSess(sessionIdFromCookie));
+
+                            session.setAttribute("userBean", userBeanTemp);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            userBean = (UserBean) session.getAttribute("userBean");
+            boolean isLoggedIn = (userBean != null && userBean.getUserId() != 0) || !sessionIdFromCookie.equals("");
         %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta
@@ -179,7 +201,7 @@
                 }
 
                 if(myForm.equals("myOrders")) {
-                    String sql = "SELECT * FROM siparisler";
+                    String sql = "SELECT * FROM siparisler WHERE kullanici_id = " + userBean.getUserId();
                     try (ResultSet result = DBOperations.executeQuery(sql)) {
                         List<Orders> searchResults = new ArrayList<>();
                         while (result.next()) {

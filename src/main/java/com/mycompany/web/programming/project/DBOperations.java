@@ -126,6 +126,54 @@ public class DBOperations {
         return userId;
     }
     
+    public static int getUserIdFromSess(String sessionId) throws SQLException {
+        String sql = "SELECT urunKullanici_id FROM kullanicilar WHERE kullaniciSessId = ?";
+        int userId = 0;
+        
+        try (Connection connection = DBConnection.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, sessionId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                userId = resultSet.getInt("urunKullanici_id");
+            }
+        }
+        
+        return userId;
+    }
+    
+    public static String getUserNickFromSess(String sessionId) throws SQLException {
+        String sql = "SELECT kullaniciNick FROM kullanicilar WHERE kullaniciSessId = ?";
+        String userNick = "";
+        
+        try (Connection connection = DBConnection.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, sessionId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                userNick = resultSet.getString("kullaniciNick");
+            }
+        }
+
+        return userNick;
+    }
+    
+    public static String getUserSessionId(int userId) throws SQLException {
+        String sql = "SELECT kullaniciSessId FROM kullanicilar WHERE urunKullanici_id  = ?";
+        String sessId = "";
+        
+        try (Connection connection = DBConnection.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, userId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                sessId = resultSet.getString("kullaniciSessId");
+            }
+        }
+
+        return sessId;
+    }
+    
     public static String getUserNick(String userEmail) throws SQLException {
         String userNick = "";
         String sql = "SELECT kullaniciNick FROM kullanicilar WHERE kullaniciEposta = ?";

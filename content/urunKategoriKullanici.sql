@@ -5,7 +5,8 @@ USE projectdb;
     kullaniciNick VARCHAR(20) NOT NULL UNIQUE,
     kullaniciEposta VARCHAR(255) NOT NULL UNIQUE,
     kullaniciSifre VARCHAR(255) NOT NULL,
-    kullaniciUrl VARCHAR(255) NOT NULL
+    kullaniciUrl VARCHAR(255) NOT NULL,
+    kullaniciSessId VARCHAR(255) NOT NULL
 ) ENGINE=INNODB;
  
 CREATE TABLE IF NOT EXISTS kategoriler (
@@ -36,9 +37,9 @@ CREATE TABLE IF NOT EXISTS siparisler (
     siparis_tarih TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=INNODB;
 
-INSERT INTO kullanicilar (kullaniciNick, kullaniciEposta, kullaniciSifre, kullaniciUrl) VALUES 
-('admin', 'admin@admin.com', 'admin', 'kullaniciResim/user.jpg'),
-('user', 'user@user.com', 'user', 'kullaniciResim/user.jpg');
+INSERT INTO kullanicilar (kullaniciNick, kullaniciEposta, kullaniciSifre, kullaniciUrl, kullaniciSessId) VALUES 
+('admin', 'admin@admin.com', 'admin', 'kullaniciResim/user.jpg', 'cb2596a8-afe7-46dd-9090-69fd87fced5f'),
+('user', 'user@user.com', 'user', 'kullaniciResim/user.jpg', '7986f224-b820-4d2b-96d9-ce9296d224e4');
 
 INSERT INTO kategoriler (urunKategori_ad) VALUES
  ('mutfak'), 

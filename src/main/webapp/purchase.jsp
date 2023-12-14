@@ -4,12 +4,34 @@
     Author     : iscie
 --%>
 
+<%@page import="com.mycompany.web.programming.project.DBOperations"%>
 <%@page import="com.mycompany.web.programming.project.UserBean"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
     UserBean userBean = (UserBean) session.getAttribute("userBean");
-    boolean isLoggedIn = (userBean != null && userBean.getUserId() != 0);
+    String sessionIdFromCookie = "";
+
+    if(userBean == null) {
+        UserBean userBeanTemp = new UserBean();
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("userSessId".equals(cookie.getName())) {
+                    sessionIdFromCookie = cookie.getValue();
+
+                    userBeanTemp.setUserId(DBOperations.getUserIdFromSess(sessionIdFromCookie));
+                    userBeanTemp.setUserNick(DBOperations.getUserNickFromSess(sessionIdFromCookie));
+
+                    session.setAttribute("userBean", userBeanTemp);
+                    break;
+                }
+            }
+        }
+    }
+
+    userBean = (UserBean) session.getAttribute("userBean");
+    boolean isLoggedIn = (userBean != null && userBean.getUserId() != 0) || !sessionIdFromCookie.equals("");
 %>
 
 <!DOCTYPE html>
@@ -60,12 +82,14 @@
                             <p class="stock-price-color-first">FİYAT: <span class="stock-price-color"><%out.print(request.getParameter("productPrice"));%></span> TL</p>
                             <p class="stock-price-color-first">STOK: <span class="stock-price-color"><%out.print(request.getParameter("productStock"));%></span></p>
                         </div>
-                            <%System.out.println(isLoggedIn);
-                            System.out.println("");
-                        System.out.println(userBean.getUserId());%>
-                        <button class="product-buy <%if(isLoggedIn && Integer.parseInt(request.getParameter("productUserId")) == userBean.getUserId()) out.print("padding-disable");%>">
-                            <%if(isLoggedIn && Integer.parseInt(request.getParameter("productUserId")) == userBean.getUserId()) out.print("<a class='products' href='profile.jsp?link=myProducts'>Ürünlerim</a>"); else out.print("Sepete Ekle");%>
-                        </button>
+                        <form method="post" action="addCart.jsp">
+                            <input type="hidden" name="productUrl" value="<%out.print(request.getParameter("productUrl"));%>"/>
+                            <input type="hidden" name="productName" value="<%out.print(request.getParameter("productName"));%>"/>
+                            <input type="hidden" name="productPrice" value="<%out.print(request.getParameter("productPrice"));%>"/>
+                            <button type="submit" class="product-buy <%if(isLoggedIn && Integer.parseInt(request.getParameter("productUserId")) == userBean.getUserId()) out.print("padding-disable");%>">
+                                <%if(isLoggedIn && Integer.parseInt(request.getParameter("productUserId")) == userBean.getUserId()) out.print("<a class='products' href='profile.jsp?link=myProducts'>Ürünlerim</a>"); else out.print("Sepete Ekle");%>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

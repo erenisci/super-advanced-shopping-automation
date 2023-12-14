@@ -14,7 +14,28 @@
 
 <%
     UserBean userBean = (UserBean) session.getAttribute("userBean");
-    boolean isLoggedIn = (userBean != null && userBean.getUserId() != 0);
+    String sessionIdFromCookie = "";
+
+    if(userBean == null) {
+        UserBean userBeanTemp = new UserBean();
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("userSessId".equals(cookie.getName())) {
+                    sessionIdFromCookie = cookie.getValue();
+
+                    userBeanTemp.setUserId(DBOperations.getUserIdFromSess(sessionIdFromCookie));
+                    userBeanTemp.setUserNick(DBOperations.getUserNickFromSess(sessionIdFromCookie));
+
+                    session.setAttribute("userBean", userBeanTemp);
+                    break;
+                }
+            }
+        }
+    }
+
+    userBean = (UserBean) session.getAttribute("userBean");
+    boolean isLoggedIn = (userBean != null && userBean.getUserId() != 0) || !sessionIdFromCookie.equals("");
     
     if(isLoggedIn) {
         try (Connection connection = DBConnection.getConnection()) {
