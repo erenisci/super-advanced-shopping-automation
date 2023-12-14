@@ -263,6 +263,7 @@
                     String newIsim = result.getString("urunIsim").substring(0, 1).toUpperCase() + result.getString("urunIsim").substring(1);
                     if(newIsim.length() > 12) newIsim = newIsim.substring(0,12) + "...";
                     urun.setUrunIsim(newIsim);
+                    urun.setUrunKullaniciId(result.getInt("urunKullanici_id"));
                     urun.setUrunUrl(result.getString("urunUrl"));
                     urun.setUrunFiyat(result.getFloat("urunFiyat"));
                     urun.setUrunStok(result.getInt("urunStok"));
@@ -361,10 +362,22 @@
         <nav class="boxNav">
           <p class="footer-heading">Hesap</p>
           <ul class="footer-nav">
-            <li><a class="footer-link" href="#">Giriş Yap</a></li>
-            <li><a class="footer-link" href="#">Hesap Oluştur</a></li>
-            <li><a class="footer-link" href="#">iOS Uygulaması</a></li>
-            <li><a class="footer-link" href="#">Android Uygulaması</a></li>
+            <%
+                if (isLoggedIn) {
+                    %>
+                        <li><a class="footer-link" href="#">iOS Uygulaması</a></li>
+                        <li><a class="footer-link" href="#">Android Uygulaması</a></li>
+                    <%
+                } else {
+                    %>
+                        <li><a class="footer-link" href="login.jsp">Giriş Yap</a></li>
+                        <li><a class="footer-link" href="register.jsp">Hesap Oluştur</a></li>
+                        <li><a class="footer-link" href="#">iOS Uygulaması</a></li>
+                        <li><a class="footer-link" href="#">Android Uygulaması</a></li>
+                    <%
+                }
+            %>
+
           </ul>
         </nav>
         <nav class="boxNav">

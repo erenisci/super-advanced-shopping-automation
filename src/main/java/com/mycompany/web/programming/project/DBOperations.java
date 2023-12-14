@@ -47,6 +47,24 @@ public class DBOperations {
         }
         return false;
     }
+
+    public static boolean userPassMatches(int userId, String currentPassword) throws SQLException {
+        try (Connection connection = DBConnection.getConnection()) {
+            String query = "SELECT kullaniciSifre FROM kullanicilar WHERE urunKullanici_id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setInt(1, userId);
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        String password = resultSet.getString("kullaniciSifre");
+                        if(password.equals(currentPassword)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
     
     public static boolean isUserNickExists(String userNick) throws SQLException {
         try (Connection connection = DBConnection.getConnection()) {

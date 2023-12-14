@@ -4,6 +4,7 @@
     Author     : iscie
 --%>
 
+<%@page import="com.mycompany.web.programming.project.UserBean"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -31,23 +32,50 @@
           rel="stylesheet"
           href="css/goToLogin.css"
         />
-        <title>Re-Log</title> 
-        <script> 
-            let seconds = 3;
-            function countdown() {
-                if (seconds === 0) { 
-                    window.location.href = "login.jsp"; 
-                } else { 
-                    document.getElementById("countdown-message").innerHTML += ".";
-                    seconds--; setTimeout(countdown, 1000); 
-                } 
-            } setTimeout(countdown, 1000); 
-        </script>
+        <link
+          rel="stylesheet"
+          href="css/general.css"
+        />
+        <%
+            if (isLoggedIn) {
+                %>
+                <script> 
+                    let seconds = 3;
+                    function countdown() {
+                        if (seconds === 0) { 
+                            window.location.href = "index.jsp"; 
+                        } else { 
+                            document.querySelector("#message").innerHTML += ".";
+                            seconds--; 
+                            setTimeout(countdown, 1000); 
+                        } 
+                    } setTimeout(countdown, 1000); 
+                </script>
+                <%
+            } else {
+                %>
+                <script> 
+                    let seconds = 3;
+                    function countdown() {
+                        if (seconds === 0) { 
+                            window.location.href = "login.jsp"; 
+                        } else { 
+                            document.querySelector("#message").innerHTML += ".";
+                            seconds--; 
+                            setTimeout(countdown, 1000); 
+                        } 
+                    } setTimeout(countdown, 1000); 
+                </script>
+                <%
+            }
+        %>
+        <title>Re-Log</title>
     </head>
     <body>
         <p class="logo-p"><a class="logo" href="index.jsp">LOGO</a></p>
     <div class="profile-cont">
-        <p id="countdown-message">Giriş Sayfasına Yönlendiriliyorsunuz</p>
+        <%if(isLoggedIn) out.print("<p class='countdown-message'>Zaten Giriş Yaptınız</p>");%>
+        <p id="message" class="countdown-message"><%if(isLoggedIn) out.print("Ana Sayfaya Yönlendiriliyorsunuz"); else out.print("Giriş Sayfasına Yönlendiriliyorsunuz");%></p>
     </div>
     </body>
 </html>

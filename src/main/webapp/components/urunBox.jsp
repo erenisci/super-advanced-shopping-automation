@@ -21,6 +21,7 @@
     </div>
     <div class="center">
       <form action="purchase.jsp" method="get">
+        <input type="hidden" name="productUserId" value="<%out.print(product.getUrunKullaniciId());%>"/>
         <input type="hidden" name="productName" value="<%out.print(product.getUrunIsim());%>"/>
         <input type="hidden" name="productUrl" value="<%out.print(product.getUrunUrl());%>"/>
         <input type="hidden" name="productPrice" value="<%out.print(product.getUrunFiyat());%>"/>
@@ -30,7 +31,7 @@
         <input type="hidden" name="search" value="<%out.print(searchKeyword);%>"/>
         <input type="hidden" name="category" value="<%out.print(categoryKeyword);%>"/>
         <input type="hidden" name="sort" value="<%out.print(sortOption);%>"/>
-        <button class="buy <%if(isLoggedIn && (product.getUrunKullaniciId() == userBean.getUserId())) out.print("buy-disabled");%>" type="submit">Satın Al</button>
+        <button class="buy" type="submit">Ürünü Önizle</button>
       </form>
     </div>
 </div>

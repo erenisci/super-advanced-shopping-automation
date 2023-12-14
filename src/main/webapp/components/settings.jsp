@@ -30,6 +30,9 @@
         if(error.equals("email_exists")) {
             %><script>alert("E-Posta Kullanımda!");</script><%
         }
+        if(error.equals("passFalse")) {
+            %><script>alert("Mevcut Şifreniz Yanlış!");</script><%
+        }
     }
 %>
 
@@ -39,7 +42,7 @@
         <form class="form-flex" method="post" action="set.jsp">
             <input type="hidden" name="userNick" value="nick"/>
             <input type="text" name="newUserNick" maxlength="20" pattern="[a-zA-ZçÇğĞıİöÖşŞüÜ]+" title="Sadece Türkçe karakterler kullanılabilir. [a-z] veya [A-Z]" placeholder="Yeni Kullanıcı Adı" required/>
-            <input type="password" pattern="^[^\s]+$" title="Boşluk içeremez." placeholder="Mevcut Şifre" required/>
+            <input type="password" name="currentPassword" pattern="^[^\s]+$" title="Boşluk içeremez." placeholder="Mevcut Şifre" required/>
             <input class="subm" type="submit" value="Değiştir"/>
         </form>
     </div>
@@ -48,7 +51,7 @@
         <form class="form-flex" method="post" action="set.jsp">
             <input type="hidden" name="userEmail" value="email"/>
             <input type="email" name="newUserEmail" placeholder="Yeni E-Posta" required/>
-            <input type="password" pattern="^[^\s]+$" title="Boşluk içeremez." placeholder="Mevcut Şifre" required/>
+            <input type="password" name="currentPassword" pattern="^[^\s]+$" title="Boşluk içeremez." placeholder="Mevcut Şifre" required/>
             <input class="subm" type="submit" value="Değiştir"/>
         </form>
     </div>
@@ -57,7 +60,7 @@
         <form id="last" class="form-flex" method="post" action="set.jsp">
             <input type="hidden" name="userPassword" value="sifre"/>
             <input type="password" name="newUserPassword" pattern="^[^\s]+$" title="Boşluk içeremez." placeholder="Yeni Şifre" required/>
-            <input type="password" pattern="^[^\s]+$" title="Boşluk içeremez." placeholder="Mevcut Şifre" required/>
+            <input type="password" name="currentPassword" pattern="^[^\s]+$" title="Boşluk içeremez." placeholder="Mevcut Şifre" required/>
             <input class="subm" type="submit" value="Değiştir"/>
         </form>
     </div>

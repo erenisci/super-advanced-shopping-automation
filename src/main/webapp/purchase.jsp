@@ -4,7 +4,13 @@
     Author     : iscie
 --%>
 
+<%@page import="com.mycompany.web.programming.project.UserBean"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+    UserBean userBean = (UserBean) session.getAttribute("userBean");
+    boolean isLoggedIn = (userBean != null && userBean.getUserId() != 0);
+%>
 
 <!DOCTYPE html>
 <html>
@@ -54,7 +60,12 @@
                             <p class="stock-price-color-first">FİYAT: <span class="stock-price-color"><%out.print(request.getParameter("productPrice"));%></span> TL</p>
                             <p class="stock-price-color-first">STOK: <span class="stock-price-color"><%out.print(request.getParameter("productStock"));%></span></p>
                         </div>
-                        <button class="product-buy">Sepete Ekle</button>
+                            <%System.out.println(isLoggedIn);
+                            System.out.println("");
+                        System.out.println(userBean.getUserId());%>
+                        <button class="product-buy <%if(isLoggedIn && Integer.parseInt(request.getParameter("productUserId")) == userBean.getUserId()) out.print("padding-disable");%>">
+                            <%if(isLoggedIn && Integer.parseInt(request.getParameter("productUserId")) == userBean.getUserId()) out.print("<a class='products' href='profile.jsp?link=myProducts'>Ürünlerim</a>"); else out.print("Sepete Ekle");%>
+                        </button>
                     </div>
                 </div>
             </div>
