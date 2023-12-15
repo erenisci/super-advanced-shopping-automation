@@ -109,6 +109,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 
 .productStok {
   position: absolute;
+  left: -5px;
   font-size: 1.6rem;
   padding: 0.8rem 0.7rem;
   font-weight: bold;

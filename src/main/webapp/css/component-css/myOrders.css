@@ -85,22 +85,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 
 .productPrice {
   align-self: center;
-  width: 20rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: -2rem;
-}
-
-#lastTime {
-  margin-bottom: 0.5rem;
-}
-
-.productName {
-  align-self: center;
-  width: 15rem;
-  font-weight: bold;
-  margin-left: 2rem;
 }
 
 .test {
@@ -113,6 +101,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
   font-size: 1.6rem;
 }
 
+.fiyatTexts {
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
 .fiyat {
   color: #ea580c;
 }
@@ -123,6 +116,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 
 .seco {
   height: 5rem;
+  font-size: 1.8rem;
 }
 
 .money {
@@ -139,4 +133,37 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 
 .stokS {
   color: #ea580c;
+}
+
+.product-Name {
+  font-size: 1.8rem;
+  margin-left: -1rem;
+}
+
+.productName {
+  align-self: center;
+  width: 15rem;
+  font-weight: bold;
+  margin-left: 2rem;
+}
+
+.adet-div {
+  width: 8rem;
+}
+
+.fiyat-div {
+  width: 15rem;
+}
+
+.toplam-fiyat-div {
+  width: 19rem;
+}
+
+#lastTime {
+  width: 14rem;
+  margin-bottom: 0.5rem;
+}
+
+.seco-2 {
+  width: 9rem;
 }

@@ -26,7 +26,7 @@
         <%%>
         <input type="hidden" name="productId" value="<%out.print(product.getUrunId());%>"/>
         <input type="hidden" name="productStok" value="<%out.print(product.getUrunStok());%>"/>
-        <input class="inputNumber" type="number" name="stockNum" onKeyDown="return false" value="0" max="<%out.print(product.getUrunStok());%>" min="0"/>
+        <input class="inputNumber" type="number" name="stockNum" value="0" max="<%out.print(product.getUrunStok());%>" min="0"/>
         <button type="submit" class="delete-button">Sil</button>
     </form>
 </div>

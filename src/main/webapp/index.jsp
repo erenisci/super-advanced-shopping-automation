@@ -58,6 +58,7 @@
         UserBean userBean = (UserBean) session.getAttribute("userBean");
         String sessionIdFromCookie = "";
         
+        System.out.println(userBean);
         if(userBean == null) {
             UserBean userBeanTemp = new UserBean();
             Cookie[] cookies = request.getCookies();
@@ -75,6 +76,7 @@
                 }
             }
         }
+        
         
         userBean = (UserBean) session.getAttribute("userBean");
         boolean isLoggedIn = (userBean != null && userBean.getUserId() != 0) || !sessionIdFromCookie.equals("");
@@ -124,7 +126,7 @@
             String searchKey = request.getParameter("search");
             boolean searchTF = true;
             if(request.getParameter("search") != null && request.getParameter("search").matches("[a-zA-ZçÇğĞıİöÖşŞüÜ ]+")) searchKeyword = request.getParameter("search").trim();
-            else searchTF = false;
+            else searchTF = false;            
             
             String categoryKeyword = "";
             if (request.getParameter("category") != null) categoryKeyword = request.getParameter("category");
@@ -202,7 +204,7 @@
         <!-- SEARCH NAV -->
         <div class="search-productDiv">
             <div class="searchBar">
-                <form class="form-select" method="get">
+                <form class="form-select" method="get" onsubmit='return validateForm()'>
                     <!-- PAGE -->
                     <input type="hidden" name="page" value="<%
                                                                 if (pageParam == session.getAttribute("page"))
@@ -420,12 +422,46 @@
       </div>
     </footer>
     <script>
-        document.querySelector('.form-select').addEventListener('change', function () {
-            this.submit();
+        function validateSearchText() {
+            let searchTextElement = document.querySelector('.searchText');
+            let searchTextValue = searchTextElement.value;
+
+            let searchTextRegex = /^[a-zA-ZçÇğĞıİöÖşŞüÜ0-9\s]*$/;
+            if (!searchTextRegex.test(searchTextValue)) {
+                alert('Arama metni yalnızca harf, rakam ve boşluk içerebilir.');
+                return false;
+            }
+
+            return true;
+        }
+        
+        document.querySelector('.form-select').onsubmit = function() {
+            return validateSearchText();
+        };
+        
+        document.querySelector('.search-select').addEventListener('change', function () {
+            if(validateSearchText())
+                this.form.submit();
         });
         
-        let flag = <%out.print(flag);%>
-        if(flag == true) alert("Türkçe karakter girin...");
+        
+        const allLinks = document.querySelectorAll('a:link');
+
+        allLinks.forEach(function (link) {
+          link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const href = link.getAttribute('href');
+
+            if (href === '#') {
+              window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+              });
+            } else {
+              window.location.href = href;
+            }
+          });
+        });
     </script>
   </body>
 </html>

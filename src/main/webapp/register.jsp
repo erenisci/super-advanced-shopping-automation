@@ -13,7 +13,6 @@
 <%@page import="com.mycompany.web.programming.project.SessionUtils"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-
 <%
     UserBean userBean = (UserBean) session.getAttribute("userBean");
     String sessionIdFromCookie = "";
@@ -76,10 +75,10 @@
                 <p class="logo-p"><a class="logo" href="index.jsp">LOGO</a></p>
                 <div class="login-div">
                     <p class="title">ÜYE OL</p>
-                    <form class="loginForm" method="post">
-                        <div class="inputs"><p>Kullanıcı Adı</p><input class="inp" type="text" name="registerNickname" maxlength="20" pattern="[a-zA-ZçÇğĞıİöÖşŞüÜ]+" title="Sadece Türkçe karakterler kullanılabilir. [a-z] veya [A-Z]" placeholder="Kullanıcı Adı" required/></div>
+                    <form id="emailForm" class="loginForm" method="post" onsubmit="return validateEmail()">
+                        <div class="inputs"><p>Kullanıcı Adı</p><input class="inp" type="text" name="registerNickname" maxlength="20" pattern="[a-zA-Z][a-zA-Z0-9]*" title="Kullanıcı adı harfle başlamalı ve yalnızca harf ve rakam içerebilir. Kullanıcı adı sayı ile başlayamaz. [a-z], [A-Z], [0-9]" placeholder="Kullanıcı Adı" required/></div>
                         <div class="inputs"><p>Şifre</p><input class="inp" type="password" name="registerPassword" pattern="^[^\s]+$" title="Boşluk içeremez." placeholder="Şifre" required/></div>
-                        <div class="inputs"><p>E-Posta</p><input class="inp" type="email" name="registerEmail" placeholder="E-Posta" required/></div>
+                        <div class="inputs"><p>E-Posta</p><input class="inp" type="email" id="newUserEmail" name="registerEmail" placeholder="E-Posta" required/></div>
                         <div class="inputs"><p class="hid">EŞ</p><input class="inpCheck" type="checkbox" required/><p class="new-register"><a class="linktoregister" href="">Üyelik Sözleşmesi</a>'ni okudum ve kabul ediyorum.</p></div>
                         <div><p class="hid">EŞ</p><button class="inp sub" type="submit">Üye ol</button></div>
                     </form>
@@ -92,8 +91,7 @@
 
                     try {
                         if (registerNickname != null && registerPassword != null && registerEmail != null) {
-                            System.out.println("a");
-
+                            
                             String sqlCheckNickname = "SELECT COUNT(*) FROM kullanicilar WHERE kullaniciNick = ?";
                             try (PreparedStatement checkNicknameStatement = DBConnection.getConnection().prepareStatement(sqlCheckNickname)) {
                                 checkNicknameStatement.setString(1, registerNickname);
@@ -148,6 +146,24 @@
                         e.printStackTrace();
                     }
                 %>
+                <script>
+                    function validateEmail() {
+                        let emailField = document.getElementById('newUserEmail');
+                        let emailValue = emailField.value;
+                        let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                        if (!emailRegex.test(emailValue)) {
+                            alert('Geçerli bir e-posta adresi girin.');
+                            return false;
+                        }
+                        
+                        return true;
+                    }
+                    
+                    document.getElementById('emailForm').onsubmit = function() {
+                        return validateEmail();
+                    };
+                </script>
             </body>
         </html>
 <%

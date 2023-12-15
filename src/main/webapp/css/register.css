@@ -50,7 +50,7 @@ body {
   margin-bottom: 0.3rem;
   font-size: 1.45rem;
   margin-top: 7rem;
-  margin-left: 5.8rem;
+  margin-left: 3.8rem;
 }
 
 .linktoregister:link,
@@ -91,7 +91,7 @@ body {
 
 .inpCheck {
   position: absolute;
-  left: 35%;
+  left: 35.5%;
   padding: 0.6rem 1.5rem;
   border-radius: 16px;
   border: 1px solid #003243;

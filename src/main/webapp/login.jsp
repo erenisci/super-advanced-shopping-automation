@@ -74,9 +74,10 @@
                 <p class="logo-p"><a class="logo" href="index.jsp">LOGO</a></p>
                 <div class="login-div">
                     <p class="title">GİRİŞ YAP</p>
-                    <form class="loginForm" method="post">
-                        <div class="inputs"><p>E-Posta</p><input class="inp loginName" type="email" name="userEmail" placeholder="E-Posta" required/></div>
+                    <form id="emailForm" class="loginForm" method="post" onsubmit="return validateEmail()">
+                        <div class="inputs"><p>E-Posta</p><input class="inp loginName" id="newUserEmail" type="email" name="userEmail" placeholder="E-Posta" required/></div>
                         <div class="inputs"><p>Şifre</p><input class="inp loginPassword" type="password" name="userPassword" pattern="^[^\s]+$" title="Boşluk içeremez." placeholder="Şifre" required/></div>
+                        <div class="inputs margins"><p class="hid">EŞ</p><input class="inpCheck" type="checkbox" name="session"/><p class="new-register">Oturumum açık kalsın.</p></div>
                         <div class="inputs marg-top"><p class="hid">EŞ</p><button class="inp sub" type="submit">Giriş Yap</button></div>
                         <p class="passwordf"><a class="passwordforgot" href="#">Şifrenizi mi unuttunuz?</a></p>
                     </form>
@@ -96,9 +97,12 @@
                             userNick = DBOperations.getUserNick(userEmail);
                             userBean.setUserId(userId);
                             userBean.setUserNick(userNick);
-                            String userSessId = DBOperations.getUserSessionId(userBean.getUserId());
-                            response.addCookie(SessionUtils.createSessionCookie(userSessId));
                             session.setAttribute("userBean", userBean);
+                            
+                            if (request.getParameter("session") != null) {
+                                String userSessId = DBOperations.getUserSessionId(userBean.getUserId());
+                                response.addCookie(SessionUtils.createSessionCookie(userSessId));
+                            }
                             
                             response.sendRedirect("index.jsp");
                         } else if (userEmail == null || userPassword == null) {
@@ -110,6 +114,24 @@
                         e.printStackTrace();
                     }
                 %>
+                <script>
+                    function validateEmail() {
+                        let emailField = document.getElementById('newUserEmail');
+                        let emailValue = emailField.value;
+                        let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                        if (!emailRegex.test(emailValue)) {
+                            alert('Geçerli bir e-posta adresi girin.');
+                            return false;
+                        }
+                        
+                        return true;
+                    }
+                    
+                    document.getElementById('emailForm').onsubmit = function() {
+                        return validateEmail();
+                    };
+                </script>
             </body>
         </html>
 <%

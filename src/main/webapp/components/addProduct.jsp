@@ -36,7 +36,7 @@
             </div>
             <div class="flex-width">
                 <p class="urunEkle-p">İsim</p>
-                <input class="border-bot" id="inputImg-Right" type="text" pattern="[a-zA-ZçÇğĞıİöÖşŞüÜ ]+" title="Sadece Türkçe karakterler kullanılabilir. [a-z] veya [A-Z]" placeholder="Ürün İsmi" name="isim" required/>
+                <input class="border-bot" id="inputImg-Right" type="text" pattern="[a-zA-ZçÇğĞıİöÖşŞüÜ0-9 ]+" title="Sadece Türkçe karakterler ve rakam içerebilir. [a-z], [A-Z], [0-9]" placeholder="Ürün İsmi" name="isim" required/>
             </div>
         </div>
         <div class="flex">

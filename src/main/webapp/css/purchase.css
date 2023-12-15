@@ -105,6 +105,7 @@ body {
 }
 
 .product-info {
+  overflow-wrap: anywhere;
   font-size: 2rem;
   margin-bottom: 7rem;
   height: 16rem;

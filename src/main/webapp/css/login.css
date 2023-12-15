@@ -104,6 +104,7 @@ body {
 
 .passwordforgot:link,
 .passwordforgot:visited {
+  font-size: 1.4rem;
   text-decoration: none;
   font-weight: bold;
   transition: all 0.1s;
@@ -117,7 +118,7 @@ body {
 
 .passwordf {
   position: absolute;
-  bottom: 12.6rem;
+  bottom: 17rem;
   left: 17.5rem;
   font-size: 1.45rem;
 }
@@ -127,7 +128,7 @@ body {
 }
 
 .marg-top {
-  margin-top: 1rem;
+  margin-top: -1rem;
 }
 
 .logo-p {
@@ -145,4 +146,30 @@ body {
 .logo:hover,
 .logo:active {
   color: #ea580c;
+}
+
+.inpCheck {
+  position: absolute;
+  left: 17rem;
+  padding: 0.6rem 1.5rem;
+  border-radius: 16px;
+  border: 1px solid #003243;
+}
+
+.new-register {
+  color: #003243;
+  align-self: center;
+  margin-bottom: 0.3rem;
+  font-size: 1.45rem;
+  position: absolute;
+  left: 19rem;
+  top: 33.4%;
+}
+
+.hid {
+  opacity: 0;
+}
+
+.margins {
+  margin-top: 1rem;
 }

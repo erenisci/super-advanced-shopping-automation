@@ -86,13 +86,48 @@
         <div class="profile-info-div" id="firs-bottom-div">
             <p class="profile-info-p">Kullanıcı Adı</p>
             <div class="profile-info-border">
-                <p class="profile-info-border-p"><%out.print(kullaniciAdi);%></p>
+                <%
+                    int kullaniciAdiLength = kullaniciAdi.length();
+                    String kullaniciAdiHidden = "";
+                    for (int i = 0; i < kullaniciAdiLength; i++) {
+                        if (i == 0 || i == kullaniciAdiLength - 1)
+                            kullaniciAdiHidden += kullaniciAdi.charAt(i);  
+                        else
+                            kullaniciAdiHidden += "*";                         
+                    }
+                %>
+                <p class="profile-info-border-p"><%out.print(kullaniciAdiHidden);%></p>
             </div>
         </div>
         <div class="profile-info-div">
             <p class="profile-info-p">E-Posta</p>
             <div class="profile-info-border">
-                <p class="profile-info-border-p"><%out.print(kullaniciEposta);%></p>
+                <%
+                    int kullaniciEpostaLength = kullaniciEposta.length();
+                    String kullaniciEpostaHidden = "";
+
+                    String[] ePostaParts = kullaniciEposta.split("@");
+                    
+                    String userNamePart = ePostaParts[0];
+                    String domainPart = ePostaParts[1].split("\\.")[0];
+                    
+
+                    for (int i = 0; i < userNamePart.length(); i++) {
+                        if(i == 0 || i == userNamePart.length() - 1)
+                            kullaniciEpostaHidden += userNamePart.charAt(i);
+                        else
+                            kullaniciEpostaHidden += "*";
+                    }
+                    kullaniciEpostaHidden += "@";
+                    for (int i = 0; i < domainPart.length(); i++) {
+                        if (i == 0 || i == domainPart.length() - 1)
+                            kullaniciEpostaHidden += domainPart.charAt(i);
+                        else
+                            kullaniciEpostaHidden += "*";
+                    }
+                    kullaniciEpostaHidden += "." + ePostaParts[1].split("\\.")[1];
+                %>
+                <p class="profile-info-border-p"><%out.print(kullaniciEpostaHidden);%></p>
             </div>
         </div>
     </div>

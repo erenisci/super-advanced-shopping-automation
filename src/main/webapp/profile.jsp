@@ -208,7 +208,9 @@
                             Orders orderDetail = new Orders();
                             orderDetail.setSiparisId(result.getInt("siparis_id"));
                             orderDetail.setKullaniciId(result.getInt("kullanici_id"));
-                            orderDetail.setSiparisIsim(result.getString("siparisIsim").substring(0, 1).toUpperCase() + result.getString("siparisIsim").substring(1));
+                            String setSiparisIsim = result.getString("siparisIsim").substring(0, 1).toUpperCase() + result.getString("siparisIsim").substring(1);
+                            if(setSiparisIsim.length() > 12) setSiparisIsim = setSiparisIsim.substring(0,12) + "...";
+                            orderDetail.setSiparisIsim(setSiparisIsim);
                             orderDetail.setSiparisUrl(result.getString("siparisUrl"));
                             orderDetail.setSiparisFiyat(result.getFloat("siparisFiyat"));
                             orderDetail.setSiparisAdet(result.getInt("siparisAdet"));
