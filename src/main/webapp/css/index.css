@@ -111,10 +111,10 @@
 }
 
 header {
+  padding: 4rem 5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 4rem 5rem;
   background: #00435a;
   color: #fff;
   border-bottom: 1px solid #00212d;
@@ -467,18 +467,18 @@ main {
 .gosterge {
   position: absolute;
   background: #dc2626;
-  width: 3rem;
-  height: 3rem;
-  font-size: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.6rem;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 360px;
   color: #fff;
-  top: -0.4rem;;
-  right: -0.5rem;
+  top: -0.1rem;;
+  right: -0.4rem;
 }
 
 ion-icon {
-  font-size: 4rem;
+  font-size: 3rem;
 }
