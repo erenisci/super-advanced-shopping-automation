@@ -5,22 +5,23 @@
 --%>
 
 <%@page import="java.util.List"%>
+<%@page import="java.sql.ResultSet"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.Connection"%>
+<%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="org.apache.commons.fileupload.*"%>
 <%@page import="javax.servlet.http.HttpServletRequest"%>
 <%@page import="javax.servlet.http.HttpServletResponse"%>
-<%@page import="org.apache.commons.fileupload.*"%>
-<%@page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
-<%@page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
+<%@page import="com.mycompany.web.programming.project.UserBean"%>
 <%@page import="com.mycompany.web.programming.project.DBConnection"%>
 <%@page import="com.mycompany.web.programming.project.DBOperations"%>
-<%@page import="com.mycompany.web.programming.project.UserBean"%>
+<%@page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
+<%@page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
@@ -58,7 +59,6 @@
         String urunIsim = null;
         String urunUrl = null;
         String urunFiyat = null;
-        String urunAdet = null;
         
         try {
             List<FileItem> items = upload.parseRequest(request);
@@ -84,9 +84,6 @@
                         case "urunFiyat":
                             urunFiyat = paramValue;
                             break;
-                        case "urunStok":
-                            urunAdet = paramValue;
-                            break;
                     }
                 }
             }
@@ -109,7 +106,7 @@
                 e.printStackTrace();
             }
         
-            response.sendRedirect("cart.jsp");
+            response.sendRedirect("purchase.jsp?added=true");
     } else {
 %>
 <%@include file="goToLogin.jsp"%>

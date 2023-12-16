@@ -9,6 +9,7 @@
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="com.mycompany.web.programming.project.DBConnection"%>
 <%@page import="com.mycompany.web.programming.project.DBOperations"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%

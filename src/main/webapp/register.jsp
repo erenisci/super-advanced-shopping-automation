@@ -4,13 +4,20 @@
     Author     : iscie
 --%>
 
+<%@page import="java.util.List"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.SQLException"%>
-<%@page import="java.sql.PreparedStatement" %>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="org.apache.commons.fileupload.*"%>
+<%@page import="javax.servlet.http.HttpServletRequest"%>
+<%@page import="javax.servlet.http.HttpServletResponse"%>
 <%@page import="com.mycompany.web.programming.project.UserBean"%>
 <%@page import="com.mycompany.web.programming.project.DBOperations"%>
 <%@page import="com.mycompany.web.programming.project.DBConnection"%>
 <%@page import="com.mycompany.web.programming.project.SessionUtils"%>
+<%@page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
+<%@page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
@@ -72,11 +79,11 @@
                 <title>Register</title>
             </head>
             <body>
-                <p class="logo-p"><a class="logo" href="index.jsp">LOGO</a></p>
+                <div class="logoDivs"><a class="logo" href="index.jsp"><img class="imgLogo" src="logo/f8f8f8.png" alt="Site logosu"/></a></div>
                 <div class="login-div">
                     <p class="title">ÜYE OL</p>
-                    <form id="emailForm" class="loginForm" method="post" onsubmit="return validateEmail()">
-                        <div class="inputs"><p>Kullanıcı Adı</p><input class="inp" type="text" name="registerNickname" maxlength="20" pattern="[a-zA-Z][a-zA-Z0-9]*" title="Kullanıcı adı harfle başlamalı ve yalnızca harf ve rakam içerebilir. Kullanıcı adı sayı ile başlayamaz. [a-z], [A-Z], [0-9]" placeholder="Kullanıcı Adı" required/></div>
+                    <form id="emailForm" class="loginForm" method="post" onsubmit="return validateEmail()" enctype="multipart/form-data">
+                        <div class="inputs"><p>Kullanıcı Adı</p><input class="inp" type="text" name="registerNickname" maxlength="20" pattern="[a-zA-ZğğüşıöçĞÜŞİÖÇı][a-zA-Z0-9ğüşıöçĞÜŞİÖÇı]*" title="Kullanıcı adı harfle başlamalı ve yalnızca harf ve rakam içerebilir. Kullanıcı adı sayı ile başlayamaz. [a-z], [A-Z], [0-9]" placeholder="Kullanıcı Adı" required/></div>
                         <div class="inputs"><p>Şifre</p><input class="inp" type="password" name="registerPassword" pattern="^[^\s]+$" title="Boşluk içeremez." placeholder="Şifre" required/></div>
                         <div class="inputs"><p>E-Posta</p><input class="inp" type="email" id="newUserEmail" name="registerEmail" placeholder="E-Posta" required/></div>
                         <div class="inputs"><p class="hid">EŞ</p><input class="inpCheck" type="checkbox" required/><p class="new-register"><a class="linktoregister" href="">Üyelik Sözleşmesi</a>'ni okudum ve kabul ediyorum.</p></div>
@@ -85,9 +92,37 @@
                     <p class="newregister">Zaten bir hesabınız var mı? <a class="linktoregister" href="login.jsp">Giriş Yap</a></p>
                 </div>
                 <%
-                    String registerNickname = request.getParameter("registerNickname");
-                    String registerPassword = request.getParameter("registerPassword");
-                    String registerEmail = request.getParameter("registerEmail");
+                    FileItemFactory factory = new DiskFileItemFactory();
+                    ServletFileUpload upload = new ServletFileUpload(factory);
+
+                    String registerNickname = null;
+                    String registerPassword = null;
+                    String registerEmail = null;
+
+                    try {
+                        List<FileItem> items = upload.parseRequest(request);
+
+                        for (FileItem item : items) {
+                            if (item.isFormField()) {
+                                String paramName = item.getFieldName();
+                                String paramValue = item.getString("UTF-8");
+
+                                switch (paramName) {
+                                    case "registerNickname":
+                                        registerNickname = paramValue;
+                                        break;
+                                    case "registerPassword":
+                                        registerPassword = paramValue;
+                                        break;
+                                    case "registerEmail":
+                                        registerEmail = paramValue;
+                                        break;
+                                }
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
                     try {
                         if (registerNickname != null && registerPassword != null && registerEmail != null) {

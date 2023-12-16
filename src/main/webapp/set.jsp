@@ -4,17 +4,18 @@
     Author     : iscie
 --%>
 
-<%@page import="java.io.*, java.util.*" %>
-<%@page import="java.math.BigDecimal"%>
 <%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.Connection"%>
+<%@page import="java.math.BigDecimal"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.io.*, java.util.*"%>
 <%@page import="java.sql.PreparedStatement"%>
+<%@page import="com.mycompany.web.programming.project.Product"%>
 <%@page import="com.mycompany.web.programming.project.UserBean"%>
 <%@page import="com.mycompany.web.programming.project.Categories"%>
 <%@page import="com.mycompany.web.programming.project.DBConnection"%>
 <%@page import="com.mycompany.web.programming.project.DBOperations"%>
-<%@page import="com.mycompany.web.programming.project.Product"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
@@ -48,19 +49,17 @@
         if(request.getParameter("userNick") != null) {
             String newUserNick = request.getParameter("newUserNick");
             boolean checkPass = DBOperations.userPassMatches(userId, request.getParameter("currentPassword"));
-            System.out.println("a");
-            System.out.println(checkPass);
             if (!DBOperations.isUserNickExists(newUserNick) && DBOperations.userIdMatches(userId)) {
                     if(checkPass) {
                         try (Connection connection = DBConnection.getConnection()) {
                         String updateQuery = "UPDATE kullanicilar SET kullaniciNick = ? WHERE urunKullanici_id = ?";
 
-                        try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
-                            preparedStatement.setString(1, newUserNick);
-                            preparedStatement.setInt(2, userId);
-                            preparedStatement.executeUpdate();
-                        }
-                        response.sendRedirect("profile.jsp?link=settings&changed=nick");
+                            try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
+                                preparedStatement.setString(1, newUserNick);
+                                preparedStatement.setInt(2, userId);
+                                preparedStatement.executeUpdate();
+                            }
+                            response.sendRedirect("profile.jsp?link=settings&changed=nick");
                         } catch (SQLException e) {
                             e.printStackTrace();
                         }

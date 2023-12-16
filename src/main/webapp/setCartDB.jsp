@@ -1,9 +1,10 @@
 <%-- 
-    Document   : updateStok
-    Created on : 12 Ara 2023, 04:48:22
+    Document   : setCartDB
+    Created on : 16 Ara 2023, 15:15:17
     Author     : iscie
 --%>
 
+<%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.PreparedStatement"%>
@@ -38,30 +39,20 @@
     userBean = (UserBean) session.getAttribute("userBean");
     boolean isLoggedIn = (userBean != null && userBean.getUserId() != 0) || !sessionIdFromCookie.equals("");
     
-    if(isLoggedIn) {
+    if (isLoggedIn) {  
+        int stockNum = Integer.parseInt(request.getParameter("stockNum"));
+        int productId = Integer.parseInt(request.getParameter("productIdUpdate"));
         try (Connection connection = DBConnection.getConnection()) {
-            int stockNum = Integer.parseInt(request.getParameter("stockNum"));
-            int productId = Integer.parseInt(request.getParameter("productId"));
-            int productStok = Integer.parseInt(request.getParameter("productStok"));
-            
-            String updateQuery = "UPDATE urunler SET urunStok = ? WHERE id = ?";
+            String updateQuery = "UPDATE sepetler SET urunAdet = ? WHERE urunId = ?";
+
             try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
-                preparedStatement.setInt(1, productStok - stockNum);
+                preparedStatement.setInt(1, stockNum);
                 preparedStatement.setInt(2, productId);
                 preparedStatement.executeUpdate();
-            }            
-            
-
-            if(productStok - stockNum == 0) {
-                String deleteQuery = "DELETE FROM urunler WHERE id = ?";
-                try (PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery)) {
-                    preparedStatement.setInt(1, productId);
-                    preparedStatement.executeUpdate();
-                }
             }
-
-            response.sendRedirect("profile.jsp?link=myProducts&change=true");
-        } catch (Exception e) {
+            
+            response.sendRedirect("cart.jsp?update=true");
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     } else {

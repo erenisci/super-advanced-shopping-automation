@@ -4,8 +4,9 @@
     Author     : iscie
 --%>
 
-<%@page import="com.mycompany.web.programming.project.DBOperations"%>
 <%@page import="com.mycompany.web.programming.project.UserBean"%>
+<%@page import="com.mycompany.web.programming.project.DBOperations"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%

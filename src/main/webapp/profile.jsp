@@ -5,14 +5,15 @@
 --%>
 
 <%@page import="java.util.List"%>
-<%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.ResultSet"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.SQLException"%>
+<%@page import="com.mycompany.web.programming.project.Orders"%>
+<%@page import="com.mycompany.web.programming.project.Product"%>
 <%@page import="com.mycompany.web.programming.project.UserBean"%>
 <%@page import="com.mycompany.web.programming.project.DBConnection"%>
 <%@page import="com.mycompany.web.programming.project.DBOperations"%>
-<%@page import="com.mycompany.web.programming.project.Product"%>
-<%@page import="com.mycompany.web.programming.project.Orders"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -81,7 +82,7 @@
         if (isLoggedIn) {
     %>
     <body>
-        <p class="logo-p"><a class="logo" href="index.jsp">LOGO</a></p>
+        <div class="logoDivs"><a class="logo" href="index.jsp"><img class="imgLogo" src="logo/f8f8f8.png" alt="Site logosu"/></a></div>
         <div class='mycont'>
             <div class="turnback">
                 <a class="turn" href="index.jsp">
@@ -198,6 +199,10 @@
                                 <%@include file="components/myProducts.jsp"%>
                 <%
                             }
+
+                            if(request.getParameter("change") != null && request.getParameter("change").equals("true")) {
+                                %><script>alert("Ürünü başarıyla güncellediniz!");console.log("a");</script><%
+                            }
                 %>
                     </div>
                 <%
@@ -230,6 +235,10 @@
                 %>
                                 <%@include file="components/myOrders.jsp"%>
                 <%
+                            }
+
+                            if (request.getParameter("order") != null && request.getParameter("order").equals("complete")) {
+                                %><script>alert("Sipariş başarıyla oluşturuldu!");</script><%
                             }
                 %>
                     </div>

@@ -4,23 +4,24 @@
     Author     : iscie
 --%>
 
-<%@page import="java.io.*, java.util.*" %>
-<%@page import="java.math.BigDecimal"%>
 <%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.Connection"%>
+<%@page import="java.math.BigDecimal"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.io.*, java.util.*"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="javax.servlet.ServletException"%>
+<%@page import="org.apache.commons.fileupload.*"%>
 <%@page import="javax.servlet.http.HttpServletRequest"%>
 <%@page import="javax.servlet.http.HttpServletResponse"%>
-<%@page import="org.apache.commons.fileupload.*"%>
-<%@page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
-<%@page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
+<%@page import="com.mycompany.web.programming.project.Product"%>
 <%@page import="com.mycompany.web.programming.project.UserBean"%>
 <%@page import="com.mycompany.web.programming.project.Categories"%>
 <%@page import="com.mycompany.web.programming.project.DBConnection"%>
 <%@page import="com.mycompany.web.programming.project.DBOperations"%>
-<%@page import="com.mycompany.web.programming.project.Product"%>
+<%@page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
+<%@page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%

@@ -5,17 +5,18 @@
 --%>
 
 <%@page import="java.util.List"%>
-<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.Calendar"%>
-<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.sql.ResultSet"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.SQLException"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="com.mycompany.web.programming.project.Product"%>
 <%@page import="com.mycompany.web.programming.project.UserBean"%>
 <%@page import="com.mycompany.web.programming.project.Categories"%>
 <%@page import="com.mycompany.web.programming.project.DBConnection"%>
 <%@page import="com.mycompany.web.programming.project.DBOperations"%>
-<%@page import="com.mycompany.web.programming.project.Product"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -83,13 +84,13 @@
     
     <!-- HEADER -->
     <header>
-        <p><a class="logo" href="index.jsp">LOGO</a></p>
+        <div><a class="logo" href="index.jsp"><img class="imgLogo" src="logo/00435a.png" alt="Site logosu"/></a></div>
         <div class="log-reg">
             <% 
                 if (isLoggedIn) { 
-                    List<int[]> cart = (List<int[]>) session.getAttribute("cart");
+                    int count = DBOperations.getTotalSepet(userBean.getUserId());
             %>
-            <span class='rel'><a class="logR" href="cart.jsp"><span class='centerF'>Sepetim</span><ion-icon name="cart-outline"></ion-icon></a> <%if (cart != null && !cart.isEmpty()) out.print("<span class='gosterge'>" + cart.size() + "</span>");%></span>
+            <span class='rel'><a class="logR" href="cart.jsp"><span class='centerF'>Sepetim</span><ion-icon name="cart-outline"></ion-icon></a> <%if (count > 0) out.print("<span class='gosterge'>" + count + "</span>");%></span>
                 <span class="profile-container">
                     <a class="logR" href="profile.jsp?link=profile"><span class='centerF'>Hesabım</span><ion-icon name="person-circle-outline"></ion-icon></a>
                     <div class="profile-hover">
@@ -219,11 +220,12 @@
                         <div class="search-bar">
                             <input class="searchText" type="text" name="search" value="<%out.print(searchKeyword);%>"
                                     placeholder="<%
+                                        // I have no idea :)
                                         boolean flag = false;
                                         if (searchTF || searchKey == null || searchKey == "") out.print("Arama");
                                         else {
-                                            out.print("Türkçe karakter girin...");
                                             flag = true;
+                                            out.print("Arama");
                                         }%>
                             "/>
                             <input class="searchBut" type="submit" value="ARA"/>
@@ -286,7 +288,7 @@
                 while (result.next()) {
                     Product urun = new Product();
                     String newIsim = result.getString("urunIsim").substring(0, 1).toUpperCase() + result.getString("urunIsim").substring(1);
-                    if(newIsim.length() > 12) newIsim = newIsim.substring(0,12) + "...";
+                    if(newIsim.length() > 20) newIsim = newIsim.substring(0,20) + "...";
                     urun.setUrunIsim(newIsim);
                     urun.setUrunId(result.getInt("id"));
                     urun.setUrunUrl(result.getString("urunUrl"));
@@ -351,7 +353,7 @@
       <div class="container footer-container grid--footer">
         <div class="boxLogo">
           <a class="footer-logo footer-link" href="index.jsp">
-              <p class="logoFoot">LOGO</p>
+              <img class="imgLogo" src="logo/00212d.png" alt="Site logosu"/>
           </a>
           <ul class="social-links">
             <li>
@@ -371,16 +373,16 @@
             int currentYear = calendar.get(Calendar.YEAR);
           %>
           <p class="copyright">
-            Copyright &copy; <span><%out.print(currentYear);%></span> by Lorem, Inc. Bütün Hakları Saklıdır.
+            Copyright &copy; <span><%out.print(currentYear);%></span> by OTU Shop, Inc. Bütün Hakları Saklıdır.
           </p>
         </div>
         <div class="boxAddress">
           <p class="footer-heading">İletişim</p>
           <address class="contacts">
-            <p class="address">Lorem Ipsum Dolor</p>
+            <p class="address">OTU Shop</p>
             <p>
               <a class="footer-link">123-456-7890</a><br />
-              <a class="footer-link">lorem@ipsum.com</a>
+              <a class="footer-link">otu@shop.com</a>
             </p>
           </address>
         </div>

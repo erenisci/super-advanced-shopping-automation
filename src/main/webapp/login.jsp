@@ -4,12 +4,13 @@
     Author     : iscie
 --%>
 
-<%@page import="com.mycompany.web.programming.project.SessionUtils"%>
-<%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.Connection"%>
+<%@page import="java.sql.SQLException"%>
 <%@page import="com.mycompany.web.programming.project.UserBean"%>
+<%@page import="com.mycompany.web.programming.project.SessionUtils"%>
 <%@page import="com.mycompany.web.programming.project.DBConnection"%>
 <%@page import="com.mycompany.web.programming.project.DBOperations"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
@@ -71,7 +72,7 @@
                 <title>Login</title>
             </head>
             <body>
-                <p class="logo-p"><a class="logo" href="index.jsp">LOGO</a></p>
+                <div class="logoDivs"><a class="logo" href="index.jsp"><img class="imgLogo" src="logo/f8f8f8.png" alt="Site logosu"/></a></div>
                 <div class="login-div">
                     <p class="title">GİRİŞ YAP</p>
                     <form id="emailForm" class="loginForm" method="post" onsubmit="return validateEmail()">

@@ -5,6 +5,7 @@
 --%>
 
 <%@page import="com.mycompany.web.programming.project.UserBean"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -72,10 +73,10 @@
         <title>Re-Log</title>
     </head>
     <body>
-        <p class="logo-p"><a class="logo" href="index.jsp">LOGO</a></p>
-    <div class="profile-cont">
-        <%if(isLoggedIn) out.print("<p class='countdown-message'>Zaten Giriş Yaptınız</p>"); else out.print("<p class='countdown-message'>Giriş Yapmalısınız.</p>");%>
-        <p id="message" class="countdown-message"><%if(isLoggedIn) out.print("Ana Sayfaya Yönlendiriliyorsunuz"); else out.print("Giriş Sayfasına Yönlendiriliyorsunuz");%></p>
-    </div>
+        <div class="logoDivs"><a class="logo" href="index.jsp"><img class="imgLogo" src="logo/f8f8f8.png" alt="Site logosu"/></a></div>
+        <div class="profile-cont">
+            <%if(isLoggedIn) out.print("<p class='countdown-message'>Zaten Giriş Yaptınız</p>"); else out.print("<p class='countdown-message'>Giriş Yapmalısınız.</p>");%>
+            <p id="message" class="countdown-message"><%if(isLoggedIn) out.print("Ana Sayfaya Yönlendiriliyorsunuz"); else out.print("Giriş Sayfasına Yönlendiriliyorsunuz");%></p>
+        </div>
     </body>
 </html>
