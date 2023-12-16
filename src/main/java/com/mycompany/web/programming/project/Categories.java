@@ -8,6 +8,7 @@ package com.mycompany.web.programming.project;
  *
  * @author iscie
  */
+
 public class Categories {
     private Integer categoryId;
     private String categoryName;

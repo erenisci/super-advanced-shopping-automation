@@ -8,6 +8,7 @@ package com.mycompany.web.programming.project;
  *
  * @author iscie
  */
+
 public class Product {
     private int urunId;
     private String urunIsim;
