@@ -6,8 +6,8 @@
   z-index: 999;
   display: none;
   position: absolute;
-  top: 3rem;
-  left: -4.2rem;
+  top: 4.9rem;
+  left: -0.4rem;
   background-color: #e6f6fc;
   padding: 2rem;
   border-radius: 16px;
@@ -82,6 +82,12 @@
   font-size: 1.6rem;
   text-decoration: none;
   letter-spacing: 0.05rem;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.centerF {
+  align-self: center;
 }
 
 .logR:hover,
@@ -452,4 +458,27 @@ main {
 .footer-logo:link,
 .footer-logo:visited {
   font-size: 3.2rem;
+}
+
+.rel {
+  position: relative;
+}
+
+.gosterge {
+  position: absolute;
+  background: #dc2626;
+  width: 3rem;
+  height: 3rem;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 360px;
+  color: #fff;
+  top: -0.4rem;;
+  right: -0.5rem;
+}
+
+ion-icon {
+  font-size: 4rem;
 }

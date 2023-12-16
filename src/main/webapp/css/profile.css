@@ -13,6 +13,35 @@ body {
   background: #f8f8f8;
 }
 
+.turnback {
+  width: 20rem;
+}
+
+.turn {
+  background: #00a7e1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  padding: 1.2rem 2.4rem;
+  text-decoration: none;
+  font-size: 2rem;
+}
+
+.turn:link,
+.turn:visited {
+  transition: all 0.3s;
+  color: #ea580c;
+  background: #003243;
+}
+
+.turn:hover,
+.turn:active {
+  background-color: #ea580c;
+  color:#003243;
+  outline: 1px solid #003243;
+}
+
 .logo-p {
   padding: 4rem 0 0 7rem;
 }
@@ -30,11 +59,19 @@ body {
   color: #ea580c;
 }
 
-.profile-cont {
+.mycont {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 45%;
+  left: 49%;
   transform: translate(-50%, -50%);
+  width: 100rem;
+  height: 65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.profile-cont {
   border: 1px solid #003243;
   border-radius: 16px;
   background: #e6f6fc;

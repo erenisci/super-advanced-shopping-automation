@@ -1,14 +1,12 @@
 <%-- 
-    Document   : addCart
-    Created on : 14 Ara 2023, 15:20:04
+    Document   : remove.jsp
+    Created on : 16 Ara 2023, 06:32:30
     Author     : iscie
 --%>
 
 <%@page import="java.util.List"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.net.URLEncoder"%>
+<%@page import="java.util.Iterator"%>
 <%@page import="com.mycompany.web.programming.project.DBOperations"%>
-<%@page import="com.mycompany.web.programming.project.UserBean"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
@@ -36,36 +34,31 @@
     userBean = (UserBean) session.getAttribute("userBean");
     boolean isLoggedIn = (userBean != null && userBean.getUserId() != 0) || !sessionIdFromCookie.equals("");
     
-    
     if (isLoggedIn) {
-        List<int[]> cart = (List<int[]>) session.getAttribute("cart");
-        if (cart == null) {
-            cart = new ArrayList<>();
-        }
+        String productIdToRemove = request.getParameter("productId");
 
-        String productIdString = request.getParameter("productId");
-        if (productIdString != null && !productIdString.isEmpty()) {
-            try {
-                int productId = Integer.parseInt(productIdString);
+        if (productIdToRemove != null && !productIdToRemove.isEmpty()) {
+            List<int[]> cart = (List<int[]>) session.getAttribute("cart");
 
-                boolean productExists = false;
-                for (int[] product : cart) {
-                    if (product[0] == productId) {
-                        productExists = true;
+            if (cart != null && !cart.isEmpty()) {
+                int productIdToRemoveInt = Integer.parseInt(productIdToRemove);
+
+                Iterator<int[]> iterator = cart.iterator();
+                while (iterator.hasNext()) {
+                    int[] product = iterator.next();
+                    int productId = product[0];
+
+                    if (productId == productIdToRemoveInt) {
+                        iterator.remove();
                         break;
                     }
                 }
-                if (!productExists) {
-                    int[] productInfo = {productId};
-                    cart.add(productInfo);
-                }
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
+                
+                session.setAttribute("cart", cart);
             }
         }
 
-        session.setAttribute("cart", cart);
-        response.sendRedirect("cart.jsp");
+        response.sendRedirect("cart.jsp?deleted=true");
     } else {
 %>
 <%@include file="goToLogin.jsp"%>

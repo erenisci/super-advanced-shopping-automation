@@ -83,9 +83,7 @@
                             <p class="stock-price-color-first">STOK: <span class="stock-price-color"><%out.print(request.getParameter("productStock"));%></span></p>
                         </div>
                         <form method="post" action="addCart.jsp">
-                            <input type="hidden" name="productUrl" value="<%out.print(request.getParameter("productUrl"));%>"/>
-                            <input type="hidden" name="productName" value="<%out.print(request.getParameter("productName"));%>"/>
-                            <input type="hidden" name="productPrice" value="<%out.print(request.getParameter("productPrice"));%>"/>
+                            <input type="hidden" name="productId" value="<%out.print(request.getParameter("productId"));%>"/>
                             <button type="submit" class="product-buy <%if(isLoggedIn && Integer.parseInt(request.getParameter("productUserId")) == userBean.getUserId()) out.print("padding-disable");%>">
                                 <%if(isLoggedIn && Integer.parseInt(request.getParameter("productUserId")) == userBean.getUserId()) out.print("<a class='products' href='profile.jsp?link=myProducts'>Ürünlerim</a>"); else out.print("Sepete Ekle");%>
                             </button>

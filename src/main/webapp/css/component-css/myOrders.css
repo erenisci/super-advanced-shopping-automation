@@ -14,7 +14,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
   gap: 2rem;
 }
 
-.right-col-add::-webkit-scrollbar { 
+.right-col-add::-webkit-scrollbar {
   display: none;
 }
 

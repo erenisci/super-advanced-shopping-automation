@@ -58,7 +58,6 @@
         UserBean userBean = (UserBean) session.getAttribute("userBean");
         String sessionIdFromCookie = "";
         
-        System.out.println(userBean);
         if(userBean == null) {
             UserBean userBeanTemp = new UserBean();
             Cookie[] cookies = request.getCookies();
@@ -88,12 +87,14 @@
         <div class="log-reg">
             <% 
                 if (isLoggedIn) { 
+                    List<int[]> cart = (List<int[]>) session.getAttribute("cart");
             %>
-                <span><a class="logR" href="cart.jsp">Sepet</a></span>
+            <span class='rel'><a class="logR" href="cart.jsp"><span class='centerF'>Sepetim</span><ion-icon name="cart-outline"></ion-icon></a> <%if (cart != null && !cart.isEmpty()) out.print("<span class='gosterge'>" + cart.size() + "</span>");%></span>
                 <span class="profile-container">
-                    <a class="logR" href="profile.jsp?link=profile">Profil</a>
+                    <a class="logR" href="profile.jsp?link=profile"><span class='centerF'>Hesabım</span><ion-icon name="person-circle-outline"></ion-icon></a>
                     <div class="profile-hover">
                         <ul>
+                            
                             <li><a href="profile.jsp?link=addProduct"><p><span>Ürün</span> <span>Ekle</span></p></a></li>
                             <li><a href="profile.jsp?link=myProducts">Ürünlerim</a></li>
                             <li><a href="profile.jsp?link=myOrders"><p><span>Siparişlerim</span></p></a></li>
@@ -286,7 +287,7 @@
                     String newIsim = result.getString("urunIsim").substring(0, 1).toUpperCase() + result.getString("urunIsim").substring(1);
                     if(newIsim.length() > 12) newIsim = newIsim.substring(0,12) + "...";
                     urun.setUrunIsim(newIsim);
-                    urun.setUrunKullaniciId(result.getInt("urunKullanici_id"));
+                    urun.setUrunId(result.getInt("id"));
                     urun.setUrunUrl(result.getString("urunUrl"));
                     urun.setUrunFiyat(result.getFloat("urunFiyat"));
                     urun.setUrunStok(result.getInt("urunStok"));
@@ -463,5 +464,7 @@
           });
         });
     </script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   </body>
 </html>

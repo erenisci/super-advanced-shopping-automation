@@ -74,7 +74,7 @@
     <body>
         <p class="logo-p"><a class="logo" href="index.jsp">LOGO</a></p>
     <div class="profile-cont">
-        <%if(isLoggedIn) out.print("<p class='countdown-message'>Zaten Giriş Yaptınız</p>");%>
+        <%if(isLoggedIn) out.print("<p class='countdown-message'>Zaten Giriş Yaptınız</p>"); else out.print("<p class='countdown-message'>Giriş Yapmalısınız.</p>");%>
         <p id="message" class="countdown-message"><%if(isLoggedIn) out.print("Ana Sayfaya Yönlendiriliyorsunuz"); else out.print("Giriş Sayfasına Yönlendiriliyorsunuz");%></p>
     </div>
     </body>

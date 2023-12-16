@@ -1,0 +1,255 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 16 Ara 2023, 03:48:36
+    Author     : iscie
+*/
+
+body {
+  height: 100vh;
+  position: relative;
+  background: #f8f8f8;
+}
+
+.logo-p {
+  padding: 4rem 0 0 7rem;
+}
+
+.turnback {
+  width: 20rem;
+  margin-bottom: 2rem;
+}
+
+.allflex {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 45%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+  width: 111rem;
+  height: 65rem;
+}
+
+.rowflex {
+  display: flex;
+  gap: 2rem;
+}
+
+.turn {
+  background: #00a7e1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  padding: 1.2rem 2.4rem;
+  text-decoration: none;
+  font-size: 2rem;
+}
+
+.turn:link,
+.turn:visited {
+  transition: all 0.3s;
+  color: #ea580c;
+  background: #003243;
+}
+
+.turn:hover,
+.turn:active {
+  background-color: #ea580c;
+  color: #003243;
+  outline: 1px solid #003243;
+}
+
+.logo:link,
+.logo:visited {
+  color: #003243;
+  font-size: 3.2rem;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.logo:hover,
+.logo:active {
+  color: #ea580c;
+}
+
+.profile-cont {
+  border: 1px solid #003243;
+  border-radius: 16px;
+  background: #e6f6fc;
+  width: 80rem;
+  height: 65rem;
+  overflow: hidden;
+}
+
+.left-col {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #b3e5f6;
+  overflow: scroll;
+}
+
+.right-col {
+  width: 30rem;
+  height: 20rem;
+  background: #e6f6fc;
+  border: 1px solid #003243;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.left-col::-webkit-scrollbar { 
+  display: none;
+}
+
+.div-myProduct {
+  margin: 2rem;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  display: flex;
+  justify-content: space-between;
+  background: #ccedf9;
+  color: #003243;
+  transition: 0.3s all;
+}
+
+.div-myProduct:hover {
+  transform: translateY(-0.3rem);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.inside-product-div {  
+  height: 10.5rem;
+}
+
+.inside-product-div img {
+  width: 12.5rem;
+  height: 10.5rem;
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+
+.delete-button {
+  font-size: 2rem;
+  color: #ea580c;
+  background: #003243;
+  transition: all 0.3s;
+  width: 9.5rem;
+  height: 10.5rem;
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+.delete-button:hover,
+.delete-button:active {
+  background-color: #ea580c;
+  color: #003243;
+  cursor: pointer;
+}
+
+.inputNumber {
+  height: 10.5rem;
+  width: 9rem;
+  display: block;
+  font-size: 3rem;
+  align-self: center;
+  padding: 7rem 1rem 1rem 1rem;
+  background: #b3e5f6;
+  border: 0;
+}
+
+.inputNumber:focus {
+  outline: none;
+}
+
+.form {
+  display: flex;
+  position: relative;
+}
+
+.productPrice {
+  align-self: center;
+  width: 20rem;
+}
+
+.productName {
+  align-self: center;
+  width: 20rem;
+  font-weight: bold;
+}
+
+.fiyatText {
+  font-weight: bold;
+}
+
+.fiyat {
+  color: #ea580c;
+}
+
+.money {
+  font-weight: bold;
+  font-size: 1.6rem;
+}
+
+.productStok {
+  position: absolute;
+  left: -5px;
+  font-size: 1.6rem;
+  padding: 0.8rem 0.7rem;
+  font-weight: bold;
+}
+
+.stokS {
+  color: #ea580c;
+}
+
+.satinAl {
+  font-size: 3rem;
+  color: #ea580c;
+  background: #003243;
+  transition: all 0.3s;
+  width: 100%;
+  height: 5rem;
+  border-bottom-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+
+.satinAl:hover,
+.satinAl:active {
+  background-color: #ea580c;
+  color: #003243;
+  cursor: pointer;
+}
+
+.detay {
+  padding: 1rem;
+  font-weight: bold;
+  color:#003243 ;
+}
+
+.tutar {
+  padding: 1rem;
+  font-size: 2.2rem;
+  color:#003243;
+}
+
+.tl {
+  font-size: 1.8rem;
+}
+
+.fiyatSepet {
+  color:#ea580c;
+}
+
+.empty {
+  padding: 3rem;
+  color:#003243;
+  align-self: center;
+}

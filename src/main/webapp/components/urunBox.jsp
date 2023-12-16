@@ -21,6 +21,7 @@
     </div>
     <div class="center">
       <form action="purchase.jsp" method="get">
+        <input type="hidden" name="productId" value="<%out.print(product.getUrunId());%>"/>
         <input type="hidden" name="productUserId" value="<%out.print(product.getUrunKullaniciId());%>"/>
         <input type="hidden" name="productName" value="<%out.print(product.getUrunIsim());%>"/>
         <input type="hidden" name="productUrl" value="<%out.print(product.getUrunUrl());%>"/>
