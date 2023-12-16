@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ürün Listesi</title>
+</head>
+<body>
+
+<label for="kategoriSecimi">Kategori Seçimi:</label>
+<select id="kategoriSecimi" onchange="kategoriyeGoreUrunleriGetir()">
+    <option value="0">Tüm Kategoriler</option>
+    <option value="1">Mutfak</option>
+    <option value="2">Teknoloji</option>
+    <option value="3">Kırtasiye</option>
+    <option value="4">Eşya</option>
+    <option value="5">Ev</option>
+    <option value="6">Giyim</option>
+    <option value="7">Yemek</option>
+</select>
+
+<div id="urunListesi"></div>
+
+<script>
+    function kategoriyeGoreUrunleriGetir() {
+        var selectedCategoryId = document.getElementById("kategoriSecimi").value;
+
+        // AJAX isteği gönder
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var urunListesi = JSON.parse(this.responseText);
+                gosterUrunListesi(urunListesi);
+            }
+        };
+
+        if (selectedCategoryId === "0") {
+            // Tüm kategorileri getir
+            xhr.open("GET", "urunleri_getir.php", true);
+        } else {
+            // Belirli bir kategoriyi getir
+            xhr.open("GET", "urunleri_getir.php?kategori_id=" + selectedCategoryId, true);
+        }
+
+        xhr.send();
+    }
+
+    function gosterUrunListesi(urunListesi) {
+        var urunListesiHTML = "<ul>";
+
+        for (var i = 0; i < urunListesi.length; i++) {
+            urunListesiHTML += "<li>" + urunListesi[i].urunIsim + " - Fiyat: $" + urunListesi[i].urunFiyat + "</li>";
+        }
+
+        urunListesiHTML += "</ul>";
+
+        document.getElementById("urunListesi").innerHTML = urunListesiHTML;
+    }
+</script>
+
+</body>
+</html>
