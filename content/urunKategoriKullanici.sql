@@ -1,3 +1,5 @@
+CREATE DATABASE projectdb;
+
 USE projectdb;
 
  CREATE TABLE IF NOT EXISTS kullanicilar (
@@ -25,6 +27,16 @@ CREATE TABLE IF NOT EXISTS kategoriler (
     urunKullanici_id INT NOT NULL,
     FOREIGN KEY (urunKategori_id) REFERENCES kategoriler(urunKategori_id),
     FOREIGN KEY (urunKullanici_id) REFERENCES kullanicilar(urunKullanici_id)
+) ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS sepetler (
+    sepet_id INT AUTO_INCREMENT PRIMARY KEY,
+    kullanici_id INT NOT NULL,
+    urunId INT NOT NULL UNIQUE,
+    urunIsim VARCHAR(255) NOT NULL,
+    urunUrl VARCHAR(255) NOT NULL,
+	urunFiyat DECIMAL(10, 2) NOT NULL,
+    urunAdet INT NOT NULL
 ) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS siparisler (
