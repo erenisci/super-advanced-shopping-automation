@@ -18,10 +18,8 @@
     </div>
     <div class="form">
         <div class="productStok"><span>STOK: </span><span class="stokS"><%out.print(product.getUrunStok());%></span></div>
-        <input class="inputNumber" type="number" name="stockNum" value="1" max="<%out.print(product.getUrunStok());%>" min="1"/>        
-        <form method="get" action="remove.jsp">
-            <input type="hidden" name="productId" value="<%out.print(product.getUrunId());%>"/>
-            <button type="submit" class="delete-button">Sepetten Kaldır</button>
-        </form>
+        
+        <input class="inputNumber" type="number" name="stockNum" value="1" max="<%out.print(product.getUrunStok());%>" min="1" onkeydown="return false;"/>
+        <button class="delete-button" onclick="removeFromCart(<%out.print(product.getUrunId());%>)">Sepetten Kaldır</button>
     </div>
 </div>

@@ -22,7 +22,7 @@
     UserBean userBean = (UserBean) session.getAttribute("userBean");
     String sessionIdFromCookie = "";
 
-    if(userBean == null) {
+    if (userBean == null) {
         UserBean userBeanTemp = new UserBean();
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
@@ -42,121 +42,151 @@
 
     userBean = (UserBean) session.getAttribute("userBean");
     boolean isLoggedIn = (userBean != null && userBean.getUserId() != 0) || !sessionIdFromCookie.equals("");
-    
+
     if (isLoggedIn) {
         double toplamTutar = 0;
-        if(request.getParameter("deleted") != null && request.getParameter("deleted").equals("true")) {
-            %><script>alert("Ürün sepetten başarıyla kaldırıldı!");</script><%
-        }
-            
-    %>
-        <!DOCTYPE html>
-        <html>
-            <head>
-                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-                <meta
-                  name="viewport"
-                  content="width=device-width, initial-scale=1.0"
-                />
-                <link
-                  rel="preconnect"
-                  href="https://fonts.googleapis.com"
-                />
-                <link
-                  rel="preconnect"
-                  href="https://fonts.gstatic.com"
-                  crossorigin
-                />
-                <link
-                  href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
-                  rel="stylesheet"
-                />
-                <link
-                  rel="stylesheet"
-                  href="css/cart.css"
-                />
-                <link
-                  rel="stylesheet"
-                  href="css/general.css"
-                />
-                <title>Login</title>
-            </head>
-            <body>
-                <p class="logo-p"><a class="logo" href="index.jsp">LOGO</a></p>
-                <div class='allflex'>
-                    <div class="turnback">
-                        <a class="turn" href="index.jsp">
-                            Ana Sayfaya Dön
-                        </a>
-                    </div>
-                    <div class='rowflex'>
-                        <div class="profile-cont">
-                            <div class="left-col">
-                            <%
-                                List<int[]> cart = (List<int[]>) session.getAttribute("cart");
+        if (request.getParameter("deleted") != null && request.getParameter("deleted").equals("true")) {
+%><script>alert("Ürün sepetten başarıyla kaldırıldı!");</script><%
+                }
 
-                                if (cart != null && !cart.isEmpty()) {
-                                    List<Product> products = new ArrayList<>();
+%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+            />
+        <link
+            rel="preconnect"
+            href="https://fonts.googleapis.com"
+            />
+        <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin
+            />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+            rel="stylesheet"
+            />
+        <link
+            rel="stylesheet"
+            href="css/cart.css"
+            />
+        <link
+            rel="stylesheet"
+            href="css/general.css"
+            />
+        <title>Login</title>
+    </head>
+    <body>
+        <p class="logo-p"><a class="logo" href="index.jsp">LOGO</a></p>
+        <div class='allflex'>
+            <div class="turnback">
+                <a class="turn" href="index.jsp">
+                    Ana Sayfaya Dön
+                </a>
+            </div>
+            <div class='rowflex'>
+                <div class="profile-cont">
+                    <div class="left-col">
+                        <%                                
+                            List<int[]> cart = (List<int[]>) session.getAttribute("cart");
+                            List<Product> products = new ArrayList<>();
+                            
+                            if (cart != null && !cart.isEmpty()) {
+                                
+                                for (int[] product : cart) {
+                                    int productId = product[0];
 
-                                    for (int[] product : cart) {
-                                        int productId = product[0];
+                                    try (Connection connection = DBConnection.getConnection();
+                                        Statement statement = connection.createStatement();) {
+                                        
+                                        String query = "SELECT * FROM urunler WHERE id = " + productId;
 
-                                        try (Connection connection = DBConnection.getConnection();
-                                            Statement statement = connection.createStatement();) {
-                                            String query = "SELECT * FROM urunler WHERE id = " + productId;
-
-                                            try (ResultSet resultSet = statement.executeQuery(query)) {
-                                                while (resultSet.next()) {
-                                                    Product urun = new Product();
-                                                    String newIsim = resultSet.getString("urunIsim").substring(0, 1).toUpperCase() + resultSet.getString("urunIsim").substring(1);
-                                                    if(newIsim.length() > 12) newIsim = newIsim.substring(0,12) + "...";
-                                                    urun.setUrunIsim(newIsim);
-                                                    urun.setUrunId(resultSet.getInt("id"));
-                                                    urun.setUrunUrl(resultSet.getString("urunUrl"));
-                                                    urun.setUrunFiyat(resultSet.getFloat("urunFiyat"));
-                                                    urun.setUrunStok(resultSet.getInt("urunStok"));
-                                                    urun.setUrunKullaniciId(resultSet.getInt("urunKullanici_id"));
-                                                    urun.setUrunAciklama(resultSet.getString("urunAciklama"));
-                                                    urun.setUrunNewPageUrl();
-                                                    toplamTutar += urun.getUrunFiyat();
-                                                    products.add(urun);
+                                        try (ResultSet resultSet = statement.executeQuery(query)) {
+                                            while (resultSet.next()) {
+                                                Product urun = new Product();
+                                                String newIsim = resultSet.getString("urunIsim").substring(0, 1).toUpperCase() + resultSet.getString("urunIsim").substring(1);
+                                                if (newIsim.length() > 12) {
+                                                    newIsim = newIsim.substring(0, 12) + "...";
                                                 }
+                                                urun.setUrunIsim(newIsim);
+                                                urun.setUrunId(resultSet.getInt("id"));
+                                                urun.setUrunUrl(resultSet.getString("urunUrl"));
+                                                urun.setUrunFiyat(resultSet.getFloat("urunFiyat"));
+                                                urun.setUrunStok(resultSet.getInt("urunStok"));
+                                                urun.setUrunNewPageUrl();
+                                                toplamTutar += urun.getUrunFiyat();
+                                                products.add(urun);
                                             }
-                                        } catch (SQLException e) {
-                                            e.printStackTrace();
                                         }
+                                    } catch (SQLException e) {
+                                        e.printStackTrace();
                                     }
-
-                                    for (Product product : products) {
-                                        %>
-                                        <%@include file="components/cartBox.jsp"%>
-                                        <%
-                                    }
-                                } else {
-                            %>
-                                    <p class="empty">< Sepetiniz boş ></p>
-                            <%
                                 }
-                            %>
-                            </div>
-                        </div>
-                        <div class="right-col">
-                            <div style="align-self: center">
-                                <p class="detay">Sepet Detay</p>
-                            </div>
-                            <div>
-                                <p class="tutar">Ödenecek tutar: <span id="totalAmount" class="fiyatSepet"><%out.print(toplamTutar);%></span><span class="tl"> TL</span></p>
-                            </div>
-                            <div>
-                                <button class="satinAl">Satın Al</button>
-                            </div>
-                        </div>
+
+                                for (Product product : products) {
+                        %>
+                        <%@include file="components/cartBox.jsp"%>
+                        <%
+                            }
+                        } else {
+                        %>
+                        <p class="empty">< Sepetiniz boş ></p>
+                        <%
+                            }
+                        %>
                     </div>
                 </div>
-            </body>
-        </html>
-    <%
-    } else {
+                <div class="right-col">
+                    <div style="align-self: center">
+                        <p class="detay">Sepet Detay</p>
+                    </div>
+                    <div>
+                        <p class="tutar">Ödenecek tutar: <span id="totalAmount" class="fiyatSepet"><%out.print(toplamTutar);%></span><span class="tl"> TL</span></p>
+                    </div>
+                    <div>
+                        <button type="submit" class="satinAl">Satın Al</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                updateTotalAmount();
+
+                let inputNumbers = document.querySelectorAll('.inputNumber');
+                inputNumbers.forEach(function (input) {
+                    input.addEventListener('input', function () {
+                        updateTotalAmount();
+                    });
+                });
+            });
+
+            function updateTotalAmount() {
+                let totalAmount = 0;
+
+                let productBoxes = document.querySelectorAll('.div-myProduct');
+                productBoxes.forEach(function (box) {
+                    let price = parseFloat(box.querySelector('.fiyat').innerText);
+                    let quantity = parseInt(box.querySelector('.inputNumber').value);
+
+                    totalAmount += price * quantity;
+                });
+                document.getElementById('totalAmount').innerText = totalAmount.toFixed(2);
+            }
+            
+            function removeFromCart(productId) {
+                 window.location.href = "remove.jsp?productId=" + productId;
+            }
+        </script>
+    </body>
+</html>
+<%
+} else {
 %>
 <%@include file="goToLogin.jsp"%>
 <%
