@@ -30,6 +30,7 @@ body {
   left: 52%;
   transform: translate(-50%, -50%);
   width: 160rem;
+  width: 160rem;
   height: 65rem;
 }
 
@@ -96,6 +97,7 @@ body {
 
 .right-col {
   width: 25%;
+  width: 25%;
   height: 20rem;
   background: #e6f6fc;
   border: 1px solid #003243;
@@ -105,11 +107,12 @@ body {
   justify-content: space-between;
 }
 
-.left-col::-webkit-scrollbar { 
+.left-col::-webkit-scrollbar {
   display: none;
 }
 
 .div-myProduct {
+  width: 86%;
   width: 86%;
   margin: 2rem;
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
@@ -126,7 +129,7 @@ body {
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
 }
 
-.inside-product-div {  
+.inside-product-div {
   height: 10.5rem;
 }
 
@@ -138,6 +141,7 @@ body {
 }
 
 .update-button {
+.update-button {
   font-size: 2rem;
   color: #ea580c;
   background: #003243;
@@ -148,6 +152,8 @@ body {
   border-bottom-right-radius: 16px;
 }
 
+.update-button:hover,
+.update-button:active {
 .update-button:hover,
 .update-button:active {
   background-color: #ea580c;
@@ -221,6 +227,7 @@ body {
   border-bottom-right-radius: 16px;
   border-bottom-left-radius: 16px;
   border: 1px solid #003243;
+  border: 1px solid #003243;
 }
 
 .satinAl:hover,
@@ -234,13 +241,13 @@ body {
 .detay {
   padding: 1rem;
   font-weight: bold;
-  color:#003243 ;
+  color: #003243;
 }
 
 .tutar {
   padding: 1rem;
   font-size: 2.2rem;
-  color:#003243;
+  color: #003243;
 }
 
 .tl {
@@ -248,12 +255,12 @@ body {
 }
 
 .fiyatSepet {
-  color:#ea580c;
+  color: #ea580c;
 }
 
 .empty {
   padding: 3rem;
-  color:#003243;
+  color: #003243;
   align-self: center;
 }
 
@@ -265,7 +272,7 @@ body {
   width: 6.5rem;
   height: 6.5rem;
   border-radius: 16px;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
 }

@@ -106,8 +106,9 @@
             <%
                 } else { 
             %>
-                <span><a class="logR-else" href="login.jsp">Giriş Yap</a></span>
-                <span><a class="logR-else" href="register.jsp">Üye Ol</a></span>
+                <span style="opacity: 0; width:2.5rem; height: 5rem;"><ion-icon name="cart-outline"></ion-icon></span>
+                <span><a style="font-size: 1.9rem;" class="logR-else" href="login.jsp">Giriş Yap</a></span>
+                <span><a style="font-size: 1.9rem;" class="logR-else" href="register.jsp">Üye Ol</a></span>
             <%
                 }
             %>
