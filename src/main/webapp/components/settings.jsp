@@ -6,7 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-
 <%
     String changed = request.getParameter("changed");
     String error = request.getParameter("error");

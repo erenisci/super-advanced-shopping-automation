@@ -5,16 +5,17 @@
 --%>
 
 <%@page import="java.util.List"%>
-<%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.Connection"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.PreparedStatement"%>
+<%@page import="com.mycompany.web.programming.project.Product"%>
 <%@page import="com.mycompany.web.programming.project.UserBean"%>
 <%@page import="com.mycompany.web.programming.project.Categories"%>
 <%@page import="com.mycompany.web.programming.project.DBConnection"%>
 <%@page import="com.mycompany.web.programming.project.DBOperations"%>
-<%@page import="com.mycompany.web.programming.project.Product"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%

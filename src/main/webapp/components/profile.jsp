@@ -4,13 +4,14 @@
     Author     : iscie
 --%>
 
-<%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.Connection"%>
+<%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.PreparedStatement"%>
+<%@page import="com.mycompany.web.programming.project.Product"%>
 <%@page import="com.mycompany.web.programming.project.UserBean"%>
 <%@page import="com.mycompany.web.programming.project.DBConnection"%>
 <%@page import="com.mycompany.web.programming.project.DBOperations"%>
-<%@page import="com.mycompany.web.programming.project.Product"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
@@ -59,9 +60,11 @@
             <%
                 if(isChanged != null) {
                     if (isChanged.equals("true")) {
+                        %><script>alert("Resminizi başarıyla değiştirdiniz!");</script><%
                         out.print("Resminizin değişmesi biraz zaman alabilir..."); 
                     } else {
-                        out.print("Resminizin silinmesi biraz zaman alabilir..."); 
+                        %><script>alert("Resminizi başarıyla sildiniz!");</script><%
+                        out.print("Resminizin silinmesi biraz zaman alabilir...");
                     }
                 } else {
                     out.print("Resminizin değişmesi biraz zaman alabilir...");
@@ -86,48 +89,13 @@
         <div class="profile-info-div" id="firs-bottom-div">
             <p class="profile-info-p">Kullanıcı Adı</p>
             <div class="profile-info-border">
-                <%
-                    int kullaniciAdiLength = kullaniciAdi.length();
-                    String kullaniciAdiHidden = "";
-                    for (int i = 0; i < kullaniciAdiLength; i++) {
-                        if (i == 0 || i == kullaniciAdiLength - 1)
-                            kullaniciAdiHidden += kullaniciAdi.charAt(i);  
-                        else
-                            kullaniciAdiHidden += "*";                         
-                    }
-                %>
-                <p class="profile-info-border-p"><%out.print(kullaniciAdiHidden);%></p>
+                <p class="profile-info-border-p"><%out.print(kullaniciAdi);%></p>
             </div>
         </div>
         <div class="profile-info-div">
             <p class="profile-info-p">E-Posta</p>
             <div class="profile-info-border">
-                <%
-                    int kullaniciEpostaLength = kullaniciEposta.length();
-                    String kullaniciEpostaHidden = "";
-
-                    String[] ePostaParts = kullaniciEposta.split("@");
-                    
-                    String userNamePart = ePostaParts[0];
-                    String domainPart = ePostaParts[1].split("\\.")[0];
-                    
-
-                    for (int i = 0; i < userNamePart.length(); i++) {
-                        if(i == 0 || i == userNamePart.length() - 1)
-                            kullaniciEpostaHidden += userNamePart.charAt(i);
-                        else
-                            kullaniciEpostaHidden += "*";
-                    }
-                    kullaniciEpostaHidden += "@";
-                    for (int i = 0; i < domainPart.length(); i++) {
-                        if (i == 0 || i == domainPart.length() - 1)
-                            kullaniciEpostaHidden += domainPart.charAt(i);
-                        else
-                            kullaniciEpostaHidden += "*";
-                    }
-                    kullaniciEpostaHidden += "." + ePostaParts[1].split("\\.")[1];
-                %>
-                <p class="profile-info-border-p"><%out.print(kullaniciEpostaHidden);%></p>
+                <p class="profile-info-border-p"><%out.print(kullaniciEposta);%></p>
             </div>
         </div>
     </div>
