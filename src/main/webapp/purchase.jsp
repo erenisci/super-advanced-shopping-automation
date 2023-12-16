@@ -82,8 +82,13 @@
                             <p class="stock-price-color-first">FİYAT: <span class="stock-price-color"><%out.print(request.getParameter("productPrice"));%></span> TL</p>
                             <p class="stock-price-color-first">STOK: <span class="stock-price-color"><%out.print(request.getParameter("productStock"));%></span></p>
                         </div>
-                        <form method="post" action="addCart.jsp">
-                            <input type="hidden" name="productId" value="<%out.print(request.getParameter("productId"));%>"/>
+                        <form method="post" action="addCart.jsp" enctype="multipart/form-data">
+                            <input type="hidden" name="kullanici_id" value="<%if (isLoggedIn) out.print(userBean.getUserId()); else out.print(0);%>"/>
+                            <input type="hidden" name="urunId" value="<%out.print(request.getParameter("productId"));%>"/>
+                            <input type="hidden" name="urunIsim" value="<%out.print(request.getParameter("productName"));%>"/>
+                            <input type="hidden" name="urunUrl" value="<%out.print(request.getParameter("productUrl"));%>"/>
+                            <input type="hidden" name="urunFiyat" value="<%out.print(request.getParameter("productPrice"));%>"/>
+                            <input type="hidden" name="urunAdet" value="<%out.print(request.getParameter("productStok"));%>"/>
                             <button type="submit" class="product-buy <%if(isLoggedIn && Integer.parseInt(request.getParameter("productUserId")) == userBean.getUserId()) out.print("padding-disable");%>">
                                 <%if(isLoggedIn && Integer.parseInt(request.getParameter("productUserId")) == userBean.getUserId()) out.print("<a class='products' href='profile.jsp?link=myProducts'>Ürünlerim</a>"); else out.print("Sepete Ekle");%>
                             </button>

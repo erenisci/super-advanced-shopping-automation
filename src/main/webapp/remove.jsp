@@ -4,8 +4,10 @@
     Author     : iscie
 --%>
 
-<%@page import="java.util.List"%>
-<%@page import="java.util.Iterator"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="com.mycompany.web.programming.project.DBConnection"%>
 <%@page import="com.mycompany.web.programming.project.DBOperations"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -35,27 +37,17 @@
     boolean isLoggedIn = (userBean != null && userBean.getUserId() != 0) || !sessionIdFromCookie.equals("");
     
     if (isLoggedIn) {
-        String productIdToRemove = request.getParameter("productId");
-
-        if (productIdToRemove != null && !productIdToRemove.isEmpty()) {
-            List<int[]> cart = (List<int[]>) session.getAttribute("cart");
-
-            if (cart != null && !cart.isEmpty()) {
-                int productIdToRemoveInt = Integer.parseInt(productIdToRemove);
-
-                Iterator<int[]> iterator = cart.iterator();
-                while (iterator.hasNext()) {
-                    int[] product = iterator.next();
-                    int productId = product[0];
-
-                    if (productId == productIdToRemoveInt) {
-                        iterator.remove();
-                        break;
-                    }
-                }
-                
-                session.setAttribute("cart", cart);
+        int productId = Integer.parseInt(request.getParameter("productId"));
+        try (Connection connection = DBConnection.getConnection()) {
+            
+            String deleteQuery = "DELETE FROM sepetler WHERE urunId = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery)) {
+                preparedStatement.setInt(1, productId);
+                preparedStatement.executeUpdate();
             }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         response.sendRedirect("cart.jsp?deleted=true");

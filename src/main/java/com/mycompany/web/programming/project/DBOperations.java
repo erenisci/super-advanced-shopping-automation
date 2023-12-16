@@ -202,6 +202,19 @@ public class DBOperations {
         return totalProduct;
     }
     
+    public static int getTotalSepet(int param) throws SQLException {
+        int totalProduct = 0;
+        String sql = "SELECT COUNT(*) as total FROM sepetler WHERE kullanici_id = " + param;
+
+        try (ResultSet resultSet = executeQuery(sql)) {
+            if (resultSet.next()) {
+                totalProduct = resultSet.getInt("total");
+            }
+        }
+        
+        return totalProduct;
+    }
+    
     public static int getTotalProduct() throws SQLException {
         int totalProduct = 0;
         String sql = "SELECT COUNT(*) as total FROM urunler";
