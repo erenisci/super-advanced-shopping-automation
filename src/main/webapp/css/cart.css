@@ -17,16 +17,37 @@ body {
   padding: 4rem 0 0 7rem;
 }
 
+.logo {
+  margin-left: 2rem;
+}
+
+.imgLogo {
+  width: 16.6rem;
+  height: 4.4rem;
+}
+
+.logoDivs {
+  padding: 4rem 5rem;
+}
+
+
+.dis {
+  pointer-events: none;
+  background: #f8f8f8 !important;
+  color:#003243 !important;
+}
+
 .turnback {
   width: 20rem;
   margin-bottom: 2rem;
+  box-shadow: 0 3.2rem 6.4rem rgba(0, 0, 0, 0.2);
 }
 
 .allflex {
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 45%;
+  top: 47%;
   left: 52%;
   transform: translate(-50%, -50%);
   width: 160rem;
@@ -77,6 +98,7 @@ body {
 }
 
 .profile-cont {
+  box-shadow: 0 3.2rem 6.4rem rgba(0, 0, 0, 0.2);
   border: 1px solid #003243;
   border-radius: 16px;
   background: #e6f6fc;
@@ -95,6 +117,7 @@ body {
 }
 
 .right-col {
+ box-shadow: 0 3.2rem 6.4rem rgba(0, 0, 0, 0.2);
   width: 25%;
   height: 20rem;
   background: #e6f6fc;
@@ -184,6 +207,7 @@ body {
   align-self: center;
   width: 20rem;
   font-weight: bold;
+  margin-right: 8rem;
 }
 
 .fiyatText {
@@ -220,7 +244,8 @@ body {
   height: 5rem;
   border-bottom-right-radius: 16px;
   border-bottom-left-radius: 16px;
-  border: 1px solid #003243;
+  border-top: 1px solid #003243 !important;
+  border: 0px solid #003243;
 }
 
 .satinAl:hover,

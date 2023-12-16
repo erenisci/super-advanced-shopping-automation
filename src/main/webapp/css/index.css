@@ -15,6 +15,12 @@
   box-shadow: 0 3.2rem 6.4rem rgba(0, 0, 0, 0.2);
 }
 
+
+.imgLogo {
+  width: 16.6rem;
+  height: 4.4rem;
+}
+
 .past {
   display: flex;
   flex-direction: column;
@@ -309,6 +315,7 @@ main {
   top: 50%;
   right: -40px;
   transform: translate(-50%, -50%);
+  box-shadow: 0 3.2rem 6.4rem rgba(0, 0, 0, 0.06);
 }
 
 .search-bar {
@@ -319,6 +326,7 @@ main {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  box-shadow: 0 3.2rem 6.4rem rgba(0, 0, 0, 0.06);
 }
 
 .searchText {

@@ -13,6 +13,19 @@ body {
   background: #f8f8f8;
 }
 
+.logo {
+  margin-left: 2rem;
+}
+
+.imgLogo {
+  width: 16.6rem;
+  height: 4.4rem;
+}
+
+.logoDivs {
+  padding: 4rem 5rem;
+}
+
 .login-div {
   position: absolute;
   top: 45%;

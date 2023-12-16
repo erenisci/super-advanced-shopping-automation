@@ -75,12 +75,17 @@ body {
   width: 120rem;
 }
 
-.div-info {
-  display: flex;
-  justify-content: center;
-  background: #ccedf9;
-  padding: 3rem;
-  border-radius: 16px;
+.logo {
+  margin-left: 2rem;
+}
+
+.imgLogo {
+  width: 16.6rem;
+  height: 4.4rem;
+}
+
+.logoDivs {
+  padding: 4rem 5rem;
 }
 
 .img-product {
@@ -96,6 +101,58 @@ body {
   flex-direction: column;
   gap: 2rem;
   position: relative;
+}
+
+.div-info {
+  display: flex;
+  justify-content: center;
+  padding: 3rem;
+  background:#ccedf9;
+  border-radius: 16px;
+  gap: 5rem;
+}
+
+.div-info-if {
+  display: flex;
+  justify-content: center;
+  padding: 3rem;
+  border-radius: 16px;
+  gap: 5rem;
+}
+
+.text-product-if {
+  width: 30rem;
+  background: #ccedf9;
+  height: 5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 2rem;
+  color:#003243;
+  outline: 1px solid #003243;
+  border-radius: 9px;
+}
+
+.text-product-if button {
+  padding: 1.2rem 2rem;
+  font-size: 2.2rem;
+  width: 5rem; 
+  border-radius: 9px;
+  border: 0;
+  transition: all 0.3s;
+  background-color: #fff;
+  color: #003243;
+  outline: 1px solid #003243;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-product-if button:hover,
+.text-product-if button:active {
+  background-color: #003243;
+  color: #ea580c;
 }
 
 .product-name {
