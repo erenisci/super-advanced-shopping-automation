@@ -15,7 +15,7 @@
 <%@page import="com.mycompany.web.programming.project.DBConnection"%>
 <%@page import="com.mycompany.web.programming.project.DBOperations"%>
 <%@page import="com.mycompany.web.programming.project.UserBean"%>
-<%@page import="com.mycompany.web.programming.project.Product"%>
+<%@page import="com.mycompany.web.programming.project.CartItem"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
@@ -44,7 +44,6 @@
     boolean isLoggedIn = (userBean != null && userBean.getUserId() != 0) || !sessionIdFromCookie.equals("");
     
     if (isLoggedIn) {
-        double toplamTutar = 0;
         if(request.getParameter("deleted") != null && request.getParameter("deleted").equals("true")) {
             %><script>alert("Ürün sepetten başarıyla kaldırıldı!");</script><%
         }
@@ -93,50 +92,46 @@
                         <div class="profile-cont">
                             <div class="left-col">
                             <%
-                                List<int[]> cart = (List<int[]>) session.getAttribute("cart");
+                                int count = DBOperations.getTotalSepet(userBean.getUserId());
+                                if(count != 0) {
+                                    List<CartItem> products = new ArrayList<>();
 
-                                if (cart != null && !cart.isEmpty()) {
-                                    List<Product> products = new ArrayList<>();
+                                    try (Connection connection = DBConnection.getConnection();
+                                        Statement statement = connection.createStatement();) {
+                                        String query = "SELECT s.*, u.urunStok " +
+                                                            "FROM sepetler s " +
+                                                            "JOIN urunler u ON s.urunId = u.id " +
+                                                            "WHERE s.kullanici_id = " + userBean.getUserId();
 
-                                    for (int[] product : cart) {
-                                        int productId = product[0];
-
-                                        try (Connection connection = DBConnection.getConnection();
-                                            Statement statement = connection.createStatement();) {
-                                            String query = "SELECT * FROM urunler WHERE id = " + productId;
-
-                                            try (ResultSet resultSet = statement.executeQuery(query)) {
-                                                while (resultSet.next()) {
-                                                    Product urun = new Product();
-                                                    String newIsim = resultSet.getString("urunIsim").substring(0, 1).toUpperCase() + resultSet.getString("urunIsim").substring(1);
-                                                    if(newIsim.length() > 12) newIsim = newIsim.substring(0,12) + "...";
-                                                    urun.setUrunIsim(newIsim);
-                                                    urun.setUrunId(resultSet.getInt("id"));
-                                                    urun.setUrunUrl(resultSet.getString("urunUrl"));
-                                                    urun.setUrunFiyat(resultSet.getFloat("urunFiyat"));
-                                                    urun.setUrunStok(resultSet.getInt("urunStok"));
-                                                    urun.setUrunKullaniciId(resultSet.getInt("urunKullanici_id"));
-                                                    urun.setUrunAciklama(resultSet.getString("urunAciklama"));
-                                                    urun.setUrunNewPageUrl();
-                                                    toplamTutar += urun.getUrunFiyat();
-                                                    products.add(urun);
-                                                }
+                                        try (ResultSet resultSet = statement.executeQuery(query)) {
+                                            while (resultSet.next()) {
+                                                CartItem urun = new CartItem();
+                                                urun.setProductId(resultSet.getInt("urunId"));
+                                                urun.setUserId(resultSet.getInt("kullanici_id"));
+                                                String newIsim = resultSet.getString("urunIsim").substring(0, 1).toUpperCase() + resultSet.getString("urunIsim").substring(1);
+                                                if(newIsim.length() > 12) newIsim = newIsim.substring(0,12) + "...";
+                                                urun.setProductName(newIsim);
+                                                urun.setProductUrl(resultSet.getString("urunUrl"));
+                                                urun.setProductPrice(resultSet.getFloat("urunFiyat"));
+                                                urun.setProductQuantity(1);
+                                                urun.setTotalStock(resultSet.getInt("urunStok"));
+                                                products.add(urun);
                                             }
-                                        } catch (SQLException e) {
-                                            e.printStackTrace();
                                         }
+                                    } catch (SQLException e) {
+                                        e.printStackTrace();
                                     }
-
-                                    for (Product product : products) {
-                                        %>
-                                        <%@include file="components/cartBox.jsp"%>
-                                        <%
+                                    
+                                    for (CartItem product : products) {
+                                    %>
+                                    <%@include file="components/cartBox.jsp"%>
+                                    <%
                                     }
                                 } else {
                             %>
-                                    <p class="empty">< Sepetiniz boş ></p>
+                                <p class="empty">< Sepetiniz boş ></p>
                             <%
-                                }
+                            }
                             %>
                             </div>
                         </div>
@@ -145,14 +140,16 @@
                                 <p class="detay">Sepet Detay</p>
                             </div>
                             <div>
-                                <p class="tutar">Ödenecek tutar: <span id="totalAmount" class="fiyatSepet"><%out.print(toplamTutar);%></span><span class="tl"> TL</span></p>
+                                <p class="tutar">Ödenecek tutar: <span id="totalAmount" class="fiyatSepet"><%%></span><span class="tl"> TL</span></p>
                             </div>
-                            <div>
-                                <button class="satinAl">Satın Al</button>
-                            </div>
+                            <form>
+                                <button name="toplam_tutar" class="satinAl">Satın Al</button>
+                            </form>
                         </div>
                     </div>
                 </div>
+            <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+            <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
             </body>
         </html>
     <%

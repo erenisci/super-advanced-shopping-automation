@@ -29,7 +29,7 @@ body {
   top: 45%;
   left: 52%;
   transform: translate(-50%, -50%);
-  width: 111rem;
+  width: 160rem;
   height: 65rem;
 }
 
@@ -80,7 +80,7 @@ body {
   border: 1px solid #003243;
   border-radius: 16px;
   background: #e6f6fc;
-  width: 80rem;
+  width: 75%;
   height: 65rem;
   overflow: hidden;
 }
@@ -95,7 +95,7 @@ body {
 }
 
 .right-col {
-  width: 30rem;
+  width: 25%;
   height: 20rem;
   background: #e6f6fc;
   border: 1px solid #003243;
@@ -110,6 +110,7 @@ body {
 }
 
 .div-myProduct {
+  width: 86%;
   margin: 2rem;
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
   border-radius: 16px;
@@ -136,7 +137,7 @@ body {
   border-bottom-left-radius: 16px;
 }
 
-.delete-button {
+.update-button {
   font-size: 2rem;
   color: #ea580c;
   background: #003243;
@@ -147,8 +148,8 @@ body {
   border-bottom-right-radius: 16px;
 }
 
-.delete-button:hover,
-.delete-button:active {
+.update-button:hover,
+.update-button:active {
   background-color: #ea580c;
   color: #003243;
   cursor: pointer;
@@ -219,10 +220,12 @@ body {
   height: 5rem;
   border-bottom-right-radius: 16px;
   border-bottom-left-radius: 16px;
+  border: 1px solid #003243;
 }
 
 .satinAl:hover,
 .satinAl:active {
+  
   background-color: #ea580c;
   color: #003243;
   cursor: pointer;
@@ -251,5 +254,29 @@ body {
 .empty {
   padding: 3rem;
   color:#003243;
+  align-self: center;
+}
+
+.delete-button {
+  font-size: 4rem;
+  color: #ea580c;
+  background: #003243;
+  transition: all 0.3s;
+  width: 6.5rem;
+  height: 6.5rem;
+  border-radius: 16px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-button:hover,
+.delete-button:active {
+  background-color: #ea580c;
+  color: #003243;
+  cursor: pointer;
+}
+
+.delete {
   align-self: center;
 }

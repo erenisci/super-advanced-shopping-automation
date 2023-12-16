@@ -7,6 +7,18 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.net.URLEncoder"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="javax.servlet.http.HttpServletRequest"%>
+<%@page import="javax.servlet.http.HttpServletResponse"%>
+<%@page import="org.apache.commons.fileupload.*"%>
+<%@page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
+<%@page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
+<%@page import="com.mycompany.web.programming.project.DBConnection"%>
 <%@page import="com.mycompany.web.programming.project.DBOperations"%>
 <%@page import="com.mycompany.web.programming.project.UserBean"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -38,34 +50,66 @@
     
     
     if (isLoggedIn) {
-        List<int[]> cart = (List<int[]>) session.getAttribute("cart");
-        if (cart == null) {
-            cart = new ArrayList<>();
-        }
+        FileItemFactory factory = new DiskFileItemFactory();
+        ServletFileUpload upload = new ServletFileUpload(factory);
+        
+        String kullaniciId = null;
+        String urunId = null;
+        String urunIsim = null;
+        String urunUrl = null;
+        String urunFiyat = null;
+        String urunAdet = null;
+        
+        try {
+            List<FileItem> items = upload.parseRequest(request);
+            
+            for (FileItem item : items) {
+                if (item.isFormField()) {
+                    String paramName = item.getFieldName();
+                    String paramValue = item.getString("UTF-8");
 
-        String productIdString = request.getParameter("productId");
-        if (productIdString != null && !productIdString.isEmpty()) {
-            try {
-                int productId = Integer.parseInt(productIdString);
-
-                boolean productExists = false;
-                for (int[] product : cart) {
-                    if (product[0] == productId) {
-                        productExists = true;
-                        break;
+                    switch (paramName) {
+                        case "kullanici_id":
+                            kullaniciId = paramValue;
+                            break;
+                        case "urunId":
+                            urunId = paramValue;
+                            break;
+                        case "urunIsim":
+                            urunIsim = paramValue;
+                            break;
+                        case "urunUrl":
+                            urunUrl = paramValue;
+                            break;
+                        case "urunFiyat":
+                            urunFiyat = paramValue;
+                            break;
+                        case "urunStok":
+                            urunAdet = paramValue;
+                            break;
                     }
                 }
-                if (!productExists) {
-                    int[] productInfo = {productId};
-                    cart.add(productInfo);
-                }
-            } catch (NumberFormatException e) {
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        String insertQuery = "INSERT INTO sepetler (kullanici_id, urunId, urunIsim, urunUrl, urunFiyat, urunAdet) VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement updateStatement = connection.prepareStatement(insertQuery)) { 
+            
+                updateStatement.setInt(1, Integer.parseInt(kullaniciId));
+                updateStatement.setInt(2, Integer.parseInt(urunId));
+                updateStatement.setString(3, urunIsim);
+                updateStatement.setString(4, urunUrl);
+                updateStatement.setDouble(5, Double.parseDouble(urunFiyat));
+                updateStatement.setInt(6, 1);
+                updateStatement.executeUpdate();
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
-
-        session.setAttribute("cart", cart);
-        response.sendRedirect("cart.jsp");
+        
+            response.sendRedirect("cart.jsp");
     } else {
 %>
 <%@include file="goToLogin.jsp"%>
