@@ -97,9 +97,11 @@
                                 kategori = paramValue;
                                 break;
                         }
+                        
                     } else {
                         String fileName = userBean.getUserId() + isim + ".jpg";
-                        String uploadDir = application.getRealPath("/") + "../../src/main/webapp/urunResim/";
+                        String subDir = "urunResim/";
+                        String uploadDir = application.getRealPath("/") + subDir;
 
                         String filePath = uploadDir + fileName;
                         File uploadedFile = new File(filePath);
