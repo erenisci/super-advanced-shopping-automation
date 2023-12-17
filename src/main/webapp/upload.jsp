@@ -42,7 +42,8 @@
     boolean isLoggedIn = (userBean != null && userBean.getUserId() != 0) || !sessionIdFromCookie.equals("");
     
     if(isLoggedIn) {
-        String uploadSubDir = "../../src/main/webapp/kullaniciResim/";
+        // String uploadSubDir = "../../src/main/webapp/kullaniciResim/";
+        String uploadSubDir = "kullaniciResim/";
         String uploadDir = application.getRealPath("/") + uploadSubDir;
         DiskFileItemFactory factory = new DiskFileItemFactory();
         File repository = new File(uploadDir);
