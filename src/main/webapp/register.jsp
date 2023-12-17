@@ -85,7 +85,7 @@
                     <form id="emailForm" class="loginForm" method="post" onsubmit="return validateEmail()" enctype="multipart/form-data">
                         <div class="inputs"><p>Kullanıcı Adı</p><input class="inp" type="text" name="registerNickname" maxlength="20" pattern="[a-zA-ZğğüşıöçĞÜŞİÖÇı][a-zA-Z0-9ğüşıöçĞÜŞİÖÇı]*" title="Kullanıcı adı harfle başlamalı ve yalnızca harf ve rakam içerebilir. Kullanıcı adı sayı ile başlayamaz. [a-z], [A-Z], [0-9]" placeholder="Kullanıcı Adı" required/></div>
                         <div class="inputs"><p>Şifre</p><input class="inp" type="password" name="registerPassword" pattern="^[^\s]+$" title="Boşluk içeremez." placeholder="Şifre" required/></div>
-                        <div class="inputs"><p>E-Posta</p><input class="inp" type="email" id="newUserEmail" name="registerEmail" placeholder="E-Posta" required/></div>
+                        <div class="inputs"><p>E-Posta</p><input class="inp" type="email" id="newUserEmail" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" name="registerEmail" placeholder="E-Posta" required/></div>
                         <div class="inputs"><p class="hid">EŞ</p><input class="inpCheck" type="checkbox" required/><p class="new-register"><a class="linktoregister" href="">Üyelik Sözleşmesi</a>'ni okudum ve kabul ediyorum.</p></div>
                         <div><p class="hid">EŞ</p><button class="inp sub" type="submit">Üye ol</button></div>
                     </form>
@@ -185,7 +185,7 @@
                     function validateEmail() {
                         let emailField = document.getElementById('newUserEmail');
                         let emailValue = emailField.value;
-                        let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        let emailRegex = /^[a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
                         if (!emailRegex.test(emailValue)) {
                             alert('Geçerli bir e-posta adresi girin.');

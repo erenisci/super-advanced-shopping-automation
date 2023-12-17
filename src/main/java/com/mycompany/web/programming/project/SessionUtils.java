@@ -17,8 +17,7 @@ public class SessionUtils {
     
     public static Cookie createSessionCookie(String sessionId) {
         Cookie sessionCookie = new Cookie("userSessId", sessionId);
-        sessionCookie.setHttpOnly(true);
-        sessionCookie.setSecure(true);
+        sessionCookie.setPath("/");
         sessionCookie.setMaxAge(24 * 60 * 60);
         return sessionCookie;
     }
