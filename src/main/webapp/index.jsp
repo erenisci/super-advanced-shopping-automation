@@ -129,7 +129,7 @@
             String searchKey = request.getParameter("search");
             boolean searchTF = true;
             if(request.getParameter("search") != null && request.getParameter("search").matches("[a-zA-ZçÇğĞıİöÖşŞüÜ ]+")) searchKeyword = request.getParameter("search").trim();
-            else searchTF = false;            
+            else searchTF = false;       
             
             String categoryKeyword = "";
             if (request.getParameter("category") != null) categoryKeyword = request.getParameter("category");

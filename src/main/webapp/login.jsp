@@ -76,7 +76,7 @@
                 <div class="login-div">
                     <p class="title">GİRİŞ YAP</p>
                     <form id="emailForm" class="loginForm" method="post" onsubmit="return validateEmail()">
-                        <div class="inputs"><p>E-Posta</p><input class="inp loginName" id="newUserEmail" type="email" name="userEmail" placeholder="E-Posta" required/></div>
+                        <div class="inputs"><p>E-Posta</p><input class="inp loginName" id="newUserEmail" type="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" name="userEmail" placeholder="E-Posta" required/></div>
                         <div class="inputs"><p>Şifre</p><input class="inp loginPassword" type="password" name="userPassword" pattern="^[^\s]+$" title="Boşluk içeremez." placeholder="Şifre" required/></div>
                         <div class="inputs margins"><p class="hid">EŞ</p><input class="inpCheck" type="checkbox" name="session"/><p class="new-register">Oturumum açık kalsın.</p></div>
                         <div class="inputs marg-top"><p class="hid">EŞ</p><button class="inp sub" type="submit">Giriş Yap</button></div>
@@ -119,7 +119,7 @@
                     function validateEmail() {
                         let emailField = document.getElementById('newUserEmail');
                         let emailValue = emailField.value;
-                        let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        let emailRegex = /^[a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
                         if (!emailRegex.test(emailValue)) {
                             alert('Geçerli bir e-posta adresi girin.');

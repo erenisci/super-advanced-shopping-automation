@@ -20,7 +20,7 @@
       <p class="value-urunIsim"><span class="value-urunFiyat"><%out.print(product.getUrunFiyat());%></span><span class="value-tl"> TL</span></p>
     </div>
     <div class="center">
-      <form action="purchase.jsp" method="get">
+      <form action="purchase.jsp" method="post">
         <input type="hidden" name="productId" value="<%out.print(product.getUrunId());%>"/>
         <input type="hidden" name="productUserId" value="<%out.print(product.getUrunKullaniciId());%>"/>
         <input type="hidden" name="productName" value="<%out.print(product.getUrunIsim());%>"/>
