@@ -58,6 +58,12 @@
                     preparedStatement.setInt(1, productId);
                     preparedStatement.executeUpdate();
                 }
+                
+                String deleteQueryCart = "DELETE FROM sepetler WHERE urunId = ?";
+                try (PreparedStatement preparedStatement = connection.prepareStatement(deleteQueryCart)) {
+                    preparedStatement.setInt(1, productId);
+                    preparedStatement.executeUpdate();
+                }
             }
 
             response.sendRedirect("profile.jsp?link=myProducts&change=true");
