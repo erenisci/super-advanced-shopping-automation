@@ -20,12 +20,12 @@
 
 <%
     String isAdded = request.getParameter("added");
-    
-    if(isAdded != null && !isAdded.isEmpty()) {
+
+    if (isAdded != null && !isAdded.isEmpty()) {
         if (isAdded.equals("true")) {
-            %><script>alert("Ürününüzü Başarıyla Eklediniz!");</script><%
-        }
-    }
+%><script>alert("Ürününüzü Başarıyla Eklediniz!");</script><%
+                    }
+                }
 %>
 
 <div class="right-col">
@@ -71,9 +71,9 @@
                                 }
                                 for (Categories category : categoryResults) {
                         %>
-                                    <option value="<%out.print(category.getCategoryId());%>">
-                                        <%out.print(category.getCategoryName().substring(0,1).toUpperCase() + category.getCategoryName().substring(1));%>
-                                    </option>
+                        <option value="<%out.print(category.getCategoryId());%>">
+                            <%out.print(category.getCategoryName().substring(0, 1).toUpperCase() + category.getCategoryName().substring(1));%>
+                        </option>
                         <%
                                 }
                             } catch (Exception e) {

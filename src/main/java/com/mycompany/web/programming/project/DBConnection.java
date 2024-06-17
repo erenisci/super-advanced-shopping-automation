@@ -12,11 +12,12 @@ import java.sql.SQLException;
  *
  * @author iscie
  */
-
 public class DBConnection {
+
     private static final String URL = "jdbc:mysql://localhost:3306/projectdb"; // Your database 
     private static final String USER = "root"; // Your username
     private static final String PASSWORD = "admin"; // Your password 
+
     public static Connection getConnection() throws SQLException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

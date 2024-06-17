@@ -28,7 +28,7 @@
     UserBean userBean = (UserBean) session.getAttribute("userBean");
     String sessionIdFromCookie = "";
 
-    if(userBean == null) {
+    if (userBean == null) {
         UserBean userBeanTemp = new UserBean();
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
@@ -97,7 +97,7 @@
                                 kategori = paramValue;
                                 break;
                         }
-                        
+
                     } else {
                         String fileName = userBean.getUserId() + isim + ".jpg";
                         String subDir = "urunResim/";
@@ -106,7 +106,7 @@
                         String filePath = uploadDir + fileName;
                         File uploadedFile = new File(filePath);
                         item.write(uploadedFile);
-                        
+
                         picUrl = "urunResim/" + fileName;
                     }
                 }
@@ -115,9 +115,9 @@
             }
         }
 
-        String insertSql = "INSERT INTO urunler (urunIsim, urunUrl, urunAciklama, urunFiyat, urunStok, urunKategori_id, urunKullanici_id) VALUES (?, ?, ?, ?, ?, ?, ?)"; 
+        String insertSql = "INSERT INTO urunler (urunIsim, urunUrl, urunAciklama, urunFiyat, urunStok, urunKategori_id, urunKullanici_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = DBConnection.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(insertSql)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(insertSql)) {
             preparedStatement.setString(1, isim);
             preparedStatement.setString(2, picUrl);
             preparedStatement.setString(3, aciklama);
@@ -130,7 +130,7 @@
         } catch (SQLException e) {
             e.printStackTrace();
         }
-            
+
         response.sendRedirect("profile.jsp?link=addProduct&added=true");
     } else {
 %>

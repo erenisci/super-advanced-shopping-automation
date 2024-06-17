@@ -2,10 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package com.mycompany.web.programming.project;
 
-import com.mycompany.web.programming.project.DBConnection;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -15,8 +13,8 @@ import java.sql.PreparedStatement;
  *
  * @author iscie
  */
-
 public class DBOperations {
+
     public static ResultSet executeQuery(String sql) {
         Connection connection = null;
         PreparedStatement statement = null;
@@ -29,9 +27,9 @@ public class DBOperations {
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
-        } 
+        }
     }
-    
+
     public static boolean userIdMatches(int userId) throws SQLException {
         try (Connection connection = DBConnection.getConnection()) {
             String query = "SELECT COUNT(*) FROM kullanicilar WHERE urunKullanici_id = ?";
@@ -56,7 +54,7 @@ public class DBOperations {
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     if (resultSet.next()) {
                         String password = resultSet.getString("kullaniciSifre");
-                        if(password.equals(currentPassword)) {
+                        if (password.equals(currentPassword)) {
                             return true;
                         }
                     }
@@ -65,7 +63,7 @@ public class DBOperations {
         }
         return false;
     }
-    
+
     public static boolean isUserNickExists(String userNick) throws SQLException {
         try (Connection connection = DBConnection.getConnection()) {
             String query = "SELECT COUNT(*) FROM kullanicilar WHERE kullaniciNick = ?";
@@ -81,7 +79,7 @@ public class DBOperations {
         }
         return false;
     }
-    
+
     public static boolean isEmailExists(String email) throws SQLException {
         try (Connection connection = DBConnection.getConnection()) {
             String query = "SELECT COUNT(*) FROM kullanicilar WHERE kullaniciEposta = ?";
@@ -97,11 +95,11 @@ public class DBOperations {
         }
         return false;
     }
-    
+
     public static boolean validateUser(String userEmail, String userPassword) throws SQLException {
         String sql = "SELECT * FROM kullanicilar WHERE kullaniciEposta = ? AND kullaniciSifre = ?";
         try (Connection connection = DBConnection.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)) {
+                PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, userEmail);
             statement.setString(2, userPassword);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -109,13 +107,13 @@ public class DBOperations {
             }
         }
     }
-    
+
     public static int getUserId(String userEmail) throws SQLException {
         int userId = 0;
         String sql = "SELECT urunKullanici_id FROM kullanicilar WHERE kullaniciEposta = ?";
-        
+
         try (Connection connection = DBConnection.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)) {
+                PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, userEmail);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -125,29 +123,29 @@ public class DBOperations {
 
         return userId;
     }
-    
+
     public static int getUserIdFromSess(String sessionId) throws SQLException {
         String sql = "SELECT urunKullanici_id FROM kullanicilar WHERE kullaniciSessId = ?";
         int userId = 0;
-        
+
         try (Connection connection = DBConnection.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)) {
+                PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, sessionId);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 userId = resultSet.getInt("urunKullanici_id");
             }
         }
-        
+
         return userId;
     }
-    
+
     public static String getUserNickFromSess(String sessionId) throws SQLException {
         String sql = "SELECT kullaniciNick FROM kullanicilar WHERE kullaniciSessId = ?";
         String userNick = "";
-        
+
         try (Connection connection = DBConnection.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)) {
+                PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, sessionId);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -157,13 +155,13 @@ public class DBOperations {
 
         return userNick;
     }
-    
+
     public static String getUserSessionId(int userId) throws SQLException {
         String sql = "SELECT kullaniciSessId FROM kullanicilar WHERE urunKullanici_id  = ?";
         String sessId = "";
-        
+
         try (Connection connection = DBConnection.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)) {
+                PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, userId);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -173,13 +171,13 @@ public class DBOperations {
 
         return sessId;
     }
-    
+
     public static String getUserNick(String userEmail) throws SQLException {
         String userNick = "";
         String sql = "SELECT kullaniciNick FROM kullanicilar WHERE kullaniciEposta = ?";
-        
+
         try (Connection connection = DBConnection.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)) {
+                PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, userEmail);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -189,7 +187,7 @@ public class DBOperations {
 
         return userNick;
     }
-    
+
     public static int getAllProduct(String sql) throws SQLException {
         int totalProduct = 0;
 
@@ -198,10 +196,10 @@ public class DBOperations {
                 totalProduct = resultSet.getInt("total");
             }
         }
-        
+
         return totalProduct;
     }
-    
+
     public static int getTotalSepet(int param) throws SQLException {
         int totalProduct = 0;
         String sql = "SELECT COUNT(*) as total FROM sepetler WHERE kullanici_id = " + param;
@@ -211,10 +209,10 @@ public class DBOperations {
                 totalProduct = resultSet.getInt("total");
             }
         }
-        
+
         return totalProduct;
     }
-    
+
     public static int getTotalProduct() throws SQLException {
         int totalProduct = 0;
         String sql = "SELECT COUNT(*) as total FROM urunler";
@@ -224,15 +222,14 @@ public class DBOperations {
                 totalProduct = resultSet.getInt("total");
             }
         }
-        
+
         return totalProduct;
     }
-    
+
     public static int getTotalQueryProduct(String query) throws SQLException {
         int totalProduct = 0;
         String sql = query.replace("*", "COUNT(*)");
         sql = sql.substring(0, sql.length() - 10);
-        
 
         try (ResultSet resultSet = executeQuery(sql)) {
             if (resultSet.next()) {
@@ -242,12 +239,11 @@ public class DBOperations {
 
         return totalProduct;
     }
-    
+
     public static int getTotalCategoryProduct(String query) throws SQLException {
         int totalProduct = 0;
         String sql = query.replace("u.*", "COUNT(*)");
         sql = sql.substring(0, sql.length() - 10);
-        
 
         try (ResultSet resultSet = executeQuery(sql)) {
             if (resultSet.next()) {

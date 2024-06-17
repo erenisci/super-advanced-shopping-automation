@@ -18,7 +18,7 @@
     UserBean userBean = (UserBean) session.getAttribute("userBean");
     String sessionIdFromCookie = "";
 
-    if(userBean == null) {
+    if (userBean == null) {
         UserBean userBeanTemp = new UserBean();
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
@@ -38,8 +38,8 @@
 
     userBean = (UserBean) session.getAttribute("userBean");
     boolean isLoggedIn = (userBean != null && userBean.getUserId() != 0) || !sessionIdFromCookie.equals("");
-    
-    if (isLoggedIn) {  
+
+    if (isLoggedIn) {
         int stockNum = Integer.parseInt(request.getParameter("stockNum"));
         int productId = Integer.parseInt(request.getParameter("productIdUpdate"));
         try (Connection connection = DBConnection.getConnection()) {
@@ -50,7 +50,7 @@
                 preparedStatement.setInt(2, productId);
                 preparedStatement.executeUpdate();
             }
-            
+
             response.sendRedirect("cart.jsp?update=true");
         } catch (SQLException e) {
             e.printStackTrace();

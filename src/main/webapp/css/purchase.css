@@ -2,231 +2,232 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
 */
+
 /* 
     Created on : 8 Ara 2023, 01:27:14
     Author     : iscie
 */
 
 body {
-  background: #f8f8f8;
+    background: #f8f8f8;
 }
 
 .products {
-  width: 100%;
-  display: block;
-  height: 100%;
-  padding: 1.2rem 2rem;
+    width: 100%;
+    display: block;
+    height: 100%;
+    padding: 1.2rem 2rem;
 }
 
 .products:link,
 .products:visited {
-  color: #003243;
-  transition: all 0.3s;
-  text-decoration: none;
+    color: #003243;
+    transition: all 0.3s;
+    text-decoration: none;
 }
 
 .products:hover,
 .products:active {
-  color: #ea580c;
+    color: #ea580c;
 }
 
 .padding-disable {
-  padding: 0 !important;
+    padding: 0 !important;
 }
 
 .child {
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .turnback {
-  margin-bottom: 1rem;
+    margin-bottom: 1rem;
 }
 
 .buy-disabled {
-  pointer-events: none;
-  background-color: #33333315;
-  color: #003243;
+    pointer-events: none;
+    background-color: #33333315;
+    color: #003243;
 }
 
 .turn {
-  background: #00a7e1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 2rem;
-  border-radius: 360px;
-  padding: 1.2rem 2.4rem;
-  text-decoration: none;
+    background: #00a7e1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    border-radius: 360px;
+    padding: 1.2rem 2.4rem;
+    text-decoration: none;
 }
 
 .color {
-  color: #00435a;
+    color: #00435a;
 }
 
 .div-product {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 120rem;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 120rem;
 }
 
 .logo {
-  margin-left: 2rem;
+    margin-left: 2rem;
 }
 
 .imgLogo {
-  width: 16.6rem;
-  height: 4.4rem;
+    width: 16.6rem;
+    height: 4.4rem;
 }
 
 .logoDivs {
-  padding: 4rem 5rem;
+    padding: 4rem 5rem;
 }
 
 .img-product {
-  width: 50rem;
-  height: 50rem;
-  border-radius: 16px;
+    width: 50rem;
+    height: 50rem;
+    border-radius: 16px;
 }
 
 .text-product {
-  width: 50rem;
-  padding: 0 3rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  position: relative;
+    width: 50rem;
+    padding: 0 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    position: relative;
 }
 
 .div-info {
-  display: flex;
-  justify-content: center;
-  padding: 3rem;
-  background:#ccedf9;
-  border-radius: 16px;
-  gap: 5rem;
+    display: flex;
+    justify-content: center;
+    padding: 3rem;
+    background:#ccedf9;
+    border-radius: 16px;
+    gap: 5rem;
 }
 
 .div-info-if {
-  display: flex;
-  justify-content: center;
-  padding: 3rem;
-  border-radius: 16px;
-  gap: 5rem;
+    display: flex;
+    justify-content: center;
+    padding: 3rem;
+    border-radius: 16px;
+    gap: 5rem;
 }
 
 .text-product-if {
-  width: 30rem;
-  background: #ccedf9;
-  height: 5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 2rem;
-  color:#003243;
-  outline: 1px solid #003243;
-  border-radius: 9px;
+    width: 30rem;
+    background: #ccedf9;
+    height: 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 2rem;
+    color:#003243;
+    outline: 1px solid #003243;
+    border-radius: 9px;
 }
 
 .text-product-if button {
-  padding: 1.2rem 2rem;
-  font-size: 2.2rem;
-  width: 5rem; 
-  border-radius: 9px;
-  border: 0;
-  transition: all 0.3s;
-  background-color: #fff;
-  color: #003243;
-  outline: 1px solid #003243;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    padding: 1.2rem 2rem;
+    font-size: 2.2rem;
+    width: 5rem;
+    border-radius: 9px;
+    border: 0;
+    transition: all 0.3s;
+    background-color: #fff;
+    color: #003243;
+    outline: 1px solid #003243;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .text-product-if button:hover,
 .text-product-if button:active {
-  background-color: #003243;
-  color: #ea580c;
+    background-color: #003243;
+    color: #ea580c;
 }
 
 .product-name {
-  font-size: 4rem;
-  margin-bottom: 4rem;
-  color: #003243;
+    font-size: 4rem;
+    margin-bottom: 4rem;
+    color: #003243;
 }
 
 .product-info {
-  overflow-wrap: anywhere;
-  font-size: 2rem;
-  margin-bottom: 7rem;
-  height: 16rem;
+    overflow-wrap: anywhere;
+    font-size: 2rem;
+    margin-bottom: 7rem;
+    height: 16rem;
 }
 
 .stock-price {
-  display: flex;
-  justify-content: space-between;
-  bottom: 14rem;
-  right: 3.3rem;
+    display: flex;
+    justify-content: space-between;
+    bottom: 14rem;
+    right: 3.3rem;
 }
 
 .stock-price-color-first {
-  color: #003243;
+    color: #003243;
 }
 
 .stock-price-color {
-  color: #ec6924;
+    color: #ec6924;
 }
 
 .product-buy {
-  position: absolute;
-  bottom: 0;
-  right: 9rem;
-  padding: 1.2rem 2rem;
-  font-size: 2.2rem;
-  width: 30rem; 
-  border-radius: 16px;
-  border: 0;
-  transition: all 0.3s;
-  background-color: #fff;
-  color: #003243;
-  outline: 1px solid #003243;
-  cursor: pointer; 
+    position: absolute;
+    bottom: 0;
+    right: 9rem;
+    padding: 1.2rem 2rem;
+    font-size: 2.2rem;
+    width: 30rem;
+    border-radius: 16px;
+    border: 0;
+    transition: all 0.3s;
+    background-color: #fff;
+    color: #003243;
+    outline: 1px solid #003243;
+    cursor: pointer;
 }
 
 .product-buy:hover,
 .product-buy:active {
-  background-color: #003243;
-  color: #ea580c;
+    background-color: #003243;
+    color: #ea580c;
 }
 
 .turn:link,
 .turn:visited {
-  transition: all 0.3s;
-  color: #e6f6fc;
-  background: #003243;
+    transition: all 0.3s;
+    color: #e6f6fc;
+    background: #003243;
 }
 
 .turn:hover,
 .turn:active {
-  background-color: #e6f6fc;
-  color: #003243;
-  outline: 1px solid #003243;
+    background-color: #e6f6fc;
+    color: #003243;
+    outline: 1px solid #003243;
 }
 
 .products:link,
 .products:visited {
-  color: #003243;
-  transition: all 0.3s;
-  text-decoration: none;
+    color: #003243;
+    transition: all 0.3s;
+    text-decoration: none;
 }
 
 .products:hover,
 .products:active {
-  color: #ea580c;
+    color: #ea580c;
 }

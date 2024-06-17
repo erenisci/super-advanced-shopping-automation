@@ -8,8 +8,8 @@ package com.mycompany.web.programming.project;
  *
  * @author iscie
  */
-
 public class Product {
+
     private int urunId;
     private String urunIsim;
     private String urunUrl;
@@ -28,15 +28,15 @@ public class Product {
         this.urunFiyat = urunFiyat;
         this.urunStok = urunStok;
     }
-    
+
     public int getUrunId() {
         return urunId;
     }
-    
+
     public void setUrunId(int urunId) {
         this.urunId = urunId;
     }
-    
+
     public String getUrunIsim() {
         return urunIsim;
     }
@@ -68,7 +68,7 @@ public class Product {
     public void setUrunStok(int urunStok) {
         this.urunStok = urunStok;
     }
-    
+
     public int getUrunKullaniciId() {
         return urunKullaniciId;
     }
@@ -76,7 +76,7 @@ public class Product {
     public void setUrunKullaniciId(int urunKullaniciId) {
         this.urunKullaniciId = urunKullaniciId;
     }
-    
+
     public String getUrunAciklama() {
         return urunAciklama;
     }
@@ -84,7 +84,7 @@ public class Product {
     public void setUrunAciklama(String urunAciklama) {
         this.urunAciklama = urunAciklama;
     }
-    
+
     public String getUrunNewPageUrl() {
         return urunNewPageUrl;
     }

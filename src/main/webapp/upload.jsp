@@ -20,7 +20,7 @@
     UserBean userBean = (UserBean) session.getAttribute("userBean");
     String sessionIdFromCookie = "";
 
-    if(userBean == null) {
+    if (userBean == null) {
         UserBean userBeanTemp = new UserBean();
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
@@ -40,8 +40,8 @@
 
     userBean = (UserBean) session.getAttribute("userBean");
     boolean isLoggedIn = (userBean != null && userBean.getUserId() != 0) || !sessionIdFromCookie.equals("");
-    
-    if(isLoggedIn) {
+
+    if (isLoggedIn) {
         // String uploadSubDir = "../../src/main/webapp/kullaniciResim/";
         String uploadSubDir = "kullaniciResim/";
         String uploadDir = application.getRealPath("/") + uploadSubDir;
@@ -60,7 +60,7 @@
             }
             response.sendRedirect("profile.jsp?link=profile&change=true&url=kullaniciResim/" + userBean.getUserId() + userBean.getUserNick() + ".jpg");
         } catch (Exception e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
     } else {
 %>

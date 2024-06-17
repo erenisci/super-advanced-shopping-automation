@@ -12,16 +12,15 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author iscie
  */
-
 public class SessionUtils {
-    
+
     public static Cookie createSessionCookie(String sessionId) {
         Cookie sessionCookie = new Cookie("userSessId", sessionId);
         sessionCookie.setPath("/");
         sessionCookie.setMaxAge(24 * 60 * 60);
         return sessionCookie;
     }
-    
+
     public static String generateUniqueSessionID() {
         return UUID.randomUUID().toString();
     }
