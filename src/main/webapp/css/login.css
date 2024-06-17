@@ -1,0 +1,189 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+
+/* 
+    Created on : 9 Ara 2023, 02:24:24
+    Author     : iscie
+*/
+
+body {
+    height: 100vh;
+    position: relative;
+    background: #f8f8f8;
+}
+
+.logo {
+    margin-left: 2rem;
+}
+
+.imgLogo {
+    width: 16.6rem;
+    height: 4.4rem;
+}
+
+.logoDivs {
+    padding: 4rem 5rem;
+}
+
+.login-div {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #003243;
+    border-radius: 16px;
+    background: #e6f6fc;
+    width: 55rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    align-self: center;
+    padding: 2rem;
+    color: #003243;
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: 4rem;
+}
+
+.inputs {
+    display: flex;
+    align-items: center;
+    color: #003243;
+    padding: 0.5rem 3rem;
+    position: relative;
+}
+
+.inp {
+    position: absolute;
+    left: 30%;
+    padding: 0.6rem 1.5rem;
+    width: 30rem;
+    border-radius: 16px;
+    border: 1px solid #003243;
+}
+
+.inp:focus {
+    outline: none;
+}
+
+.sub{
+    width: 22rem;
+    color: #e6f6fc;
+    background: #003243;
+    border: none;
+    padding: 0.8rem 2rem;
+    outline: 1px solid #003243;
+    transition: all 0.3s;
+    font-size: 1.8rem;
+    margin-top: 1.5rem;
+}
+
+.sub:hover,
+.sub:active {
+    color: #003243;
+    background: #e6f6fc;
+    cursor: pointer;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.newregister {
+    color: #003243;
+    align-self: center;
+    margin-bottom: 0.3rem;
+    font-size: 1.45rem;
+    margin-top:6rem;
+}
+
+.linktoregister:link,
+.linktoregister:visited {
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.1s;
+    color: #003243;
+}
+
+.linktoregister:hover,
+.linktoregister:active {
+    color: #ec6924
+}
+
+.passwordforgot:link,
+.passwordforgot:visited {
+    font-size: 1.4rem;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.1s;
+    color: #003243;
+}
+
+.passwordforgot:hover,
+.passwordforgot:active {
+    color: #ec6924
+}
+
+.passwordf {
+    position: absolute;
+    bottom: 17rem;
+    left: 17.5rem;
+    font-size: 1.45rem;
+}
+
+.hid {
+    opacity: 0;
+}
+
+.marg-top {
+    margin-top: -1rem;
+}
+
+.logo-p {
+    padding: 4rem 0 0 7rem;
+}
+
+.logo:link,
+.logo:visited {
+    color: #003243;
+    font-size: 3.2rem;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.logo:hover,
+.logo:active {
+    color: #ea580c;
+}
+
+.inpCheck {
+    position: absolute;
+    left: 17rem;
+    padding: 0.6rem 1.5rem;
+    border-radius: 16px;
+    border: 1px solid #003243;
+}
+
+.new-register {
+    color: #003243;
+    align-self: center;
+    margin-bottom: 0.3rem;
+    font-size: 1.45rem;
+    position: absolute;
+    left: 19rem;
+    top: 33.4%;
+}
+
+.hid {
+    opacity: 0;
+}
+
+.margins {
+    margin-top: 1rem;
+}

@@ -1,0 +1,68 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+
+/* 
+    Created on : 13 Ara 2023, 05:38:35
+    Author     : iscie
+*/
+
+body {
+    height: 100vh;
+    position: relative;
+    background: #f8f8f8;
+}
+
+.logo {
+    margin-left: 2rem;
+}
+
+.imgLogo {
+    width: 16.6rem;
+    height: 4.4rem;
+}
+
+.logoDivs {
+    padding: 4rem 5rem;
+}
+
+.countdown-message {
+    font-size: 2.4rem;
+    font-weight: 500;
+    color: #ea580c;
+}
+
+.profile-cont {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #003243;
+    border-radius: 16px;
+    background: #e6f6fc;
+    width: 50rem;
+    height: 10rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.logo-p {
+    padding: 4rem 0 0 7rem;
+}
+
+.logo:link,
+.logo:visited {
+    color: #003243;
+    font-size: 3.2rem;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.logo:hover,
+.logo:active {
+    color: #ea580c;
+}
