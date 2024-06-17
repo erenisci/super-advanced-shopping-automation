@@ -18,14 +18,14 @@
     String isChange = request.getParameter("change");
     String isChanged = request.getParameter("changed");
 
-    if(isChange != null && !isChange.isEmpty()) {
+    if (isChange != null && !isChange.isEmpty()) {
         if (isChange.equals("true")) {
             int userId = userBean.getUserId();
 
             String updateSql = "UPDATE kullanicilar SET kullaniciUrl = ? WHERE urunKullanici_id = ?";
             try (Connection connection = DBConnection.getConnection();
-                PreparedStatement updateStatement = connection.prepareStatement(updateSql)) {
-                
+                    PreparedStatement updateStatement = connection.prepareStatement(updateSql)) {
+
                 updateStatement.setString(1, request.getParameter("url"));
                 updateStatement.setInt(2, userId);
                 updateStatement.executeUpdate();
@@ -38,7 +38,7 @@
             String updateSql = "UPDATE kullanicilar SET kullaniciUrl = ? WHERE urunKullanici_id = ?";
 
             try (Connection connection = DBConnection.getConnection();
-                PreparedStatement updateStatement = connection.prepareStatement(updateSql)) {
+                    PreparedStatement updateStatement = connection.prepareStatement(updateSql)) {
                 updateStatement.setString(1, "kullaniciResim/user.jpg");
                 updateStatement.setInt(2, userId);
                 updateStatement.executeUpdate();
@@ -46,31 +46,32 @@
                 response.sendRedirect("profile.jsp?link=profile&changed=false");
             } catch (SQLException e) {
                 e.printStackTrace();
-            } 
+            }
         }
     }
 %>
-      
+
 <div class="right-col right-col-profile">
     <div class="profile-pic">
         <div class="div-userBean-img">
             <img class="userBean-img" src="<%out.print(kullaniciUrl);%>" alt="<%out.print(kullaniciAdi);%>-resim"/>
         </div>
-            <p class="resimChange <%if(isChanged == null) out.print("opac");%>">
+        <p class="resimChange <%if (isChanged == null)
+                    out.print("opac");%>">
             <%
-                if(isChanged != null) {
+                if (isChanged != null) {
                     if (isChanged.equals("true")) {
-                        %><script>alert("Resminizi başarıyla değiştirdiniz!");</script><%
-                        out.print("Resminizin değişmesi biraz zaman alabilir..."); 
-                    } else {
-                        %><script>alert("Resminizi başarıyla sildiniz!");</script><%
-                        out.print("Resminizin silinmesi biraz zaman alabilir...");
-                    }
-                } else {
-                    out.print("Resminizin değişmesi biraz zaman alabilir...");
-                }
-            %>
-            </p>
+            %><script>alert("Resminizi başarıyla değiştirdiniz!");</script><%
+                            out.print("Resminizin değişmesi biraz zaman alabilir...");
+                        } else {
+        %><script>alert("Resminizi başarıyla sildiniz!");</script><%
+                                    out.print("Resminizin silinmesi biraz zaman alabilir...");
+                                }
+                            } else {
+                                out.print("Resminizin değişmesi biraz zaman alabilir...");
+                            }
+        %>
+        </p>
         <div class="divFormImg">
             <p class="divFormImgP">Resmi Değiştir</p>
             <form class="sendImg" method="post" action="upload.jsp" enctype="multipart/form-data">

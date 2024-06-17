@@ -16,7 +16,7 @@
     UserBean userBean = (UserBean) session.getAttribute("userBean");
     String sessionIdFromCookie = "";
 
-    if(userBean == null) {
+    if (userBean == null) {
         UserBean userBeanTemp = new UserBean();
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
@@ -36,17 +36,17 @@
 
     userBean = (UserBean) session.getAttribute("userBean");
     boolean isLoggedIn = (userBean != null && userBean.getUserId() != 0) || !sessionIdFromCookie.equals("");
-    
+
     if (isLoggedIn) {
         int productId = Integer.parseInt(request.getParameter("productId"));
         try (Connection connection = DBConnection.getConnection()) {
-            
+
             String deleteQuery = "DELETE FROM sepetler WHERE urunId = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery)) {
                 preparedStatement.setInt(1, productId);
                 preparedStatement.executeUpdate();
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }

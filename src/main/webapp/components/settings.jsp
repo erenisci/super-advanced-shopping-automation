@@ -9,30 +9,30 @@
 <%
     String changed = request.getParameter("changed");
     String error = request.getParameter("error");
-    
-    if(changed != null) {
-        if(changed.equals("nick")) {
-            %><script>alert("Kullanıcı Adınızı Başarıyla Değiştirdiniz!");</script><%
-        }
-        if(changed.equals("email")) {
-            %><script>alert("E-Postanızı Başarıyla Değiştirdiniz!");</script><%
-        }
-        if(changed.equals("password")) {
-            %><script>alert("Şifrenizi Başarıyla Değiştirdiniz!");</script><%
-        }
-    }
 
-    if (error != null) {
-        if(error.equals("userNick_exists")) {
-            %><script>alert("Kullanıcı Adı Kullanımda!");</script><%
-        }
-        if(error.equals("email_exists")) {
-            %><script>alert("E-Posta Kullanımda!");</script><%
-        }
-        if(error.equals("passFalse")) {
-            %><script>alert("Mevcut Şifreniz Yanlış!");</script><%
-        }
-    }
+    if (changed != null) {
+        if (changed.equals("nick")) {
+%><script>alert("Kullanıcı Adınızı Başarıyla Değiştirdiniz!");</script><%
+                }
+                if (changed.equals("email")) {
+%><script>alert("E-Postanızı Başarıyla Değiştirdiniz!");</script><%
+                }
+                if (changed.equals("password")) {
+%><script>alert("Şifrenizi Başarıyla Değiştirdiniz!");</script><%
+                    }
+                }
+
+                if (error != null) {
+                    if (error.equals("userNick_exists")) {
+%><script>alert("Kullanıcı Adı Kullanımda!");</script><%
+                }
+                if (error.equals("email_exists")) {
+%><script>alert("E-Posta Kullanımda!");</script><%
+                }
+                if (error.equals("passFalse")) {
+%><script>alert("Mevcut Şifreniz Yanlış!");</script><%
+                    }
+                }
 %>
 
 <div class="container-height">
@@ -77,7 +77,7 @@
             return false;
         }
     }
-    document.getElementById('emailForm').onsubmit = function() {
+    document.getElementById('emailForm').onsubmit = function () {
         return validateEmail();
     };
 </script>

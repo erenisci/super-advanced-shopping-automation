@@ -10,8 +10,8 @@ import java.util.Date;
  *
  * @author iscie
  */
-
 public class Orders {
+
     private int siparisId;
     private int kullaniciId;
     private String siparisIsim;

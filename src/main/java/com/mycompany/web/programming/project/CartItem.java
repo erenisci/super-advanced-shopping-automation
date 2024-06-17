@@ -8,8 +8,8 @@ package com.mycompany.web.programming.project;
  *
  * @author iscie
  */
-
 public class CartItem {
+
     private int userId;
     private int productId;
     private int totalStock;
@@ -37,7 +37,7 @@ public class CartItem {
     public void setUserId(int userId) {
         this.userId = userId;
     }
-    
+
     public int getTotalStock() {
         return totalStock;
     }

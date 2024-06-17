@@ -24,7 +24,7 @@
     </div>
     <form class="form" action="updateStok.jsp" method="get">
         <div class="productStok"><span>STOK: </span><span class="stokS"><%out.print(product.getUrunStok());%></span></div>
-        <%%>
+            <%%>
         <input type="hidden" name="productId" value="<%out.print(product.getUrunId());%>"/>
         <input type="hidden" name="productStok" value="<%out.print(product.getUrunStok());%>"/>
         <input class="inputNumber" type="number" name="stockNum" value="0" max="<%out.print(product.getUrunStok());%>" min="0"/>

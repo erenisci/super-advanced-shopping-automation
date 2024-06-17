@@ -17,7 +17,7 @@
     UserBean userBean = (UserBean) session.getAttribute("userBean");
     String sessionIdFromCookie = "";
 
-    if(userBean == null) {
+    if (userBean == null) {
         UserBean userBeanTemp = new UserBean();
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
@@ -37,28 +37,27 @@
 
     userBean = (UserBean) session.getAttribute("userBean");
     boolean isLoggedIn = (userBean != null && userBean.getUserId() != 0) || !sessionIdFromCookie.equals("");
-    
-    if(isLoggedIn) {
+
+    if (isLoggedIn) {
         try (Connection connection = DBConnection.getConnection()) {
             int stockNum = Integer.parseInt(request.getParameter("stockNum"));
             int productId = Integer.parseInt(request.getParameter("productId"));
             int productStok = Integer.parseInt(request.getParameter("productStok"));
-            
+
             String updateQuery = "UPDATE urunler SET urunStok = ? WHERE id = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
                 preparedStatement.setInt(1, productStok - stockNum);
                 preparedStatement.setInt(2, productId);
                 preparedStatement.executeUpdate();
-            }            
-            
+            }
 
-            if(productStok - stockNum == 0) {
+            if (productStok - stockNum == 0) {
                 String deleteQuery = "DELETE FROM urunler WHERE id = ?";
                 try (PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery)) {
                     preparedStatement.setInt(1, productId);
                     preparedStatement.executeUpdate();
                 }
-                
+
                 String deleteQueryCart = "DELETE FROM sepetler WHERE urunId = ?";
                 try (PreparedStatement preparedStatement = connection.prepareStatement(deleteQueryCart)) {
                     preparedStatement.setInt(1, productId);

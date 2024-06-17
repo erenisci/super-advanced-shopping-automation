@@ -28,7 +28,7 @@
     UserBean userBean = (UserBean) session.getAttribute("userBean");
     String sessionIdFromCookie = "";
 
-    if(userBean == null) {
+    if (userBean == null) {
         UserBean userBeanTemp = new UserBean();
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
@@ -48,21 +48,20 @@
 
     userBean = (UserBean) session.getAttribute("userBean");
     boolean isLoggedIn = (userBean != null && userBean.getUserId() != 0) || !sessionIdFromCookie.equals("");
-    
-    
+
     if (isLoggedIn) {
         FileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);
-        
+
         String kullaniciId = null;
         String urunId = null;
         String urunIsim = null;
         String urunUrl = null;
         String urunFiyat = null;
-        
+
         try {
             List<FileItem> items = upload.parseRequest(request);
-            
+
             for (FileItem item : items) {
                 if (item.isFormField()) {
                     String paramName = item.getFieldName();
@@ -90,23 +89,23 @@
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         String insertQuery = "INSERT INTO sepetler (kullanici_id, urunId, urunIsim, urunUrl, urunFiyat, urunAdet) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection connection = DBConnection.getConnection();
-                PreparedStatement updateStatement = connection.prepareStatement(insertQuery)) { 
-            
-                updateStatement.setInt(1, Integer.parseInt(kullaniciId));
-                updateStatement.setInt(2, Integer.parseInt(urunId));
-                updateStatement.setString(3, urunIsim);
-                updateStatement.setString(4, urunUrl);
-                updateStatement.setDouble(5, Double.parseDouble(urunFiyat));
-                updateStatement.setInt(6, 1);
-                updateStatement.executeUpdate();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        
-            response.sendRedirect("purchase.jsp?added=true");
+                PreparedStatement updateStatement = connection.prepareStatement(insertQuery)) {
+
+            updateStatement.setInt(1, Integer.parseInt(kullaniciId));
+            updateStatement.setInt(2, Integer.parseInt(urunId));
+            updateStatement.setString(3, urunIsim);
+            updateStatement.setString(4, urunUrl);
+            updateStatement.setDouble(5, Double.parseDouble(urunFiyat));
+            updateStatement.setInt(6, 1);
+            updateStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        response.sendRedirect("purchase.jsp?added=true");
     } else {
 %>
 <%@include file="goToLogin.jsp"%>

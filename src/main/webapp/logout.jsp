@@ -13,7 +13,7 @@
     UserBean userBean = (UserBean) session.getAttribute("userBean");
     String sessionIdFromCookie = "";
 
-    if(userBean == null) {
+    if (userBean == null) {
         UserBean userBeanTemp = new UserBean();
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
@@ -33,13 +33,13 @@
 
     userBean = (UserBean) session.getAttribute("userBean");
     boolean isLoggedIn = (userBean != null && userBean.getUserId() != 0) || !sessionIdFromCookie.equals("");
-    
+
     if (isLoggedIn) {
         Cookie cookie = new Cookie("userSessId", "");
         cookie.setMaxAge(0);
         cookie.setPath("/");
         response.addCookie(cookie);
-        
+
         session.invalidate();
         response.sendRedirect("index.jsp");
     } else {
