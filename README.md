@@ -19,8 +19,8 @@ Follow these steps to install and run the project locally:
 ### Clone the repository
 
 ```bash
-$ git clone https://github.com/username/projectname.git
-$ cd projectname
+$ git clone https://github.com/erenisci/Super-Advanced-Shopping-Automation.git
+$ cd Super-Advanced-Shopping-Automation
 ```
 
 ## Build the project
@@ -37,7 +37,7 @@ $ mvn clean install
 
 ```bash
 $ mysql -u username -p shopping < content/urunKategoriKullanici.sql
-$ cd projectname
+$ cd Super-Advanced-Shopping-Automation
 ```
 
 ## Run the project
