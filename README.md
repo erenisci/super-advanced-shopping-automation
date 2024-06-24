@@ -36,7 +36,7 @@ $ mvn clean install
 - Import the database schema from content/urunKategoriKullanici.sql file.
 
 ```bash
-$ mysql -u username -p shopping < content/urunKategoriKullanici.sql
+$ mysql -u username -p projectdb < content/urunKategoriKullanici.sql
 $ cd Super-Advanced-Shopping-Automation
 ```
 
