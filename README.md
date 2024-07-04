@@ -31,7 +31,7 @@ $ mvn clean install
 
 ## Set up the database
 
-- Create a MySQL database named alisveris.
+- Create a MySQL database named projectdb.
 
 - Import the database schema from content/urunKategoriKullanici.sql file.
 
